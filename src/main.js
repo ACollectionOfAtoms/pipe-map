@@ -1,3 +1,7 @@
+/* References: http://bl.ocks.org/cmdoptesc/fc0e318ce7992bed7ca8
+              http://dataviscourse.net/2016/lectures/lecture-d3-layouts-maps/
+*/
+
  var w = 800;
  var h = 500;
  var projection = d3.geoAlbersUsa()
@@ -12,13 +16,21 @@
          .attr("width", w)
          .attr("height", h);
 
- d3.json("../data/us.json", function (json) {
+ d3.json("../data/us.json", function (error, json) {
+     if (error) return console.log(error)
 
-     svg.selectAll("path")
-             .data(json.features)
-             .enter()
-             .append("path")
-             .attr("d", path);
+     svg.append("path")
+         .datum(topojson.feature(json, json.objects.land))
+         .attr("d", path)
+         .attr("class", "land-boundary");
+     svg.append("path")
+         .datum(topojson.mesh(json, json.objects.counties, function(a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
+         .attr("d", path)
+         .attr("class", "county-boundary");
+     svg.append("path")
+         .datum(topojson.mesh(json, json.objects.states, function(a, b) { return a !== b; }))
+         .attr("d", path)
+         .attr("class", "state-boundary");
      //Load in cities data
      d3.csv("../data/pipe-data.csv", function (data) {
          svg.selectAll("circle")

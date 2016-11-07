@@ -1,0 +1,42 @@
+{
+  "name": "pipe-map",
+  "version": "1.0.0",
+  "description": "A small map vis",
+  "main": "index.js",
+  "dependencies": {
+    "d3": "^4.3.0",
+    "es6-promise": "^4.0.5",
+    "topojson": "^2.0.0",
+    "topojson-client": "^2.1.0",
+    "vue": "^2.0.5",
+    "vue-router": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-runtime": "^6.18.0",
+    "css-loader": "^0.25.0",
+    "vue-hot-reload-api": "^2.0.6",
+    "vue-html-loader": "^1.2.3",
+    "vue-loader": "^9.8.1",
+    "vue-style-loader": "^1.0.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --inline --hot --no-info",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ACollectionOfAtoms/pipe-map.git"
+  },
+  "author": "ACollectionOfAtoms",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ACollectionOfAtoms/pipe-map/issues"
+  },
+  "homepage": "https://github.com/ACollectionOfAtoms/pipe-map#readme"
+}

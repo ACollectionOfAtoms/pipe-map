@@ -1,0 +1,24 @@
+path {
+  fill: none;
+  stroke: #333;
+  stroke-width: .5px;
+}
+
+.land-boundary {
+  stroke-width: 1px;
+}
+
+.county-boundary {
+  stroke: #ddd;
+}
+
+.site {
+	stroke-width: .5px;
+  stroke: #333;
+  fill: #9cf;
+}
+
+#slider3 {
+  margin: 20px 0 10px 20px;
+  width: 900px;
+}
