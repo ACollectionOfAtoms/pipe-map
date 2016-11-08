@@ -1,15 +1,18 @@
 <template>
-  hi
-  <div id='map-container'>
+  <div>
+    <div id='map-container'></div>
+    <div id="slider3"></div>
   </div>
 </template>
 
 <script>
 import * as d3 from 'd3'
 import * as topojson from 'topojson-client'
+import moment from 'moment'
 
 export default {
   name: 'main-app',
+
   data() {
     return {
       hi: 'lol'
@@ -20,6 +23,7 @@ export default {
     this.createContainer()
     this.drawMap()
     this.drawAccidentBubbles()
+    this.readCSV("../data/pipe-data.csv")
   },
 
   methods: {
@@ -72,6 +76,31 @@ export default {
                   .style("fill", "steelblue")
                   .style("opacity", 0.8)
       })
+    },
+    readCSV(f) {
+      d3.csv(f)
+          .row( d => {
+            return {
+              description: d.description,
+              lat: d.latitude,
+              lng: d.longitude,
+              city: d.city,
+              refLink: d['ref_link'],
+              gallons: d.gallons,
+              date: moment(d.date, "YYYY-MM-DD").unix(),
+              accidentType: d['accident_type']
+            }
+          })
+          .get( (err, rows) => {
+            if (err) return console.error(err)
+            window.site_data = rows  // This feels wrong.
+          })
+    },
+    drawSites(data) {
+      let sites = this.svg.selectAll(".site")
+                            .data(data, d => {
+                              return
+                            })
     }
   }
 }
@@ -96,10 +125,5 @@ export default {
   	stroke-width: .5px;
     stroke: #333;
     fill: #9cf;
-  }
-
-  #slider3 {
-    margin: 20px 0 10px 20px;
-    width: 900px;
   }
 </style>

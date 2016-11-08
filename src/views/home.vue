@@ -1,24 +1,20 @@
 <template>
   <div>
-    heh
-    <pipe-map><pipe-map>
+    <pipe-map></pipe-map>
+    <slider></slider>
   </div>
 </template>
 
 <script>
 import PipeMap from 'components/Map.vue'
+import Slider from 'components/Slider.vue'
 
 export default {
   name: 'main-app',
 
-  data() {
-    return {
-      hi: 'lol'
-    }
-  },
-
   components: {
-    'pipe-map': PipeMap
+    'pipe-map': PipeMap,
+    'slider': Slider
   }
 }
 </script>
