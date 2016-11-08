@@ -5,22 +5,39 @@
 </template>
 
 <script>
+/* An adaptation of https://bl.ocks.org/mbostock/6499018 */
 import * as d3 from 'd3'
-
+import filter from 'lodash.filter'
+import moment from 'moment'
+// TODO: Needs MASSIVE clean up!
 export default {
+  data() {
+      return {
+        scale: [moment('2000-01-01', 'YYYY MM DD').unix(),
+                moment('2016-12-30', 'YYYY MM DD').unix()],
+        ticks: 16,
+        minDate: moment('2000-01-01', 'YYYY MM DD').unix(),
+        maxDate: moment('2016-12-30', 'YYYY MM DD').unix(),
+        secondsInDay: 60 * 60 * 24
+      }
+  },
+
+  props: {
+    siteData: Array
+  },
+
   mounted() {
     var svg = d3.select("#slider-svg"),
-        margin = {right: 50, left: 50},
+        margin = {right: 80, left: 80},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height");
 
     var hueActual = 0,
-        hueTarget = 70,
-        hueAlpha = 0.2,
-        hueTimer = d3.timer(hueTween);
+        hueTarget = 1072418400,
+        hueAlpha = 0.2
 
     var x = d3.scaleLinear()
-        .domain([0, 180])
+        .domain(this.scale)
         .range([0, width])
         .clamp(true);
 
@@ -44,27 +61,37 @@ export default {
         .attr("class", "ticks")
         .attr("transform", "translate(0," + 18 + ")")
       .selectAll("text")
-      .data(x.ticks(10))
+      .data(x.ticks(this.ticks))
       .enter().append("text")
         .attr("x", x)
         .attr("text-anchor", "middle")
-        .text(function(d) { return d + "°"; });
+        .text(function(d) { return d });
 
     var handle = slider.insert("circle", ".track-overlay")
         .attr("class", "handle")
         .attr("r", 9);
-
+    let self = this /// Clean this up!
     function hue(h) {
       hueTarget = h;
-      hueTimer.restart(hueTween);
+      handle.attr("cx", x(hueTarget));
+      self.onSlide(hueTarget) // hueActual is UNIX DATE time
+      // hueTimer.restart(hueTween);
     }
+    // function hueTween() {
+    //   var hueError = hueTarget - hueActual;
+    //   if (Math.abs(hueError) < 1e-3) hueActual = hueTarget, hueTimer.stop();
+    //   else hueActual += hueError * hueAlpha;
+    //
+    //   svg.style("background-color", d3.hsl(hueActual, 0.8, 0.8));
+    // }
+  },
 
-    function hueTween() {
-      var hueError = hueTarget - hueActual;
-      if (Math.abs(hueError) < 1e-3) hueActual = hueTarget, hueTimer.stop();
-      else hueActual += hueError * hueAlpha;
-      handle.attr("cx", x(hueActual));
-      svg.style("background-color", d3.hsl(hueActual, 0.8, 0.8));
+  methods: {
+    onSlide(dateVal) {
+      let newData = filter(this.siteData, d => {
+        return d.date < dateVal
+      })
+      window.eventBus.$emit('sliderChange', newData)
     }
   }
 }

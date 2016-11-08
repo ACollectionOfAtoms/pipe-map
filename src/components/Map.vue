@@ -1,14 +1,13 @@
 <template>
   <div>
     <div id='map-container'></div>
-    <slider></slider>
   </div>
 </template>
 
 <script>
+/* with reference to http://bl.ocks.org/cmdoptesc/fc0e318ce7992bed7ca8 */
 import * as d3 from 'd3'
 import * as topojson from 'topojson-client'
-import Slider from 'components/Slider.vue'
 import moment from 'moment'
 
 export default {
@@ -19,15 +18,19 @@ export default {
     }
   },
 
-  components: {
-    'slider': Slider
+  props: {
+    siteData: Array
   },
-  
+
+  created() {
+    window.eventBus.$on('sliderChange', d => {
+      this.drawSites(d)
+    })
+  },
+
   mounted() {
     this.createContainer()
     this.drawMap()
-    this.drawAccidentBubbles()
-    this.readCSV("../data/pipe-data.csv")
   },
 
   methods: {
@@ -58,53 +61,54 @@ export default {
               .attr("class", "state-boundary")
       })
     },
-    drawAccidentBubbles() {
-      d3.csv("../data/pipe-data.csv", data => {
-          let self = this
-          this.svg.selectAll("circle")
-                  .data(data)
-                  .enter()
-                  .append("circle")
-                  .attr("cx", function (d) {
-                      return self.projection([d.longitude, d.latitude])[0]
-                  })
-                  .attr("cy", function (d) {
-                      return self.projection([d.longitude, d.latitude])[1]
-                  })
-                  .attr("r", function (d) {
-                      var gallons = parseInt(d.gallons) ?
-                                    parseInt(d.gallons) :
-                                    10000
-                      return Math.sqrt(gallons * 0.0004)
-                  })
-                  .style("fill", "steelblue")
-                  .style("opacity", 0.8)
-      })
-    },
-    readCSV(f) {
-      d3.csv(f)
-          .row( d => {
-            return {
-              description: d.description,
-              lat: d.latitude,
-              lng: d.longitude,
-              city: d.city,
-              refLink: d['ref_link'],
-              gallons: d.gallons,
-              date: moment(d.date, "YYYY-MM-DD").unix(),
-              accidentType: d['accident_type']
-            }
-          })
-          .get( (err, rows) => {
-            if (err) return console.error(err)
-            window.site_data = rows  // This feels wrong.
-          })
-    },
+    // drawAccidentBubbles() {
+    //   d3.csv("../data/pipe-data.csv", data => {
+    //       let self = this
+    //       this.svg.selectAll("circle")
+    //               .data(data)
+    //               .enter()
+    //               .append("circle")
+    //               .attr("cx", function (d) {
+    //                   return self.projection([d.longitude, d.latitude])[0]
+    //               })
+    //               .attr("cy", function (d) {
+    //                   return self.projection([d.longitude, d.latitude])[1]
+    //               })
+    //               .attr("r", function (d) {
+    //                   var gallons = parseInt(d.gallons) ?
+    //                                 parseInt(d.gallons) :
+    //                                 10000
+    //                   return Math.sqrt(gallons * 0.0004)
+    //               })
+    //               .style("fill", "steelblue")
+    //               .style("opacity", 0.8)
+    //   })
+    // },
     drawSites(data) {
       let sites = this.svg.selectAll(".site")
                             .data(data, d => {
-                              return
+                              return d.lat + d.lng
                             })
+      sites.enter().append("circle")
+              .attr("class", "site")
+              .attr("cx", d => {
+                return this.projection([d.lng, d.lat])[0]
+              })
+              .attr("cy", d => {
+                return this.projection([d.lng, d.lat])[1] //can this be shortened?
+              })
+              .attr("r", 1)
+              .transition().duration(400)
+                .attr("r", d => {
+                  let gallons = parseInt(d.gallons) ?
+                                parseInt(d.gallons) :
+                                10000
+                  return Math.sqrt(gallons * 0.0004)
+                })
+      sites.exit()
+        .transition().duration(200)
+          .attr("r", 1)
+          .remove()
     }
   }
 }

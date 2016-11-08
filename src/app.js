@@ -4,6 +4,7 @@ import Home from 'views/home.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
+window.eventBus = new Vue()
 
 const routes = [
   {path: '/', component: Home}
