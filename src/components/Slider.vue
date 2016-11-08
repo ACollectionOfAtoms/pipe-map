@@ -1,6 +1,6 @@
 <template>
   <div id="slider-container">
-    <svg width="800" height="50" id='slider-svg'></svg>
+    <svg width="800" height="45" id='slider-svg'></svg>
   </div>
 </template>
 

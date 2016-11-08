@@ -1,13 +1,14 @@
 <template>
   <div>
     <div id='map-container'></div>
-    <div id="slider3"></div>
+    <slider></slider>
   </div>
 </template>
 
 <script>
 import * as d3 from 'd3'
 import * as topojson from 'topojson-client'
+import Slider from 'components/Slider.vue'
 import moment from 'moment'
 
 export default {
@@ -15,10 +16,13 @@ export default {
 
   data() {
     return {
-      hi: 'lol'
     }
   },
 
+  components: {
+    'slider': Slider
+  },
+  
   mounted() {
     this.createContainer()
     this.drawMap()

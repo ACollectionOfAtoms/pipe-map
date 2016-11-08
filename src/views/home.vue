@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div class='container'>
     <pipe-map></pipe-map>
-    <slider></slider>
   </div>
 </template>
 
@@ -20,5 +19,4 @@ export default {
 </script>
 
 <style>
-
 </style>
