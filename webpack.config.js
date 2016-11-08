@@ -1,12 +1,18 @@
-var webpack = require('webpack')
+var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/app.js',
   output: {
     path: './static',
     publicPath: '/static/',
     filename: 'build.js'
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      d3: 'd3'
+    })
+  ],
   module: {
     // avoid webpack trying to shim process
     noParse: /es6-promise\.js$/,
@@ -27,23 +33,31 @@ module.exports = {
   babel: {
     presets: ['es2015'],
     plugins: ['transform-runtime']
+  },
+  resolve: {
+    root: [
+      path.resolve('./src/')
+    ],
+    alias: {
+      'vue$': 'vue/dist/vue.js'
+    }
   }
 }
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports.plugins = [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.optimize.OccurenceOrderPlugin()
-  ]
-} else {
-  module.exports.devtool = '#source-map'
-}
+// if (process.env.NODE_ENV === 'production') {
+//   module.exports.plugins = [
+//     new webpack.DefinePlugin({
+//       'process.env': {
+//         NODE_ENV: '"production"'
+//       }
+//     }),
+//     new webpack.optimize.UglifyJsPlugin({
+//       compress: {
+//         warnings: false
+//       }
+//     }),
+//     new webpack.optimize.OccurenceOrderPlugin()
+//   ]
+// } else {
+//   module.exports.devtool = '#source-map'
+// }
