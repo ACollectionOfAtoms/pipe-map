@@ -19,6 +19,7 @@ export default {
   mounted() {
     this.createContainer()
     this.drawMap()
+    this.drawAccidentBubbles()
   },
 
   methods: {
@@ -31,8 +32,8 @@ export default {
                       .attr("height", h)
     },
     drawMap() {
-      let projection = d3.geoAlbersUsa().scale([700])
-      let path = d3.geoPath().projection(projection)
+      this.projection = d3.geoAlbersUsa().scale([700])
+      let path = d3.geoPath().projection(this.projection)
       d3.json("../data/us.json", (error, json) => {
         if (error) return console.log(error)
         this.svg.append("path")
@@ -48,34 +49,57 @@ export default {
               .attr("d", path)
               .attr("class", "state-boundary")
       })
+    },
+    drawAccidentBubbles() {
+      d3.csv("../data/pipe-data.csv", data => {
+          let self = this
+          this.svg.selectAll("circle")
+                  .data(data)
+                  .enter()
+                  .append("circle")
+                  .attr("cx", function (d) {
+                      return self.projection([d.longitude, d.latitude])[0]
+                  })
+                  .attr("cy", function (d) {
+                      return self.projection([d.longitude, d.latitude])[1]
+                  })
+                  .attr("r", function (d) {
+                      var gallons = parseInt(d.gallons) ?
+                                    parseInt(d.gallons) :
+                                    10000
+                      return Math.sqrt(gallons * 0.0004)
+                  })
+                  .style("fill", "steelblue")
+                  .style("opacity", 0.8)
+      })
     }
   }
 }
 </script>
 
 <style>
-path {
-  fill: none;
-  stroke: #333;
-  stroke-width: .5px;
-}
+  path {
+    fill: none;
+    stroke: #333;
+    stroke-width: .5px;
+  }
 
-.land-boundary {
-  stroke-width: 1px;
-}
+  .land-boundary {
+    stroke-width: 1px;
+  }
 
-.county-boundary {
-  stroke: #ddd;
-}
+  .county-boundary {
+    stroke: #ddd;
+  }
 
-.site {
-	stroke-width: .5px;
-  stroke: #333;
-  fill: #9cf;
-}
+  .site {
+  	stroke-width: .5px;
+    stroke: #333;
+    fill: #9cf;
+  }
 
-#slider3 {
-  margin: 20px 0 10px 20px;
-  width: 900px;
-}
+  #slider3 {
+    margin: 20px 0 10px 20px;
+    width: 900px;
+  }
 </style>
