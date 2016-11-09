@@ -15,11 +15,8 @@ export default {
 
   data() {
     return {
+      drawnSites: Array
     }
-  },
-
-  props: {
-    siteData: Array
   },
 
   created() {
@@ -61,33 +58,12 @@ export default {
               .attr("class", "state-boundary")
       })
     },
-    // drawAccidentBubbles() {
-    //   d3.csv("../data/pipe-data.csv", data => {
-    //       let self = this
-    //       this.svg.selectAll("circle")
-    //               .data(data)
-    //               .enter()
-    //               .append("circle")
-    //               .attr("cx", function (d) {
-    //                   return self.projection([d.longitude, d.latitude])[0]
-    //               })
-    //               .attr("cy", function (d) {
-    //                   return self.projection([d.longitude, d.latitude])[1]
-    //               })
-    //               .attr("r", function (d) {
-    //                   var gallons = parseInt(d.gallons) ?
-    //                                 parseInt(d.gallons) :
-    //                                 10000
-    //                   return Math.sqrt(gallons * 0.0004)
-    //               })
-    //               .style("fill", "steelblue")
-    //               .style("opacity", 0.8)
-    //   })
-    // },
     drawSites(data) {
+      this.drawnSites = data
+      window.eventBus.$emit('drawnSitesUpdated', data)
       let sites = this.svg.selectAll(".site")
                             .data(data, d => {
-                              return d.lat + d.lng
+                              return d.lng + d.lat
                             })
       sites.enter().append("circle")
               .attr("class", "site")
@@ -110,7 +86,7 @@ export default {
           .attr("r", 1)
           .remove()
     }
-  }
+  },
 }
 </script>
 

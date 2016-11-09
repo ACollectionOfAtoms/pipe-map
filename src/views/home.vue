@@ -1,15 +1,15 @@
 <template>
   <div class='container'>
-    <pipe-map :site-data='siteData'
-              :filtered-data='filteredData'></pipe-map>
-    <slider :site-data='siteData'
-            :filtered-data='filteredData'></slider>
+    <pipe-map></pipe-map>
+    <slider :site-data='siteData'></slider>
+    <scroller :site-data='siteData'></slide>
   </div>
 </template>
 
 <script>
 import PipeMap from 'components/Map.vue'
 import Slider from 'components/Slider.vue'
+import Scroller from 'components/DescriptionScroller.vue'
 import moment from 'moment'
 import Vue from'vue'
 import * as d3 from 'd3' //TODO: import what's needed
@@ -19,14 +19,14 @@ export default {
 
   data() {
       return {
-        siteData: [],
-        filteredData: []
+        siteData: []
       }
   },
 
   components: {
     'pipe-map': PipeMap,
-    'slider': Slider
+    'slider': Slider,
+    'scroller': Scroller
   },
 
   mounted() {

@@ -13,12 +13,11 @@ import moment from 'moment'
 export default {
   data() {
       return {
-        scale: [moment('2000-01-01', 'YYYY MM DD').unix(),
-                moment('2016-12-30', 'YYYY MM DD').unix()],
         ticks: 16,
-        minDate: moment('2000-01-01', 'YYYY MM DD').unix(),
-        maxDate: moment('2016-12-30', 'YYYY MM DD').unix(),
-        secondsInDay: 60 * 60 * 24
+        minDate: moment('2000-01-01', 'YYYY-MM-DD').unix(),
+        maxDate: moment('2016-12-30', 'YYYY-MM-DD').unix(),
+        firstIncident: moment('2000-01-11', 'YYYY-MM-DD').unix(), 
+        handleRadius: 9
       }
   },
 
@@ -27,69 +26,66 @@ export default {
   },
 
   mounted() {
-    var svg = d3.select("#slider-svg"),
-        margin = {right: 80, left: 80},
-        width = +svg.attr("width") - margin.left - margin.right,
-        height = +svg.attr("height");
-
-    var hueActual = 0,
-        hueTarget = 1072418400,
-        hueAlpha = 0.2
-
-    var x = d3.scaleLinear()
-        .domain(this.scale)
-        .range([0, width])
-        .clamp(true);
-
-    var slider = svg.append("g")
-        .attr("class", "slider")
-        .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
-
-    slider.append("line")
-        .attr("class", "track")
-        .attr("x1", x.range()[0])
-        .attr("x2", x.range()[1])
-      .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-        .attr("class", "track-inset")
-      .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-        .attr("class", "track-overlay")
-        .call(d3.drag()
-            .on("start.interrupt", function() { slider.interrupt(); })
-            .on("start drag", function() {hue(x.invert(d3.event.x)); }));
-
-    slider.insert("g", ".track-overlay")
-        .attr("class", "ticks")
-        .attr("transform", "translate(0," + 18 + ")")
-      .selectAll("text")
-      .data(x.ticks(this.ticks))
-      .enter().append("text")
-        .attr("x", x)
-        .attr("text-anchor", "middle")
-        .text(function(d) { return d });
-
-    var handle = slider.insert("circle", ".track-overlay")
-        .attr("class", "handle")
-        .attr("r", 9);
-    let self = this /// Clean this up!
-    function hue(h) {
-      hueTarget = h;
-      handle.attr("cx", x(hueTarget));
-      self.onSlide(hueTarget) // hueActual is UNIX DATE time
-      // hueTimer.restart(hueTween);
-    }
-    // function hueTween() {
-    //   var hueError = hueTarget - hueActual;
-    //   if (Math.abs(hueError) < 1e-3) hueActual = hueTarget, hueTimer.stop();
-    //   else hueActual += hueError * hueAlpha;
-    //
-    //   svg.style("background-color", d3.hsl(hueActual, 0.8, 0.8));
-    // }
+    this.drawSlider()
   },
 
   methods: {
+    drawSlider() {
+      let svg = d3.select("#slider-svg"),
+          margin = {right: 80, left: 80},
+          width = +svg.attr("width") - margin.left - margin.right,
+          height = +svg.attr("height")
+      let scale = [this.minDate, this.maxDate]
+      let x = d3.scaleLinear()
+          .domain(scale)
+          .range([0, width])
+          .clamp(true)
+      this.slider = svg.append("g")
+          .attr("class", "slider")
+          .attr("transform", "translate(" + margin.left + "," + height / 2 + ")")
+          this.slider.append("line")
+              .attr("class", "track")
+              .attr("x1", x.range()[0])
+              .attr("x2", x.range()[1])
+            .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+              .attr("class", "track-inset")
+            .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+              .attr("class", "track-overlay")
+              .call(d3.drag()
+                  .on("start.interrupt", () => { this.slider.interrupt(); })
+                  .on("start drag", () => {changeDate(x.invert(d3.event.x)); }))
+          this.slider.insert("g", ".track-overlay")
+              .attr("class", "ticks")
+              .attr("transform", "translate(0," + 18 + ")")
+            .selectAll("text")
+            .data(x.ticks(this.ticks))
+            .enter().append("text")
+              .attr("x", x)
+              .attr("text-anchor", "middle")
+              .text(d => {
+                let date = d* 1000
+                return new Date(date).getFullYear()
+              })
+      var handle = this.slider.insert("circle", ".track-overlay")
+          .attr("class", "handle")
+          .attr("r", this.handleRadius)
+      this.slider.transition()
+          .duration(750)
+          .tween("changeDate", () => {
+            let i = d3.interpolate(this.minDate, this.firstIncident)
+            return function(t) {
+              changeDate(i(t))
+            }
+          })
+      let self = this
+      function changeDate(t) {
+        handle.attr("cx", x(t));
+        self.onSlide(t)
+      }
+    },
     onSlide(dateVal) {
       let newData = filter(this.siteData, d => {
-        return d.date < dateVal
+        return d.date <= dateVal
       })
       window.eventBus.$emit('sliderChange', newData)
     }
