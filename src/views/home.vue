@@ -1,17 +1,24 @@
 <template>
-  <div class='container'>
+  <div id='main-container'>
+    <!-- intro here? -->
+    <!-- <app-header></app-header> -->
     <pipe-map></pipe-map>
-    <slider :site-data='siteData'></slider>
-    <scroller :site-data='siteData'></slide>
+    <slide-pres :site-data='siteData'></slide-pres>
+    <!-- <slider :site-data='siteData'></slider> -->
+    <!-- <scroller :site-data='siteData'></slide> -->
   </div>
 </template>
 
 <script>
+import Header from 'components/Header.vue'
 import PipeMap from 'components/Map.vue'
+import Slide from 'components/Slide.vue'
+import SlidePresentation from 'components/SlidePresentation.vue'
 import Slider from 'components/Slider.vue'
 import Scroller from 'components/DescriptionScroller.vue'
 import moment from 'moment'
 import Vue from'vue'
+import utils from 'utils'
 import * as d3 from 'd3' //TODO: import what's needed
 
 export default {
@@ -26,7 +33,10 @@ export default {
   components: {
     'pipe-map': PipeMap,
     'slider': Slider,
-    'scroller': Scroller
+    'scroller': Scroller,
+    'app-header': Header,
+    'slide-pres': SlidePresentation,
+    'slide': Slide
   },
 
   mounted() {
@@ -34,10 +44,11 @@ export default {
   },
 
   methods: {
-    loadCSV(f) {
+    loadCSV(f) { //could be moved to utils
       d3.csv(f)
           .row( d => {
             return {
+              uuid: d.uuid,
               description: d.description,
               lat: d.latitude,
               lng: d.longitude,
@@ -50,7 +61,7 @@ export default {
           })
           .get( (err, rows) => {
             if (err) return console.error(err)
-            this.siteData = rows  // This feels wrong.
+            this.siteData = rows
           })
     }
   }
@@ -58,4 +69,12 @@ export default {
 </script>
 
 <style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  #main-container {
+    height: 100vh;
+    width: 100vw;
+  }
 </style>

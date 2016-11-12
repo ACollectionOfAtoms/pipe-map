@@ -14,9 +14,9 @@ export default {
   data() {
       return {
         ticks: 16,
-        minDate: moment('2000-01-01', 'YYYY-MM-DD').unix(),
+        minDate: moment('2000-01-11', 'YYYY-MM-DD').unix(),
         maxDate: moment('2016-12-30', 'YYYY-MM-DD').unix(),
-        firstIncident: moment('2000-01-11', 'YYYY-MM-DD').unix(), 
+        firstIncident: moment('2000-01-11', 'YYYY-MM-DD').unix(),
         handleRadius: 9
       }
   },

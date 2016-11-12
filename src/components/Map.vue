@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id='map-component-container'>
     <div id='map-container'></div>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
   },
 
   created() {
-    window.eventBus.$on('sliderChange', d => {
+    window.eventBus.$on('updateSites', d => {
       this.drawSites(d)
     })
   },
@@ -28,19 +28,24 @@ export default {
   mounted() {
     this.createContainer()
     this.drawMap()
+    d3.select(window).on('resize', this.sizeChange)
+    this.sizeChange()
   },
 
   methods: {
     createContainer() {
-      let w = 800,
-          h = 500
+      let w = window.innerWidth,
+          h = window.innerHeight
       this.svg = d3.select("#map-container")
                       .append("svg")
-                      .attr("width", w)
-                      .attr("height", h)
+                      .attr("width", "100%")
+                      .attr("margin-top", "50%")
+                      .attr("height", "100%")
+                        .append("g")
+
     },
     drawMap() {
-      this.projection = d3.geoAlbersUsa().scale([700])
+      this.projection = d3.geoAlbersUsa()
       let path = d3.geoPath().projection(this.projection)
       d3.json("../data/us.json", (error, json) => {
         if (error) return console.log(error)
@@ -63,7 +68,7 @@ export default {
       window.eventBus.$emit('drawnSitesUpdated', data)
       let sites = this.svg.selectAll(".site")
                             .data(data, d => {
-                              return d.lng + d.lat
+                              return d['uuid']
                             })
       sites.enter().append("circle")
               .attr("class", "site")
@@ -85,26 +90,35 @@ export default {
         .transition().duration(200)
           .attr("r", 1)
           .remove()
+    },
+    sizeChange() {
+      d3.select("g").attr("transform", "scale(" + $("#map-container").width()/900 + ")")
+	    $("svg").height($("#map-container").width()*0.618)
     }
   },
 }
 </script>
 
 <style>
+  #map-component-container, #map-container {
+    height: 100vh;
+    width: 100vw;
+  }
+  #map-container {
+    margin: auto;
+    padding-top: 5%;
+  }
   path {
     fill: none;
-    stroke: #333;
+    stroke: #AAAAAA;
     stroke-width: .5px;
   }
-
   .land-boundary {
     stroke-width: 1px;
   }
-
   .county-boundary {
     stroke: #ddd;
   }
-
   .site {
   	stroke-width: .5px;
     stroke: #333;

@@ -35,8 +35,8 @@ export default {
     this.height = window.innerHeight
     this.listContainer = d3.select('.scroll-container')
     this.scrollLength = this.listContainer.node()
-                            .getBoundingClientRect().height
-    this.scrollLength += 2*(this.scrollLength*(.20)) /// .1 is padding, times 2 for top and bottom
+                              .getBoundingClientRect().height
+    this.scrollLength += 2*(this.scrollLength*(.20)) // .1 is padding, times 2 for top and bottom
     this.descriptionLength = this.scrollLength + (.5)*this.scrollLength
     this.newScrollTop = 0
 
@@ -64,8 +64,11 @@ export default {
 
 <style>
 .scroll-container {
-  width: 100%;
-  height: 10em;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  z-index: 1000;
   overflow-y: scroll;
 }
 
