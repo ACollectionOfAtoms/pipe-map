@@ -1,6 +1,9 @@
 <template>
   <div id="header-container">
-    <div id="header">
+    <div id="header" class='row'>
+      <div class='col-xs-3'>
+        <a href='#/about'> About </a>
+      </div>
     </div>
   </div>
 </template>
@@ -13,8 +16,9 @@ export default {
 
 <style>
 #header-container {
-  height: 10%;
+  height: 5%;
   width: 100%;
-  background-color:black;
+  position: fixed;
+  z-index: 20;
 }
 </style>

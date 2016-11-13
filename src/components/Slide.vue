@@ -1,6 +1,6 @@
 <template>
   <div class='slide-container'>
-    <div class='row center-xs'>
+    <div class='row'>
       <card :card-id='cardId'
             :year='year'
             :accidents='accidents'>
@@ -44,7 +44,7 @@ export default {
   .slide-container {
     width: 100vw;
     height: 100vh;
+    pointer-events: none;
     position: relative;
-    z-index: 10;
   }
 </style>

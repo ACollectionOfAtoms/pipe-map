@@ -1,8 +1,7 @@
 <template>
   <div id='main-container'>
-    <!-- intro here? -->
-    <!-- <app-header></app-header> -->
-    <pipe-map :site-data='siteData'></pipe-map>
+    <app-header></app-header>
+    <!-- <pipe-map :site-data='siteData'></pipe-map> -->
     <slide-pres :site-data='siteData'></slide-pres>
     <!-- <slider :site-data='siteData'></slider> -->
     <!-- <scroller :site-data='siteData'></slide> -->
@@ -70,8 +69,7 @@ export default {
 
 <style>
   body {
-    margin: 0;
-    padding: 0;
+    font-family: Geneva, Tahoma, Verdana, sans-serif;
   }
   #main-container {
     height: 100vh;

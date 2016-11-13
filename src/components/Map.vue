@@ -35,9 +35,6 @@ export default {
     this.drawMap()
     d3.select(window).on('resize', this.sizeChange)
     this.sizeChange()
-    window.eventBus.$on('currentYearChanged', year => {
-      this.highlightSites(year)
-    })
   },
 
   methods: {
@@ -117,6 +114,7 @@ export default {
 
 <style>
   #map-component-container, #map-container {
+    position: fixed;
     height: 100vh;
     width: 100vw;
   }
@@ -137,16 +135,15 @@ export default {
   }
   .site, .site-unfocused {
   	stroke-width: 1px;
-    stroke: #aaaaaa;
-    fill: black;
-    opacity: 0.75;
-  }
-  .site-unfocused {
-    opacity: 0.25;
-    fill: blue;
+    stroke: black;
+    fill: #aaaaaa;
+    opacity: 0.8;
   }
   .site:hover, .site-unfocused:hover {
-    stroke-width: 2px;
-    stroke: black;
+    stroke-width: 5px;
+    opacity: 0.75;
+    fill: black;
+    stroke: #aaaaaa;
+    cursor: pointer;
   }
 </style>

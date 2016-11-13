@@ -1,24 +1,32 @@
 <template>
-  <div id='presentation-container'>
-    <!-- start intro slide -->
-    <slide>
-      <h4 slot='header'> Pipeline Accidents - 2000 And Beyond </h4>
-      <p slot='body'> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." </p>
-      <span slot='footer' class='subdued-text'>
-        <p>SCROLL DOWN TO BEGIN ⬇</p>
-      </span>
-    </slide>
-    <!-- end intro slide -->
-    <slide v-for='(obj, year, index) in years'
-           :id='index'
-           :ref='index'
-           :year='year'
-           :accidents="obj.accidents"
-    ></slide>
+  <div>
+    <div id='presentation-container'>
+      <pipe-map :site-data='siteData'></pipe-map>
+      <!-- start intro slide -->
+      <slide>
+        <h4 slot='header'> Pipeline Accidents In The 21st Century </h4>
+        <span slot='footer' class='subdued-text'>
+          <p>SCROLL DOWN TO BEGIN ⬇</p>
+        </span>
+      </slide>
+      <!-- end intro slide -->
+      <slide v-for='(obj, year, index) in years'
+             :id='index'
+             :ref='index'
+             :year='year'
+             :accidents="obj.accidents"
+      ></slide>
+      <!-- start outro slide -->
+      <slide>
+        <h4 slot='header'> In Total </h4>
+        <p slot='body'> There have been about {{ totalAccidents }} pipeline accidents.* </p>
+      </slide>
+    </div>
   </div>
 </template>
 
 <script>
+import PipeMap from 'components/Map.vue'
 import Slide from 'components/Slide.vue'
 import filter from 'lodash.filter'
 import utils from 'utils'
@@ -40,17 +48,20 @@ export default {
   },
 
   components: {
-    'slide': Slide
+    'slide': Slide,
+    'pipe-map': PipeMap
   },
 
   mounted() {
-    $('#presentation-container').on("scroll.scroller", () => {
+    let presContainer = $('#presentation-container')
+    presContainer.on("scroll.scroller", () => {
       // Feels very ineffecient, optimize/refactor if required
       for (let year of Object.keys(this.years)) {
         let cardId = '#' + year + '-card'
         let el = $(cardId)
 
         if(utils.isElementInViewport(el)) {
+          console.log(el.text())
           this.currentYear = year
           let currentDateYear = new Date(this.currentYear)
           this.filterSites(currentDateYear)
@@ -70,7 +81,7 @@ export default {
       })
       this.totalAccidents = newData.length
       Vue.set(this.years[currentYear], 'accidents', currentYearData.length)
-      window.eventBus.$emit('updateSites', newData)
+      window.eventBus.$emit('updateSites', currentYearData)
     }
   }
 }
@@ -79,10 +90,11 @@ export default {
 <style scoped>
   #presentation-container {
     position: absolute;
+    background: transparent;
     width: 100vw;
     height: 100%;
     padding-top: 1em;
-    max-height: 100vh;
+    max-height: 100%;
     overflow-y: scroll;
     top: 0;
     left: 0;
