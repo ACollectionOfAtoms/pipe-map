@@ -1,7 +1,19 @@
 <template>
-  <div>
+  <div class='col-xs-4' :class="{'col-xs-8': !year}">
     <div :id='cardId' class='slide-card'>
-      <h1> {{ year }} </h4>
+      <header>
+        <div v-if="year">
+          <h2> {{year}} </h2>
+        </div>
+        <slot name="header"></slot>
+      </header>
+      <main class='card-body'>
+        <slot name="body"></slot>
+        <h4 v-if="year"> {{ accidents }} Accidents Occured </h4>
+      </main>
+      <footer>
+        <slot name="footer"></slot>
+      </footer>
     </div>
   </div>
 </template>
@@ -10,7 +22,10 @@
 export default {
   props: {
       year: '',
-      cardId: ''
+      cardId: '',
+      title: '',
+      body: '',
+      accidents: 0
   },
 
   data() {
@@ -26,16 +41,17 @@ export default {
 </script>
 
 <style scoped>
+  .card-body {
+    max-height: 20em;
+    overflow-y: scroll;
+  }
   .slide-card {
-    padding-left: 2%;
+    padding: 1em;
     font-family: Verdana, Geneva, sans-serif;
-    border: 1px solid #aaaaaa;
     border-radius: 2%;
-    height: auto;
-    width: 11%;
     background-color: white;
-    -webkit-box-shadow: 0px 0px 14px 0px rgba(50, 50, 50, 0.76);
-    -moz-box-shadow:    0px 0px 14px 0px rgba(50, 50, 50, 0.76);
-    box-shadow:         0px 0px 14px 0px rgba(50, 50, 50, 0.76);
+    -webkit-box-shadow: 0px 0px 9px 0px rgba(50, 50, 50, 0.32);
+    -moz-box-shadow:    0px 0px 9px 0px rgba(50, 50, 50, 0.32);
+    box-shadow:         0px 0px 9px 0px rgba(50, 50, 50, 0.32);
   }
 </style>

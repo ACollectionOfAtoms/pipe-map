@@ -2,7 +2,7 @@
   <div id='main-container'>
     <!-- intro here? -->
     <!-- <app-header></app-header> -->
-    <pipe-map></pipe-map>
+    <pipe-map :site-data='siteData'></pipe-map>
     <slide-pres :site-data='siteData'></slide-pres>
     <!-- <slider :site-data='siteData'></slider> -->
     <!-- <scroller :site-data='siteData'></slide> -->
@@ -55,7 +55,7 @@ export default {
               city: d.city,
               refLink: d['ref_link'],
               gallons: d.gallons,
-              date: moment(d.date, "YYYY-MM-DD").unix(),
+              date: new Date(d.date),
               accidentType: d['accident_type']
             }
           })

@@ -13,9 +13,13 @@ import moment from 'moment'
 export default {
   name: 'main-app',
 
+  props: {
+    siteData: {}
+  },
+
   data() {
     return {
-      drawnSites: Array
+      displayedSites: []
     }
   },
 
@@ -23,6 +27,7 @@ export default {
     window.eventBus.$on('updateSites', d => {
       this.drawSites(d)
     })
+
   },
 
   mounted() {
@@ -30,6 +35,9 @@ export default {
     this.drawMap()
     d3.select(window).on('resize', this.sizeChange)
     this.sizeChange()
+    window.eventBus.$on('currentYearChanged', year => {
+      this.highlightSites(year)
+    })
   },
 
   methods: {
@@ -64,14 +72,13 @@ export default {
       })
     },
     drawSites(data) {
-      this.drawnSites = data
-      window.eventBus.$emit('drawnSitesUpdated', data)
+      this.displayedSites = data
       let sites = this.svg.selectAll(".site")
                             .data(data, d => {
                               return d['uuid']
                             })
       sites.enter().append("circle")
-              .attr("class", "site")
+              .attr("class", 'site')
               .attr("cx", d => {
                 return this.projection([d.lng, d.lat])[0]
               })
@@ -84,7 +91,7 @@ export default {
                   let gallons = parseInt(d.gallons) ?
                                 parseInt(d.gallons) :
                                 10000
-                  return Math.sqrt(gallons * 0.0004)
+                  return Math.sqrt(gallons * 0.0009)
                 })
       sites.exit()
         .transition().duration(200)
@@ -94,8 +101,17 @@ export default {
     sizeChange() {
       d3.select("g").attr("transform", "scale(" + $("#map-container").width()/900 + ")")
 	    $("svg").height($("#map-container").width()*0.618)
+    },
+    highlightSites(year) {
+      d3.selectAll("circle")
+          .attr("class", d => {
+            if (d.date.getFullYear() == year) {
+              return 'site'
+            }
+            return 'site-unfocused'
+          })
     }
-  },
+  }
 }
 </script>
 
@@ -119,9 +135,18 @@ export default {
   .county-boundary {
     stroke: #ddd;
   }
-  .site {
-  	stroke-width: .5px;
-    stroke: #333;
-    fill: #9cf;
+  .site, .site-unfocused {
+  	stroke-width: 1px;
+    stroke: #aaaaaa;
+    fill: black;
+    opacity: 0.75;
+  }
+  .site-unfocused {
+    opacity: 0.25;
+    fill: blue;
+  }
+  .site:hover, .site-unfocused:hover {
+    stroke-width: 2px;
+    stroke: black;
   }
 </style>

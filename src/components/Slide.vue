@@ -1,6 +1,14 @@
 <template>
   <div class='slide-container'>
-    <card :card-id='cardId' :year='year'></card>
+    <div class='row center-xs'>
+      <card :card-id='cardId'
+            :year='year'
+            :accidents='accidents'>
+        <span slot="header"><slot name="header"></slot></span>
+        <span slot="body"><slot name="body"></slot></span>
+        <span slot="footer"><slot name="footer"></slot></span>
+      </card>
+    </div>
   </div>
 </template>
 
@@ -10,12 +18,13 @@ import Card from 'components/DescriptionCard.vue'
 export default {
   props: {
     year: '',
+    accidents: 0
   },
 
   data() {
     return {
       stuff: 'Stuff',
-      isEmpty: false
+      isEmpty: false,
     }
   },
 
@@ -35,7 +44,6 @@ export default {
   .slide-container {
     width: 100vw;
     height: 100vh;
-    margin: 0 30%;
     position: relative;
     z-index: 10;
   }
