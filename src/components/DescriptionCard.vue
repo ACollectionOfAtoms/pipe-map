@@ -1,22 +1,28 @@
 <template>
-  <div class='slide-card col-xs-12'>
+  <div class='col-xs-12 card-container'>
+
     <div :id='cardId'>
-      <div v-if="!year" class='info-card'>
-        <header>
-          <div v-if="year">
-            <h2> {{year}} </h2>
+      <!-- if we have no year... -->
+      <!-- This should be a separate component! -->
+      <div v-if="!year" class='row middle-xs center-xs' :class='infoCardClass'>
+        <div class='col-xs-12'>
+          <div class='row middle-xs center-xs'>
+            <div class='row-xs-6 info-card-content'>
+              <header>
+                <slot :ref='cardId' name="header"></slot>
+              </header>
+              <main class='card-body'>
+                <slot name="body"></slot>
+              </main>
+              <footer>
+                <slot name="footer"></slot>
+              </footer>
+            </div>
           </div>
-          <slot name="header"></slot>
-        </header>
-        <main class='card-body'>
-          <slot name="body"></slot>
-          <h4 v-if="year"> {{ accidents }} Accidents Occured </h4>
-        </main>
-        <footer>
-          <slot name="footer"></slot>
-        </footer>
+        </div>
       </div>
-      <div v-else class='row'>
+      <!-- otherwise, use year card -->
+      <div v-else class='slide-card row'>
         <div class='col-xs-3'>
           <span class='year-label'> {{ year }} </span>
         </div>
@@ -34,9 +40,7 @@ export default {
   props: {
       year: '',
       cardId: '',
-      title: '',
-      body: '',
-      accidents: 0
+      accidents: 0,
   },
 
   data() {
@@ -46,22 +50,45 @@ export default {
     }
   },
 
+  computed: {
+    infoCardClass() {
+      if (this.cardId.includes('outro')) {
+        return 'info-card outro-card'
+      }
+      return 'intro-card info-card'
+    }
+  },
+
   methods: {
   }
 }
 </script>
 
 <style scoped>
-  .info-card {
+  .card-container {
+    padding: 0;
+  }
+  .info-card { /* really this is the slide */
     text-align: center;
-    height: 80%;
+    height: 100vh;
+    color: white;
+  }
+  .info-card-content {
+    background-color: rgba(50, 50, 50, 0.75);
+    padding: 1em;
+  }
+  .intro-card {
+    background-image: url('~assets/images/kalamazoo_2010.jpg')
+  }
+  .outro-card {
+    color: white;
+    background-image: '';
   }
   .card-body {
     max-height: 20em;
     overflow-y: scroll;
   }
   .slide-card {
-    width: 100vw;
     -webkit-box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.32);
     -moz-box-shadow:    0px 1px 0px 0px rgba(50, 50, 50, 0.32);
     box-shadow:         0px 1px 0px 0px rgba(50, 50, 50, 0.32);

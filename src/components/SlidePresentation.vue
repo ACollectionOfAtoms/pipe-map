@@ -5,23 +5,27 @@
       <!-- start intro slide -->
       <slide :id='introId'>
         <h1 slot='header'> Pipeline Accidents Of The 21st Century </h1>
-        <p slot='body'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius dui non ligula maximus, bibendum porttitor justo porta. Proin commodo eu ligula nec faucibus. Sed purus ligula, dapibus quis nibh vitae, aliquam eleifend nisi. Sed eu dolor efficitur, pharetra tellus id, efficitur dui. Nunc venenatis turpis facilisis, sagittis sem id, ultrices orci. Vestibulum volutpat aliquet est ac fringilla. Sed placerat eros sit amet diam pellentesque imperdiet. Ut dui felis, interdum eget nunc ac, elementum dictum eros. Curabitur id elementum sapien. Nam a urna et purus mollis vestibulum. Fusce purus arcu, imperdiet et ultricies at, volutpat nec mauris. </p>
+        <p slot='body'> Clicking on disaster sites provides more information. </p>
         <span slot='footer' class='subdued-text'>
           <h3>SCROLL DOWN TO BEGIN ⬇</h3>
         </span>
       </slide>
       <!-- end intro slide -->
+
+      <!-- start years slides -->
       <slide v-for='(obj, year, index) in years'
-             :id='index'
              :ref='index'
              :year='year'
              :accidents="obj.accidents"
       ></slide>
+      <!-- end year slides -->
+
       <!-- start outro slide -->
       <slide :id='outroId'>
         <h4 slot='header'> In Total </h4>
         <p slot='body'> There have been about {{ totalAccidents }} pipeline accidents.* </p>
       </slide>
+      <!-- end outro slide -->
     </div>
   </div>
 </template>
@@ -115,6 +119,5 @@ export default {
   }
   .subdued-text {
     font-size: 0.6em;
-    color: #aaaaaa;
   }
 </style>

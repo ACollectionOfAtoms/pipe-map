@@ -98,7 +98,7 @@ export default {
                   let gallons = parseInt(d.gallons) ?
                                 parseInt(d.gallons) :
                                 10000
-                  return Math.sqrt(gallons * 0.0009)
+                  return Math.sqrt(gallons * 0.001)
                 })
       sites.exit()
         .transition().duration(200)

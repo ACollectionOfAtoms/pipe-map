@@ -1,7 +1,7 @@
 <template>
   <div id='main-container'>
     <modal></modal>
-    <app-header></app-header>
+    <!-- <app-header></app-header> -->
     <!-- <pipe-map :site-data='siteData'></pipe-map> -->
     <slide-pres :site-data='siteData'></slide-pres>
     <!-- <slider :site-data='siteData'></slider> -->

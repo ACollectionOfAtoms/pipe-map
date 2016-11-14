@@ -60,8 +60,6 @@ export default {
   -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,1);
   -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,1);
   box-shadow: 0px 0px 3px 0px rgba(0,0,0,1);
-  transition: all .3s ease;
-
 }
 .modal-container {
   height: 100%;
@@ -69,7 +67,6 @@ export default {
   background-color: rgba(20, 30, 30, 0.75);
   position: fixed;
   z-index: 1000000000000;
-  transition: opacity .3s ease;
 }
 
 .modal-button:hover {
@@ -88,10 +85,11 @@ export default {
   padding-top: 0.5em;
   margin: 1em;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: display .3s ease
+/*TODO: Add nice transition */
+/*.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s
 }
 .fade-enter, .fade-leave-active {
-  display: none
-}
+  opacity: 0
+}*/
 </style>
