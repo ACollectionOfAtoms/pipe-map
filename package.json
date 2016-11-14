@@ -8,6 +8,7 @@
     "es6-promise": "^4.0.5",
     "jquery": "^3.1.1",
     "lodash.filter": "^4.6.0",
+    "lodash.round": "^4.0.4",
     "moment": "^2.15.2",
     "topojson": "^2.0.0",
     "topojson-client": "^2.1.0",

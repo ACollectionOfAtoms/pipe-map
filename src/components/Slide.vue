@@ -1,6 +1,6 @@
 <template>
   <div class='slide-container'>
-    <div class='row'>
+    <div class='row card-row'>
       <card :card-id='cardId'
             :year='year'
             :accidents='accidents'>
@@ -17,7 +17,7 @@ import Card from 'components/DescriptionCard.vue'
 
 export default {
   props: {
-    year: '',
+    year: null,
     accidents: 0
   },
 
@@ -41,6 +41,9 @@ export default {
 </script>
 
 <style scoped>
+  .card-row {
+    margin: 1em;
+  }
   .slide-container {
     width: 100vw;
     height: 100vh;

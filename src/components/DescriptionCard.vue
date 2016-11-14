@@ -1,7 +1,7 @@
 <template>
-  <div class='col-xs-8' :class="{'col-xs-12': year}">
-    <div :id='cardId' class='slide-card'>
-      <div v-if="!year">
+  <div class='slide-card col-xs-12'>
+    <div :id='cardId'>
+      <div v-if="!year" class='info-card'>
         <header>
           <div v-if="year">
             <h2> {{year}} </h2>
@@ -16,7 +16,7 @@
           <slot name="footer"></slot>
         </footer>
       </div>
-      <div class='row'>
+      <div v-else class='row'>
         <div class='col-xs-3'>
           <span class='year-label'> {{ year }} </span>
         </div>
@@ -52,12 +52,16 @@ export default {
 </script>
 
 <style scoped>
+  .info-card {
+    text-align: center;
+    height: 80%;
+  }
   .card-body {
     max-height: 20em;
     overflow-y: scroll;
   }
   .slide-card {
-    width: 100%;
+    width: 100vw;
     -webkit-box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.32);
     -moz-box-shadow:    0px 1px 0px 0px rgba(50, 50, 50, 0.32);
     box-shadow:         0px 1px 0px 0px rgba(50, 50, 50, 0.32);

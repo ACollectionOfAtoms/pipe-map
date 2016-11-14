@@ -1,5 +1,6 @@
 <template>
   <div id='main-container'>
+    <modal></modal>
     <app-header></app-header>
     <!-- <pipe-map :site-data='siteData'></pipe-map> -->
     <slide-pres :site-data='siteData'></slide-pres>
@@ -15,6 +16,7 @@ import Slide from 'components/Slide.vue'
 import SlidePresentation from 'components/SlidePresentation.vue'
 import Slider from 'components/Slider.vue'
 import Scroller from 'components/DescriptionScroller.vue'
+import Modal from 'components/Modal.vue'
 import moment from 'moment'
 import Vue from'vue'
 import utils from 'utils'
@@ -32,6 +34,7 @@ export default {
   components: {
     'pipe-map': PipeMap,
     'slider': Slider,
+    'modal': Modal,
     'scroller': Scroller,
     'app-header': Header,
     'slide-pres': SlidePresentation,
@@ -70,8 +73,9 @@ export default {
 <style>
   body {
     font-family: Geneva, Tahoma, Verdana, sans-serif;
+    margin: 0;
   }
-  #main-container {
+  #main-container, #app {
     height: 100vh;
     width: 100vw;
   }

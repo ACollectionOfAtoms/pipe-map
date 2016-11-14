@@ -3,10 +3,11 @@
     <div id='presentation-container'>
       <pipe-map :site-data='siteData'></pipe-map>
       <!-- start intro slide -->
-      <slide>
-        <h4 slot='header'> Pipeline Accidents In The 21st Century </h4>
+      <slide :id='introId'>
+        <h1 slot='header'> Pipeline Accidents Of The 21st Century </h1>
+        <p slot='body'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius dui non ligula maximus, bibendum porttitor justo porta. Proin commodo eu ligula nec faucibus. Sed purus ligula, dapibus quis nibh vitae, aliquam eleifend nisi. Sed eu dolor efficitur, pharetra tellus id, efficitur dui. Nunc venenatis turpis facilisis, sagittis sem id, ultrices orci. Vestibulum volutpat aliquet est ac fringilla. Sed placerat eros sit amet diam pellentesque imperdiet. Ut dui felis, interdum eget nunc ac, elementum dictum eros. Curabitur id elementum sapien. Nam a urna et purus mollis vestibulum. Fusce purus arcu, imperdiet et ultricies at, volutpat nec mauris. </p>
         <span slot='footer' class='subdued-text'>
-          <p>SCROLL DOWN TO BEGIN ⬇</p>
+          <h3>SCROLL DOWN TO BEGIN ⬇</h3>
         </span>
       </slide>
       <!-- end intro slide -->
@@ -17,7 +18,7 @@
              :accidents="obj.accidents"
       ></slide>
       <!-- start outro slide -->
-      <slide>
+      <slide :id='outroId'>
         <h4 slot='header'> In Total </h4>
         <p slot='body'> There have been about {{ totalAccidents }} pipeline accidents.* </p>
       </slide>
@@ -29,6 +30,7 @@
 import PipeMap from 'components/Map.vue'
 import Slide from 'components/Slide.vue'
 import filter from 'lodash.filter'
+import round from 'lodash.round'
 import utils from 'utils'
 import Vue from 'vue'
 
@@ -43,7 +45,9 @@ export default {
     return {
       currentYear: '',
       years: dateRange.reduce((obj, x) => Object.assign(obj, { [x]: {} }), {}), // like python dict comprehension
-      totalAccidents: 0
+      totalAccidents: 0,
+      introId: 'intro-card',
+      outroId: 'outro-card'
     }
   },
 
@@ -54,14 +58,25 @@ export default {
 
   mounted() {
     let presContainer = $('#presentation-container')
+    let introRect = document.getElementById("outro-card").getBoundingClientRect().top
     presContainer.on("scroll.scroller", () => {
+      let presTop = presContainer.scrollTop()
+      if (presTop === 0) {
+        // We're at the top, remove all sites
+        window.eventBus.$emit('updateSites', [])
+        return
+      }
+      if (round(presTop, -2) === round(introRect, -2)) {
+        // we're at the bottom, show all sites
+        window.eventBus.$emit('updateSites', this.siteData)
+        return
+      }
       // Feels very ineffecient, optimize/refactor if required
       for (let year of Object.keys(this.years)) {
         let cardId = '#' + year + '-card'
         let el = $(cardId)
 
         if(utils.isElementInViewport(el)) {
-          console.log(el.text())
           this.currentYear = year
           let currentDateYear = new Date(this.currentYear)
           this.filterSites(currentDateYear)
@@ -71,7 +86,7 @@ export default {
   },
 
   methods: {
-    filterSites(dateVal) {
+    filterSites(dateVal, showNone=false, showAll=false) {
       let currentYear = (dateVal.getFullYear() + 1).toString()
       let newData = filter(this.siteData, d => {
         return d.date.getFullYear() <= currentYear
@@ -93,7 +108,6 @@ export default {
     background: transparent;
     width: 100vw;
     height: 100%;
-    padding-top: 1em;
     max-height: 100%;
     overflow-y: scroll;
     top: 0;

@@ -1,6 +1,6 @@
 <template>
   <div id="header-container">
-    <div id="header" class='row'>
+    <div id="app-header" class='row'>
       <div class='col-xs-3'>
         <a href='#/about'> About </a>
       </div>
@@ -14,11 +14,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #header-container {
   height: 5%;
   width: 100%;
   position: fixed;
-  z-index: 20;
+  z-index: 1000000000;
 }
 </style>
