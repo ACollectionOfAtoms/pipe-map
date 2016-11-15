@@ -61,9 +61,10 @@ export default {
   },
 
   mounted() {
-    let presContainer = $('#presentation-container')
+    let presContainer = $(window)
     let introRect = document.getElementById("outro-card").getBoundingClientRect().top
-    presContainer.on("scroll.scroller", () => {
+    presContainer.on('scroll.scroller', () => {
+      console.log('sup')
       let presTop = presContainer.scrollTop()
       if (presTop === 0) {
         // We're at the top, remove all sites
@@ -113,7 +114,6 @@ export default {
     width: 100vw;
     height: 100%;
     max-height: 100%;
-    overflow-y: scroll;
     top: 0;
     left: 0;
   }
