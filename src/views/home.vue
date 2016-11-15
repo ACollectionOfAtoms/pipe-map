@@ -1,11 +1,8 @@
 <template>
   <div id='main-container'>
     <modal></modal>
-    <!-- <app-header></app-header> -->
-    <!-- <pipe-map :site-data='siteData'></pipe-map> -->
+    <app-header></app-header>
     <slide-pres :site-data='siteData'></slide-pres>
-    <!-- <slider :site-data='siteData'></slider> -->
-    <!-- <scroller :site-data='siteData'></slide> -->
   </div>
 </template>
 

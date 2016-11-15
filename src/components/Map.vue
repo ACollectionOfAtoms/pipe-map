@@ -56,10 +56,10 @@ export default {
               .datum(topojson.feature(json, json.objects.land))
               .attr("d", path)
               .attr("class", "land-boundary")
-        this.svg.append("path")
-              .datum(topojson.mesh(json, json.objects.counties, function(a, b) {  return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
-              .attr("d", path)
-              .attr("class", "county-boundary")
+        // this.svg.append("path")
+        //       .datum(topojson.mesh(json, json.objects.counties, function(a, b) {  return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
+        //       .attr("d", path)
+        //       .attr("class", "county-boundary")
         this.svg.append("path")
               .datum(topojson.mesh(json, json.objects.states, function(a, b) {return a !== b; }))
               .attr("d", path)
@@ -142,17 +142,17 @@ export default {
   .county-boundary {
     stroke: #ddd;
   }
-  .site, .site-unfocused {
+  .site {
   	stroke-width: 1px;
-    stroke: black;
-    fill: #aaaaaa;
-    opacity: 0.8;
-  }
-  .site:hover, .site-unfocused:hover {
-    stroke-width: 2px;
+    stroke: #1d1f20;
+    fill: #1d1f20;
     opacity: 0.75;
-    fill: black;
-    stroke: #aaaaaa;
+  }
+  .site:hover {
+    stroke-width: 4px;
+    opacity: 0.9;
+    fill: #1d1f20;
+    stroke: #1d1f20;
     cursor: pointer;
   }
 </style>

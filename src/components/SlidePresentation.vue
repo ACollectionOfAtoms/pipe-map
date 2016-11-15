@@ -22,7 +22,7 @@
 
       <!-- start outro slide -->
       <slide :id='outroId'>
-        <h4 slot='header'> In Total </h4>
+        <h4 slot='header'> In the last 16 years </h4>
         <p slot='body'> There have been about {{ totalAccidents }} pipeline accidents.* </p>
       </slide>
       <!-- end outro slide -->

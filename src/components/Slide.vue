@@ -1,8 +1,7 @@
 <template>
   <div class='slide-container'>
-    <div class='row' :class="{ 'year-card-row bottom-xs': year}">
+    <div class='row' :class="{ 'year-card-row middle-xs': year}">
       <card :card-id='cardId'
-            :card-type='cardType'
             :year='year'
             :accidents='accidents'>
         <span slot="header"><slot name="header"></slot></span>
@@ -21,7 +20,6 @@ export default {
     year: null,
     accidents: 0,
     id: '',
-    cardType: ''
   },
 
   data() {

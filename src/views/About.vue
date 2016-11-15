@@ -1,6 +1,5 @@
 <template>
   <div>
-    <app-header></app-header>
     <div class='about-container row'>
       <div class='col-xs-12'>
         <div class='box'>

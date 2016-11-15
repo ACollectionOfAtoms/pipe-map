@@ -3,7 +3,8 @@
 
     <div :id='cardId'>
       <!-- if we have no year... -->
-      <!-- This should be a separate component! -->
+      <!-- show an info card -->
+      <!-- (This should be a separate component!) -->
       <div v-if="!year" class='row middle-xs center-xs' :class='infoCardClass'>
         <div class='col-xs-12'>
           <div class='row middle-xs center-xs'>
@@ -78,7 +79,9 @@ export default {
     padding: 1em;
   }
   .intro-card {
-    background-image: url('~assets/images/kalamazoo_2010.jpg')
+    background-image: url('~assets/images/kalamazoo_2010.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
   }
   .outro-card {
     color: white;
