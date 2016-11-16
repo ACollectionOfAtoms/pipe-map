@@ -88,7 +88,7 @@ export default {
                 return this.projection([d.lng, d.lat])[1] //can this be shortened?
               })
               .attr("r", 1)
-              .transition().duration(200)
+              .transition().duration(400)
                 .attr("r", d => {
                   let exception = 'Kalamazoo'
                   // Python parser failed to catch this one.
@@ -108,15 +108,6 @@ export default {
     sizeChange() {
       d3.select("g").attr("transform", "scale(" + $("#map-container").width()/900 + ")")
 	    $("svg").height($("#map-container").width()*0.618)
-    },
-    highlightSites(year) {
-      d3.selectAll("circle")
-          .attr("class", d => {
-            if (d.date.getFullYear() == year) {
-              return 'site'
-            }
-            return 'site-unfocused'
-          })
     }
   }
 }

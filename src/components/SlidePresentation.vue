@@ -35,6 +35,7 @@ import PipeMap from 'components/Map.vue'
 import Slide from 'components/Slide.vue'
 import filter from 'lodash.filter'
 import round from 'lodash.round'
+import debounce from 'lodash.debounce'
 import utils from 'utils'
 import Vue from 'vue'
 
@@ -48,7 +49,7 @@ export default {
 
     return {
       currentYear: '',
-      years: dateRange.reduce((obj, x) => Object.assign(obj, { [x]: {} }), {}), // like python dict comprehension
+      years: dateRange.reduce((obj, x) => Object.assign(obj, { [x]: {'accidents': 0} }), {}), // like python dict comprehension
       totalAccidents: 0,
       introId: 'intro-card',
       outroId: 'outro-card'
@@ -63,8 +64,7 @@ export default {
   mounted() {
     let presContainer = $(window)
     let introRect = document.getElementById("outro-card").getBoundingClientRect().top
-    presContainer.on('scroll.scroller', () => {
-      console.log('sup')
+    let trackTime = () => {
       let presTop = presContainer.scrollTop()
       if (presTop === 0) {
         // We're at the top, remove all sites
@@ -87,7 +87,8 @@ export default {
           this.filterSites(currentDateYear)
         }
       }
-    })
+    }
+    presContainer.on('scroll.scroller', debounce(trackTime, 150))
   },
 
   methods: {
