@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div class='about-container row'>
-      <div class='col-xs-12'>
+    <section class="hero is-primary is-medium">
         <div class='box'>
           <a href='/'> map </a>
         </div>

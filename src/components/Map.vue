@@ -116,8 +116,11 @@ export default {
 <style>
   #map-component-container, #map-container {
     position: fixed;
-    height: 100vh;
-    width: 100vw;
+    bottom: 20px;
+    left: 20px;
+    height: 25vh;
+    width: 25vw;
+    border: 1px solid black;
   }
   #map-container {
     margin: auto;
