@@ -1,5 +1,5 @@
 <template>
-  <div class='col-xs-12 card-container'>
+  <div class='card-container'>
 
     <div :id='cardId'>
       <!-- if we have no year... -->
@@ -23,12 +23,17 @@
         </div>
       </div>
       <!-- otherwise, use year card -->
-      <div v-else class='slide-card row'>
-        <div class='col-xs-3'>
-          <span class='year-label'> {{ year }} </span>
+      <div v-else class='flex-container'>
+        <div class='year-container'>
+          <span class='year-text'> {{ year }} </span>
         </div>
-        <div class='col-xs-offset-3 col-xs-6 year-description-label'>
-          <span class='year-description-text'> {{ accidents }} Accidents </span>
+        <div class='accident-count-container'>
+          <div class='accident-count-header'>
+            Accidents:
+          </div>
+          <div class='accident-count-body'>
+            <span class='accident-count-text'> {{ accidents }}</span>
+          </div>
         </div>
       </div>
 
@@ -68,6 +73,31 @@ export default {
 <style scoped>
   .card-container {
     padding: 0;
+    width: 100%;
+  }
+  .flex-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+  }
+  .year-container {
+    position: absolute;
+    top: -1.5em;
+  }
+  .accident-count-text {
+    font-size: 5em;
+  }
+  .accident-count-container {
+    margin-left: 83%;
+    text-align: right;
+  }
+  .accident-count-header {
+    font-size: 1.2em;
+  }
+  .accident-count-body {
+    position: relative;
+    top: -2em;
   }
   .info-card { /* really this is the slide */
     text-align: center;
@@ -91,21 +121,7 @@ export default {
     max-height: 20em;
     overflow-y: scroll;
   }
-  .slide-card {
-    -webkit-box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.32);
-    -moz-box-shadow:    0px 1px 0px 0px rgba(50, 50, 50, 0.32);
-    box-shadow:         0px 1px 0px 0px rgba(50, 50, 50, 0.32);
-  }
-  .year-label, .year-description-label {
-    opacity: 0.75;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  }
-  .year-label {
+  .year-text, .acccident-count-text {
     font-size: 5em;
-  }
-  .year-description-label {
-    font-size: 3em;
-    padding-top: 0.6em;
-    text-align: right;
   }
 </style>

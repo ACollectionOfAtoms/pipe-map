@@ -102,7 +102,7 @@ export default {
       })
       this.totalAccidents = newData.length
       Vue.set(this.years[currentYear], 'accidents', currentYearData.length)
-      window.eventBus.$emit('updateSites', currentYearData)
+      window.eventBus.$emit('updateSites', newData)
     }
   }
 }

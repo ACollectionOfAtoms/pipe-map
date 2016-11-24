@@ -1,6 +1,7 @@
 <template>
   <div id='map-component-container'>
-    <div id='map-container'></div>
+    <div id='map-container'>
+    </div>
   </div>
 </template>
 
@@ -31,24 +32,23 @@ export default {
   mounted() {
     this.createContainer()
     this.drawMap()
-    d3.select(window).on('resize', this.sizeChange)
-    this.sizeChange()
+    // d3.select(window).on('resize', this.sizeChange)
+    // this.sizeChange()
   },
 
   methods: {
     createContainer() {
-      let w = window.innerWidth,
-          h = window.innerHeight
       this.svg = d3.select("#map-container")
                       .append("svg")
-                      .attr("width", "100%")
-                      .attr("margin-top", "50%")
-                      .attr("height", "100%")
-                        .append("g")
-
+                        .attr("width", "100%")
+                        .attr("height", "100%")
+                          .append("g")
     },
     drawMap() {
+      let size = $('#map-container').width()
       this.projection = d3.geoAlbersUsa()
+      this.projection.scale(size)
+      this.projection.translate([size / 2, size / 3]);
       let path = d3.geoPath().projection(this.projection)
       d3.json("../data/us.json", (error, json) => {
         if (error) return console.log(error)
@@ -106,24 +106,28 @@ export default {
           .remove()
     },
     sizeChange() {
+      let containerWidth = this.svg.style("width")
+      console.log(containerWidth)
       d3.select("g").attr("transform", "scale(" + $("#map-container").width()/900 + ")")
-	    $("svg").height($("#map-container").width()*0.618)
+	    $("svg").height($("#map-container").width()*2)
     }
   }
 }
 </script>
 
 <style>
-  #map-component-container, #map-container {
+  #map-component-container {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    height: 25vh;
-    width: 25vw;
-    border: 1px solid black;
+    height: 100vh;
+    width: 100vw;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   #map-container {
-    margin: auto;
+    width: 80%;
+    height: 100%;
   }
   path {
     fill: none;
@@ -138,15 +142,15 @@ export default {
   }
   .site {
   	stroke-width: 1px;
-    stroke: #1d1f20;
-    fill: #1d1f20;
+    stroke: #363636;
+    fill: #363636;
     opacity: 0.75;
   }
   .site:hover {
     stroke-width: 4px;
     opacity: 0.9;
-    fill: #1d1f20;
-    stroke: #1d1f20;
+    fill: #363636;
+    stroke: #363636;
     cursor: pointer;
   }
 </style>
