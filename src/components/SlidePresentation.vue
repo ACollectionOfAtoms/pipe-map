@@ -51,6 +51,7 @@ export default {
       currentYear: '',
       years: dateRange.reduce((obj, x) => Object.assign(obj, { [x]: {'accidents': 0} }), {}), // like python dict comprehension
       totalAccidents: 0,
+      currentYear: 2000,
       introId: 'intro-card',
       outroId: 'outro-card'
     }
@@ -94,6 +95,7 @@ export default {
   methods: {
     filterSites(dateVal, showNone=false, showAll=false) {
       let currentYear = (dateVal.getFullYear() + 1).toString()
+      window.eventBus.$emit('updateCurrentYear', currentYear)
       let newData = filter(this.siteData, d => {
         return d.date.getFullYear() <= currentYear
       })
@@ -102,6 +104,7 @@ export default {
       })
       this.totalAccidents = newData.length
       Vue.set(this.years[currentYear], 'accidents', currentYearData.length)
+      // Create "step through" function here for a iterative display
       window.eventBus.$emit('updateSites', newData)
     }
   }

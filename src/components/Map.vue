@@ -19,13 +19,18 @@ export default {
 
   data() {
     return {
-      displayedSites: []
+      displayedSites: [],
+      drawnSites: {},
+      currentYear: 2000
     }
   },
 
   created() {
     window.eventBus.$on('updateSites', d => {
       this.drawSites(d)
+    })
+    window.eventBus.$on('updateCurrentYear', d => {
+      this.currentYear = d
     })
   },
 
@@ -68,11 +73,21 @@ export default {
     },
     drawSites(data) {
       this.displayedSites = data
-      let sites = this.svg.selectAll(".site")
+      let sites = this.svg.selectAll('.site, .site-unhighlighted, .site-highlighted')
                             .data(data, d => {
                               return d['uuid']
                             })
-      sites.enter().append("circle")
+
+      //update
+      sites.attr("class", d => {
+        if (d.date.getFullYear() == parseInt(this.currentYear)) {
+          return 'site-highlighted'
+        }
+        return 'site site-unhighlighted'
+      })
+
+      // enter
+      sites.enter().append('circle')
               .on('click', d => {
                 let modalData = {
                   'title': d.date.getFullYear(),
@@ -80,7 +95,11 @@ export default {
                 }
                 window.eventBus.$emit('showModal', modalData)
               })
-              .attr("class", 'site')
+              .attr("class", d => {
+                if (d.date.getFullYear() == parseInt(this.currentYear)) {
+                  return 'site-highlighted'
+                }
+              })
               .attr("cx", d => {
                 return this.projection([d.lng, d.lat])[0]
               })
@@ -141,9 +160,18 @@ export default {
     stroke: #ddd;
   }
   .site {
-  	stroke-width: 1px;
+    opacity: 0;
+  }
+  .site-unhighlighted {
+    stroke-width: 1px;
+    opacity: 0.75;
     stroke: #363636;
     fill: #363636;
+  }
+  .site-highlighted {
+    stroke-width: 1px;
+    stroke: #E9D542;
+    fill: #E9D542;
     opacity: 0.75;
   }
   .site:hover {

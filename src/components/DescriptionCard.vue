@@ -109,7 +109,7 @@ export default {
     padding: 1em;
   }
   .intro-card {
-    background-image: url('~assets/images/kalamazoo_2010.jpg');
+    /*background-image: url('~assets/images/kalamazoo_2010.jpg');*/
     background-repeat: no-repeat;
     background-position: center;
   }
