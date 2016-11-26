@@ -69,7 +69,7 @@ export default {
     this.presContainer.on('scroll.scroller', throttle(this.trackTime, 100))
   },
 
-  updated() {
+  updated() { // ensure we render sites on reload of page
     this.trackTime()
   },
 
@@ -88,9 +88,8 @@ export default {
         })
         this.totalAccidents = newData.length
         Vue.set(this.years[currentYear], 'accidents', currentYearData.length)
-        // TODO: remove currentYearData from new Data and render that immediately
         window.eventBus.$emit('updateSites', newData)
-        // this.easeSiteExposure(newData, 2)
+        // this.easeSiteExposure(currentYearData, 2)
       }
     },
     easeSiteExposure(dataList, time) {

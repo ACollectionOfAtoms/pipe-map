@@ -35,17 +35,20 @@ export default {
   mounted() {
     this.createContainer()
     this.drawMap()
-    // d3.select(window).on('resize', this.sizeChange)
-    // this.sizeChange()
   },
 
   methods: {
     createContainer() {
+      let width = $("#map-container").width()
+      let height = $("#map-container").height()
       this.svg = d3.select("#map-container")
+                      .append("div")
+                      .classed("svg-container", true)
                       .append("svg")
-                        .attr("width", "100%")
-                        .attr("height", "100%")
+                        .attr("viewBox", `0 0 ${width} ${height}`)
+                        .attr("preserveAspectRatio", "xMidYMid meet")
                           .append("g")
+                          .classed("svg-content", true)
     },
     drawMap() {
       let size = $('#map-container').width()
@@ -77,10 +80,7 @@ export default {
 
       //update
       sites.attr("class", d => {
-        if (d.date.getFullYear() == parseInt(this.currentYear)) {
-          return 'site site-highlighted'
-        }
-        return 'site site-unhighlighted'
+        return this.setSiteClass(d.date.getFullYear())
       })
 
       // enter
@@ -93,10 +93,7 @@ export default {
                 window.eventBus.$emit('showModal', modalData)
               })
               .attr("class", d => {
-                if (d.date.getFullYear() == parseInt(this.currentYear)) {
-                  return 'site site-highlighted'
-                }
-                return 'site site-unhighlighted'
+                return this.setSiteClass(d.date.getFullYear())
               })
               .attr("cx", d => {
                 return this.projection([d.lng, d.lat])[0]
@@ -117,22 +114,37 @@ export default {
                                 10000
                   return Math.sqrt(gallons * 0.001)
                 })
+
       sites.exit()
         .transition().duration(200)
           .attr("r", 1)
           .remove()
     },
-    sizeChange() {
-      let containerWidth = this.svg.style("width")
-      console.log(containerWidth)
-      d3.select("g").attr("transform", "scale(" + $("#map-container").width()/900 + ")")
-	    $("svg").height($("#map-container").width()*2)
+    setSiteClass(year) {
+      if (year == parseInt(this.currentYear)) {
+        return 'site site-highlighted'
+      }
+      return 'site site-unhighlighted'
     }
   }
 }
 </script>
 
 <style>
+  .svg-container {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      vertical-align: top;
+      overflow: hidden;
+  }
+  .svg-content {
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      left: 0;
+  }
   #map-component-container {
     position: fixed;
     height: 100vh;
@@ -143,9 +155,10 @@ export default {
     justify-content: center;
   }
   #map-container {
-    width: 80%;
     height: 100%;
+    width: 80%; /* Flexbox div centering*/
   }
+
   path {
     fill: none;
     stroke: #AAAAAA;
