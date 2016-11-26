@@ -49,7 +49,7 @@ export default {
     let dateRange = Array.from(new Array(17), (x, i) => 2000 + i)
 
     return {
-      currentYear: '',
+      presContainer: $(window),
       yearsRange: dateRange,
       years: dateRange.reduce((obj, x) => Object.assign(obj, { [x]: {'accidents': 0} }), {}), // like python dict comprehension
       totalAccidents: 0,
@@ -66,12 +66,56 @@ export default {
   },
 
   mounted() {
-    let presContainer = $(window)
-    let introRect = document.getElementById("outro-card").getBoundingClientRect().top
-    let trackTime = () => { // move this to methods
-      let presTop = presContainer.scrollTop()
+    this.presContainer.on('scroll.scroller', throttle(this.trackTime, 100))
+  },
+
+  updated() {
+    this.trackTime()
+  },
+
+  methods: {
+    filterSites() {
+      if (this.yearStack[this.yearStack.length - 1] !== this.currentYear
+          && this.siteData.length > 1) {
+        this.updateYearStack(this.currentYear)
+        let currentYear = this.currentYear.toString()
+        window.eventBus.$emit('updateCurrentYear', currentYear)
+        let newData = filter(this.siteData, d => {
+          return d.date.getFullYear() <= currentYear
+        })
+        let currentYearData = filter(newData, d => {
+          return currentYear == d.date.getFullYear()
+        })
+        this.totalAccidents = newData.length
+        Vue.set(this.years[currentYear], 'accidents', currentYearData.length)
+        // TODO: remove currentYearData from new Data and render that immediately
+        window.eventBus.$emit('updateSites', newData)
+        // this.easeSiteExposure(newData, 2)
+      }
+    },
+    easeSiteExposure(dataList, time) {
+      let interval = time / dataList.length,
+          ticker = interval,
+          growingData;
+      for (let i = 1; i < dataList.length + 1; i++) {
+        setTimeout( () => {
+          growingData = dataList.slice(0, i)
+          window.eventBus.$emit('updateSites', growingData)
+        }, ticker*1000)
+        ticker += interval
+      }
+    },
+    updateYearStack(year) {
+      let years = this.yearsRange
+      let yearIndex = years.indexOf(year) + 1
+      this.yearStack = years.slice(0, yearIndex)
+    },
+    trackTime() {
+      let introRect = document.getElementById("outro-card").getBoundingClientRect().top
+      let presTop = this.presContainer.scrollTop()
       if (presTop === 0) {
         // We're at the top, remove all sites
+        this.yearStack = []
         window.eventBus.$emit('updateSites', [])
         return
       }
@@ -88,48 +132,8 @@ export default {
         if(utils.isElementInViewport(el)) {
           this.currentYear = year
           this.filterSites()
-          this.updateYearStack(this.currentYear)
         }
       }
-    }
-    presContainer.on('scroll.scroller', throttle(trackTime, 100))
-  },
-
-  methods: {
-    filterSites() {
-      if (this.yearStack[this.yearStack.length - 1] == this.currentYear ) {
-        let currentYear = this.currentYear.toString()
-        window.eventBus.$emit('updateCurrentYear', currentYear)
-        this.updateYearStack(currentYear)
-        let newData = filter(this.siteData, d => {
-          return d.date.getFullYear() <= currentYear
-        })
-        let currentYearData = filter(newData, d => {
-          return currentYear == d.date.getFullYear()
-        })
-        this.totalAccidents = newData.length
-        Vue.set(this.years[currentYear], 'accidents', currentYearData.length)
-        // TODO: remove currentYearData from new Data and render that immediately
-        window.eventBus.$emit('updateSites', newData)
-        // this.easeSiteExposure(newData, 2)
-      }
-    },
-    easeSiteExposure(obj, time) {
-      let interval = time / obj.length,
-          ticker = interval,
-          growingData = []
-      for (let o of obj) {
-        setTimeout( () => {
-          growingData.push(o)
-          window.eventBus.$emit('updateSites', growingData)
-        }, ticker*1000)
-        ticker += interval
-      }
-    },
-    updateYearStack(year) {
-      let years = this.yearsRange
-      let yearIndex = years.indexOf(year) + 1
-      this.yearStack = years.slice(0, yearIndex)
     }
   }
 }

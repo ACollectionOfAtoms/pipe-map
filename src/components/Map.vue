@@ -92,7 +92,12 @@ export default {
                 }
                 window.eventBus.$emit('showModal', modalData)
               })
-              .attr("class", "site site-highlighted")
+              .attr("class", d => {
+                if (d.date.getFullYear() == parseInt(this.currentYear)) {
+                  return 'site site-highlighted'
+                }
+                return 'site site-unhighlighted'
+              })
               .attr("cx", d => {
                 return this.projection([d.lng, d.lat])[0]
               })
