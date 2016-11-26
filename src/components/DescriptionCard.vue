@@ -83,13 +83,13 @@ export default {
   }
   .year-container {
     position: absolute;
-    top: -1.5em;
+    top: -1.2em;
   }
   .accident-count-text {
     font-size: 5em;
   }
   .accident-count-container {
-    margin-left: 83%;
+    margin-left: auto;
     text-align: right;
   }
   .accident-count-header {

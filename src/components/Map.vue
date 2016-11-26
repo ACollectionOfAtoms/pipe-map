@@ -19,12 +19,14 @@ export default {
 
   data() {
     return {
-      currentYear: 2000
+      currentYear: 2000,
+      currentSiteData: []
     }
   },
 
   created() {
     window.eventBus.$on('updateSites', d => {
+      this.currentSiteData = d
       this.drawSites(d)
     })
     window.eventBus.$on('updateCurrentYear', d => {
@@ -35,26 +37,25 @@ export default {
   mounted() {
     this.createContainer()
     this.drawMap()
+    this.width = $("#map-container").width()
+    this.ratio = .5
+    this.height = this.width * this.ratio
+    d3.select(window).on('resize', this.resizeMap)
+    this.resizeMap()
   },
 
   methods: {
     createContainer() {
-      let width = $("#map-container").width()
-      let height = $("#map-container").height()
       this.svg = d3.select("#map-container")
-                      .append("div")
-                      .classed("svg-container", true)
                       .append("svg")
-                        .attr("viewBox", `0 0 ${width} ${height}`)
-                        .attr("preserveAspectRatio", "xMidYMid meet")
+                      .attr("width", "100%")
+                      .attr("height", "100%")
                           .append("g")
-                          .classed("svg-content", true)
     },
     drawMap() {
-      let size = $('#map-container').width()
       this.projection = d3.geoAlbersUsa()
-      this.projection.scale(size)
-      this.projection.translate([size / 2, size / 3]);
+      this.projection.scale(this.width)
+      this.projection.translate([this.width / 2, this.height / 2]);
       let path = d3.geoPath().projection(this.projection)
       d3.json("../data/us.json", (error, json) => {
         if (error) return console.log(error)
@@ -81,6 +82,13 @@ export default {
       //update
       sites.attr("class", d => {
         return this.setSiteClass(d.date.getFullYear())
+      })
+      // below are to ensure responsiveness of sites
+      .attr("cx", d => {
+        return this.projection([d.lng, d.lat])[0]
+      })
+      .attr("cy", d => {
+        return this.projection([d.lng, d.lat])[1] //can this be shortened?
       })
 
       // enter
@@ -125,38 +133,46 @@ export default {
         return 'site site-highlighted'
       }
       return 'site site-unhighlighted'
+    },
+    resizeMap() {
+      this.width = $("#map-container").width()
+      this.ratio = .5
+      this.height = this.width * this.ratio
+      this.projection
+            .translate([this.width / 2, this.height / 2])
+            .scale(this.width)
+      this.svg
+            .style("width", this.width + 'px')
+            .style("height", this.height + 'px')
+      let path = d3.geoPath().projection(this.projection)
+      this.svg.select('.land-boundary').attr('d', path)
+      this.svg.select('.state-boundary').attr('d', path)
+      this.drawSites(this.currentSiteData)
     }
   }
 }
 </script>
 
 <style>
-  .svg-container {
-      display: inline-block;
-      position: relative;
-      width: 100%;
-      padding-bottom: 100%;
-      vertical-align: top;
-      overflow: hidden;
-  }
-  .svg-content {
-      display: inline-block;
-      position: absolute;
-      top: 10px;
-      left: 0;
-  }
   #map-component-container {
     position: fixed;
     height: 100vh;
     width: 100vw;
-    display: -webkit-flex;
-    display: flex;
-    align-items: center;
+    display: -ms-flexbox;
+  	display: -webkit-flex;
+  	display: flex;
+
+  	-ms-flex-align: center;
+  	-webkit-align-items: center;
+  	-webkit-box-align: center;
+
+  	align-items: center;
     justify-content: center;
   }
   #map-container {
+    width: 100%;
     height: 100%;
-    width: 80%; /* Flexbox div centering*/
+    border: 1px solid black;
   }
 
   path {
