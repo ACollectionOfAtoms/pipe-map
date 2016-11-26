@@ -34,8 +34,9 @@
 import PipeMap from 'components/Map.vue'
 import Slide from 'components/Slide.vue'
 import filter from 'lodash.filter'
-import round from 'lodash.round'
+import throttle from 'lodash.throttle'
 import debounce from 'lodash.debounce'
+import round from 'lodash.round'
 import utils from 'utils'
 import Vue from 'vue'
 
@@ -49,9 +50,11 @@ export default {
 
     return {
       currentYear: '',
+      yearsRange: dateRange,
       years: dateRange.reduce((obj, x) => Object.assign(obj, { [x]: {'accidents': 0} }), {}), // like python dict comprehension
       totalAccidents: 0,
       currentYear: 2000,
+      yearStack: [], // aids in ensuring we call filter for years only once.
       introId: 'intro-card',
       outroId: 'outro-card'
     }
@@ -65,47 +68,68 @@ export default {
   mounted() {
     let presContainer = $(window)
     let introRect = document.getElementById("outro-card").getBoundingClientRect().top
-    let trackTime = () => {
+    let trackTime = () => { // move this to methods
       let presTop = presContainer.scrollTop()
       if (presTop === 0) {
         // We're at the top, remove all sites
         window.eventBus.$emit('updateSites', [])
         return
       }
-      if (round(presTop, -2) === round(introRect, -2)) {
-        // we're at the bottom, show all sites
-        window.eventBus.$emit('updateSites', this.siteData)
-        return
-      }
+      // if (round(presTop, -2) === round(introRect, -2)) {
+      //   // we're at the bottom, show all sites
+      //   window.eventBus.$emit('updateSites', this.siteData)
+      //   return
+      // }
       // Feels very ineffecient, optimize/refactor if required
-      for (let year of Object.keys(this.years)) {
+      for (let year of this.yearsRange) {
         let cardId = '#' + year + '-card'
         let el = $(cardId)
 
         if(utils.isElementInViewport(el)) {
           this.currentYear = year
-          let currentDateYear = new Date(this.currentYear)
-          this.filterSites(currentDateYear)
+          this.filterSites()
+          this.updateYearStack(this.currentYear)
         }
       }
     }
-    presContainer.on('scroll.scroller', debounce(trackTime, 150))
+    presContainer.on('scroll.scroller', throttle(trackTime, 100))
   },
 
   methods: {
-    filterSites(dateVal, showNone=false, showAll=false) {
-      let currentYear = (dateVal.getFullYear() + 1).toString()
-      window.eventBus.$emit('updateCurrentYear', currentYear)
-      let newData = filter(this.siteData, d => {
-        return d.date.getFullYear() <= currentYear
-      })
-      let currentYearData = filter(newData, d => {
-        return currentYear == d.date.getFullYear()
-      })
-      this.totalAccidents = newData.length
-      Vue.set(this.years[currentYear], 'accidents', currentYearData.length)
-      // Create "step through" function here for a iterative display
-      window.eventBus.$emit('updateSites', newData)
+    filterSites() {
+      if (this.yearStack[this.yearStack.length - 1] == this.currentYear ) {
+        let currentYear = this.currentYear.toString()
+        window.eventBus.$emit('updateCurrentYear', currentYear)
+        this.updateYearStack(currentYear)
+        let newData = filter(this.siteData, d => {
+          return d.date.getFullYear() <= currentYear
+        })
+        let currentYearData = filter(newData, d => {
+          return currentYear == d.date.getFullYear()
+        })
+        this.totalAccidents = newData.length
+        Vue.set(this.years[currentYear], 'accidents', currentYearData.length)
+        // TODO: remove currentYearData from new Data and render that immediately
+        window.eventBus.$emit('updateSites', newData)
+        // this.easeSiteExposure(newData, 2)
+      }
+    },
+    easeSiteExposure(obj, time) {
+      let interval = time / obj.length,
+          ticker = interval,
+          growingData = []
+      for (let o of obj) {
+        setTimeout( () => {
+          growingData.push(o)
+          window.eventBus.$emit('updateSites', growingData)
+        }, ticker*1000)
+        ticker += interval
+      }
+    },
+    updateYearStack(year) {
+      let years = this.yearsRange
+      let yearIndex = years.indexOf(year) + 1
+      this.yearStack = years.slice(0, yearIndex)
     }
   }
 }

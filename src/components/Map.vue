@@ -19,8 +19,6 @@ export default {
 
   data() {
     return {
-      displayedSites: [],
-      drawnSites: {},
       currentYear: 2000
     }
   },
@@ -72,7 +70,6 @@ export default {
       })
     },
     drawSites(data) {
-      this.displayedSites = data
       let sites = this.svg.selectAll('.site, .site-unhighlighted, .site-highlighted')
                             .data(data, d => {
                               return d['uuid']
@@ -81,7 +78,7 @@ export default {
       //update
       sites.attr("class", d => {
         if (d.date.getFullYear() == parseInt(this.currentYear)) {
-          return 'site-highlighted'
+          return 'site site-highlighted'
         }
         return 'site site-unhighlighted'
       })
@@ -95,11 +92,7 @@ export default {
                 }
                 window.eventBus.$emit('showModal', modalData)
               })
-              .attr("class", d => {
-                if (d.date.getFullYear() == parseInt(this.currentYear)) {
-                  return 'site-highlighted'
-                }
-              })
+              .attr("class", "site site-highlighted")
               .attr("cx", d => {
                 return this.projection([d.lng, d.lat])[0]
               })
@@ -164,7 +157,7 @@ export default {
   }
   .site-unhighlighted {
     stroke-width: 1px;
-    opacity: 0.75;
+    opacity: 0.5;
     stroke: #363636;
     fill: #363636;
   }
@@ -172,13 +165,13 @@ export default {
     stroke-width: 1px;
     stroke: #E9D542;
     fill: #E9D542;
-    opacity: 0.75;
+    opacity: 0.8;
   }
-  .site:hover {
+  .site:hover, .site-highlighted:hover {
     stroke-width: 4px;
     opacity: 0.9;
-    fill: #363636;
-    stroke: #363636;
+    stroke: #E9D542;
+    fill: #E9D542;
     cursor: pointer;
   }
 </style>
