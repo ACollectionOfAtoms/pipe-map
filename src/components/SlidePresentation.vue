@@ -3,7 +3,7 @@
     <div id='presentation-container'>
       <pipe-map :site-data='siteData'></pipe-map>
       <slide :isIntro='true' :id='introId'></slide>
-      <!-- we forgo the use of a v-for directive to easily interrupt year cards with other cards -->
+      <!-- we forgo the use of a v-for directive to easily interrupt year cards with infoCards -->
       <slide :isYear='true' :year="'2000'" :accidents="years[2000]['accidents']"></slide>
       <!-- 2000 Township, Michigan -->
       <slide :isInfo='true'
@@ -59,7 +59,7 @@
       </slide>
 
       <slide :isYear='true' :year="'2016'" :accidents="years[2016]['accidents']"></slide>
-      <slide :isOutro='true' :id='outroId'></slide>
+      <!-- <slide :isOutro='true' :id='outroId'></slide> -->
     </div>
   </div>
 </template>
@@ -98,7 +98,7 @@ export default {
         '2001': {
           idName: 'info2001',
           location: 'Alaska',
-          description: ''
+          description: 'On October 4, a drunken man used a rifle to shoot a hole in the Alaskan Pipeline. More than 285,000 gallons of crude oil were spilled, costing more $13 million to clean up. The man was later convicted in Court.'
         },
         '2010': {
           idName: 'info2010', // Used to dictate bg image in InfoCard.vue

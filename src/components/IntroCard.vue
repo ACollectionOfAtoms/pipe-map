@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      introText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
+      introText: 'Scroll down to traverse time. Clicking on sites will show you their Wikipedia descriptions. Radii correspond to gallons spilt.'
     }
   }
 }
@@ -51,11 +51,12 @@ export default {
 }
 .body-container {
   width: 50%;
+  font-size: 1em;
   max-height: 30%;
   overflow-y: scroll;
   align-self: center;
   margin-bottom: 5%;
-  margin-top: 10%;
+  margin-top: 5%;
 }
 .intro-content {
   max-width: 80%;

@@ -1,6 +1,41 @@
 <template>
-  <div class='about-page-container'>
+  <div class='about-page'>
     <app-header></app-header>
+    <div class='about-page-container'>
+      <div class='about-page-content'>
+        <div class='header-container'>
+          ABOUT
+        </div>
+        <div class='body-container'>
+          Most* of the data found here was programmatically extracted from
+          <a href='https://en.wikipedia.org/wiki/List_of_pipeline_accidents_in_the_United_States_in_the_21st_century' target="_blank">
+            <span class='link'> wikipedia</span>.
+          </a>
+          It is meant to be a visual aid to the daunting list found therin.
+          <br></br>
+          Being an open-source project, you may see how the
+          <a href='https://github.com/ACollectionOfAtoms/pipe-map-data-acquisition' target="_blank">
+            <span class='link'> data was acquired</span>,
+          </a>
+          along with how this
+          <a href='https://github.com/ACollectionOfAtoms/pipe-map' target="_blank">
+            <span class='link'> webpage was built</span>.
+          </a>
+          <br></br>
+          <div class='credits'>
+            <div>
+              Engineer: Adam Hernandez
+            </div>
+            <div>
+              * Journalist: Arthur DeVitalis
+            </div>
+            <div>
+              UI-Designer: Stiles Lowe
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -14,8 +49,42 @@ export default {
 }
 </script>
 
-<style>
-.about-container {
-  padding-top: 5%;
+<style scoped>
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
 }
+.about-page {
+  width: 100vw;
+  height: 100vh;
+}
+.about-page-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.about-page-content {
+  margin-top: 5%;
+  width: 50%;
+}
+.header-container {
+  font-size: 2em;
+  color: rgb(67, 75, 75);
+}
+.body-container {
+  font-size: 1.5em;
+}
+.credits {
+  font-size: 0.55em;
+  text-align: right;
+  color: rgb(102, 100, 100);
+  align-self: flex-start;
+}
+.link {
+  color: rgb(0, 132, 255);
+}
+.link:hover {
+  cursor: pointer;
+}
+
 </style>

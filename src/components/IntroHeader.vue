@@ -41,5 +41,6 @@
 }
 .caption-container {
   margin-top: 2em;
+  font-size: 0.8em;
 }
 </style>
