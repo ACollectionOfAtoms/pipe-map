@@ -1,16 +1,12 @@
 <template>
-  <div>
-    <section class="hero is-primary is-medium">
-        <div class='box'>
-          <a href='/'> map </a>
-        </div>
-      </div>
-    </div>
+  <div class='about-page-container'>
+    <app-header></app-header>
   </div>
 </template>
 
 <script>
 import Header from 'components/Header.vue'
+
 export default {
   components: {
     'app-header': Header

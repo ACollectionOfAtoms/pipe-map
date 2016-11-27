@@ -112,10 +112,25 @@ export default {
               .attr("r", 1)
               .transition().duration(400)
                 .attr("r", d => {
-                  let exception = 'Kalamazoo'
                   // Python parser failed to catch this one.
-                  if (d.description.includes(exception)) {
+                  if (d.description.includes('Kalamazoo')) {
                       d.gallons = 800000
+                  }
+                  // ...and this one.
+                  if (d.description.includes('Blackman Charter Township, Michigan')) {
+                      d.gallons = 75000
+                  }
+                  // ..and this one.
+                  if (d.description.includes('Cohasset, Minnesota')) {
+                      d.gallons = 252000
+                  }
+                  // ..and this one.
+                  if (d.description.includes('Rusk County, Wisconsin')) {
+                    d.gallons = 201600
+                  }
+                  // ... and this one
+                  if (d.description.includes('Douglas County, Wisconsin')) {
+                    d.gallons = 100000
                   }
                   let gallons = parseInt(d.gallons) ?
                                 parseInt(d.gallons) :

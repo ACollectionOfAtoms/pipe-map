@@ -1,8 +1,11 @@
 <template>
   <div id="header-container">
     <div id="app-header">
-      <div @click='goToAbout' class='about-button'>
+      <div v-if='!atAbout' @click='goToAbout' class='about-button'>
          <span> About This Project </span>
+      </div>
+      <div v-else @click='goToMap' class='about-button'>
+        <span> Back to the map </span>
       </div>
     </div>
   </div>
@@ -14,6 +17,18 @@ export default {
   methods: {
     goToAbout() {
       this.$router.push('about')
+    },
+    goToMap() {
+      this.$router.push('/')
+    }
+  },
+
+  computed: {
+    atAbout() {
+      if (this.$router.currentRoute.fullPath == '/about') {
+        return true
+      }
+      return false
     }
   }
 }

@@ -5,10 +5,20 @@
       <slide :isIntro='true' :id='introId'></slide>
       <!-- we forgo the use of a v-for directive to easily interrupt year cards with other cards -->
       <slide :isYear='true' :year="'2000'" :accidents="years[2000]['accidents']"></slide>
-      <slide :isYear='true' :year="'2001'" :accidents="years[2001]['accidents']"></slide>
+      <!-- 2000 Township, Michigan -->
+      <slide :isInfo='true'
+             :id="infoCardInfo['2000'].idName"
+             :location="infoCardInfo['2000'].location"
+             :description="infoCardInfo['2000'].description">
+      </slide>
 
+      <slide :isYear='true' :year="'2001'" :accidents="years[2001]['accidents']"></slide>
       <!-- 2001 alaskan accident -->
-      <!-- <slide :isInfo='true' :id='info2010'></slide> -->
+      <slide :isInfo='true'
+             :id="infoCardInfo['2001'].idName"
+             :location="infoCardInfo['2001'].location"
+             :description="infoCardInfo['2001'].description">
+      </slide>
 
       <slide :isYear='true' :year="'2002'" :accidents="years[2002]['accidents']"></slide>
       <slide :isYear='true' :year="'2003'" :accidents="years[2003]['accidents']"></slide>
@@ -40,6 +50,14 @@
 
 
       <slide :isYear='true' :year="'2015'" :accidents="years[2015]['accidents']"></slide>
+
+      <!-- Refugio Beach Cali -->
+      <slide :isInfo='true'
+             :id="infoCardInfo['2015'].idName"
+             :location="infoCardInfo['2015'].location"
+             :description="infoCardInfo['2015'].description">
+      </slide>
+
       <slide :isYear='true' :year="'2016'" :accidents="years[2016]['accidents']"></slide>
       <slide :isOutro='true' :id='outroId'></slide>
     </div>
@@ -72,15 +90,30 @@ export default {
       introId: 'intro-card',
       outroId: 'outro-card',
       infoCardInfo: {
+        '2000': {
+          idName: 'info2000',
+          location: 'Township, Michigan',
+          description: "On June 7, a stopple fitting weld failed on a Wolverine Pipeline Company line, causing a rupture releasing 75,000 US gallons (280,000 L) of gasoline into the environment, and causing the evacuation of more than 500 houses in Blackman Charter Township, Michigan. The failure caused the shutdown of 30% of Michigan's gasoline supplies for nine days, contaminated a creek which flows into the Grand River, and a railroad track near the failure site was shut down for a week. Later tests found 715 anomalies in this pipeline. Wolverine later agreed to pay for switching houses in the area from local water wells to a city water source."
+        },
+        '2001': {
+          idName: 'info2001',
+          location: 'Alaska',
+          description: ''
+        },
         '2010': {
           idName: 'info2010', // Used to dictate bg image in InfoCard.vue
-          location: 'Marshall, Michigan',
-          description: 'On July 26, the Kalamazoo River oil spill: Enbridge Energy Partners LLP (Enbridge), reported that a 30-inch (760 mm) pipeline belonging to Enbridge burst in Marshall, Michigan. Enbridge had numerous alarms from the affected Line 6B, but controllers thought the alarms were from phase separation, and the leak was not reported to Enbridge for 17 hours. '
+          location: 'Ceresco, Michigan',
+          description: 'Cleanup started immediately after the Kalamazoo River oil spill from the Canadian pipeline company Enbridge. The company was fined $61 million as part of a $177 million dollar settlement following the July 2010 leak of 840,000 U.S. gallons. A separate leak of 256,000 U.S. gallons from Chicago suburb Romeville was included in the fine. The oil flowed for about 17 hours before it was shut off.'
         },
         '2014': {
           idName: 'info2014',
           location: 'Harlem, New York City',
           description: 'At 9:31 AM on March 12, 2014, a natural gas explosion leveled two apartment buildings in East Harlem in New York City. The leak started several hours prior and the initial blast killed 8 people. About 100 families were displaced in Manhattan within the blast radius while 70 others were injured. About 250 firefighters from 44 units responded to the explosion that also suspended train service in and out of Grand Central Terminal until later that afternoon. Con Ed was later accused of 11 Safety violations connected to the incident. The Harlem Explosion became the worst energy related explosion that year by casualty and property damage.'
+        },
+        '2015': {
+          idName: 'info2015',
+          location: 'Refugio Beach, California',
+          description: '124,000 U.S. Gallons of crude oil soaked Refugio Beach and wildlife on May 19th. Texas company Plains All American Pipeline was eventually indicted for spilling oil in state waters. The cleanup is ongoing and the California Environmental Protection Agency estimates at total of 181 birds and 107 marine mammals were rehabilitated.'
         }
       }
     }

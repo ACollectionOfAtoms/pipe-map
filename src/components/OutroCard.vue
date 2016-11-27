@@ -3,7 +3,7 @@
       averages and other interesting data -->
   <div class='outro-container'>
     <div :id='cardId' class='outro-content'>
-      <h1> An Outrocard </h1>
+      <h1> In Conclusion </h1>
     </div>
   </div>
 </template>

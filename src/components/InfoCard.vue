@@ -29,6 +29,12 @@ export default {
 .info-card-container {
   width: 100%;
   height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  -webkit-box-shadow: 0px 0px 40px 40px rgba(255, 255, 255, 0.75);
+  -moz-box-shadow:    0px 0px 40px 40px rgba(255, 255, 255, 0.75);
+  box-shadow:         0px 0px 40px 40px rgba(255, 255, 255, 0.75);
   display: flex;
 }
 
@@ -51,22 +57,24 @@ export default {
   height: 50%;
 }
 
-#info2010 {
-  background-image: url('~assets/images/kalamazoo_2010.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+#info2001 {
+  background-image: url('~assets/images/2001/alaska_pipelineshot.jpg');
 }
 
-#info2001 {
+#info2000 {
+  background-image: url('~assets/images/2000/WoodTV_WolverinePipelineRupture2000.jpg');
+}
 
+#info2010 {
+  background-image: url('~assets/images/2010/KalamazooMI_2010.jpg');
 }
 
 #info2014 {
   background-image: url('~assets/images/2014/Harlem2014_NGExplosion_PublicUse.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+}
+
+#info2015 {
+  background-image: url('~assets/images/2015/refugio_beach_california2015spill.jpg')
 }
 
 </style>
