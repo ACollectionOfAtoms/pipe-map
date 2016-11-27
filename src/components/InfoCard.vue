@@ -55,6 +55,18 @@ export default {
   background-image: url('~assets/images/kalamazoo_2010.jpg');
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
+}
+
+#info2001 {
+
+}
+
+#info2014 {
+  background-image: url('~assets/images/2014/Harlem2014_NGExplosion_PublicUse.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 </style>

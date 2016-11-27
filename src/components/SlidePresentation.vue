@@ -31,6 +31,14 @@
       <slide :isYear='true' :year="'2012'" :accidents="years[2012]['accidents']"></slide>
       <slide :isYear='true' :year="'2013'" :accidents="years[2013]['accidents']"></slide>
       <slide :isYear='true' :year="'2014'" :accidents="years[2014]['accidents']"></slide>
+      <!-- Harlem 2014 -->
+      <slide :isInfo='true'
+             :id="infoCardInfo['2014'].idName"
+             :location="infoCardInfo['2014'].location"
+             :description="infoCardInfo['2014'].description">
+      </slide>
+
+
       <slide :isYear='true' :year="'2015'" :accidents="years[2015]['accidents']"></slide>
       <slide :isYear='true' :year="'2016'" :accidents="years[2016]['accidents']"></slide>
       <slide :isOutro='true' :id='outroId'></slide>
@@ -68,6 +76,11 @@ export default {
           idName: 'info2010', // Used to dictate bg image in InfoCard.vue
           location: 'Marshall, Michigan',
           description: 'On July 26, the Kalamazoo River oil spill: Enbridge Energy Partners LLP (Enbridge), reported that a 30-inch (760 mm) pipeline belonging to Enbridge burst in Marshall, Michigan. Enbridge had numerous alarms from the affected Line 6B, but controllers thought the alarms were from phase separation, and the leak was not reported to Enbridge for 17 hours. '
+        },
+        '2014': {
+          idName: 'info2014',
+          location: 'Harlem, New York City',
+          description: 'At 9:31 AM on March 12, 2014, a natural gas explosion leveled two apartment buildings in East Harlem in New York City. The leak started several hours prior and the initial blast killed 8 people. About 100 families were displaced in Manhattan within the blast radius while 70 others were injured. About 250 firefighters from 44 units responded to the explosion that also suspended train service in and out of Grand Central Terminal until later that afternoon. Con Ed was later accused of 11 Safety violations connected to the incident. The Harlem Explosion became the worst energy related explosion that year by casualty and property damage.'
         }
       }
     }

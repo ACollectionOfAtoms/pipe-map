@@ -49,7 +49,7 @@ export default {
   height: 100%;
   width: 100%;
   font-size: 1.2em;
-  background-color: rgba(61, 61, 61, 0.9);
+  background-color: rgba(61, 61, 61, 0.97);
   position: fixed;
   z-index: 1000000000000;
 }
