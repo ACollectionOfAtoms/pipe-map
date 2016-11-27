@@ -3,15 +3,24 @@
     <div id='presentation-container'>
       <pipe-map :site-data='siteData'></pipe-map>
       <slide :isIntro='true'></slide>
-      <!-- start years slides -->
-      <slide v-for='(obj, year, index) in years'
-             :isYear='true'
-             :ref='index'
-             :year='year'
-             :accidents="obj.accidents"
-      ></slide>
-      <!-- end year slides -->
-
+      <!-- we forgo the use of a v-for directive to easily interrupt year cards with other cards -->
+      <slide :isYear='true' :year="'2000'" :accidents="years[2000]['accidents']"></slide>
+      <slide :isYear='true' :year="'2001'" :accidents="years[2001]['accidents']"></slide>
+      <slide :isYear='true' :year="'2002'" :accidents="years[2002]['accidents']"></slide>
+      <slide :isYear='true' :year="'2003'" :accidents="years[2003]['accidents']"></slide>
+      <slide :isYear='true' :year="'2004'" :accidents="years[2004]['accidents']"></slide>
+      <slide :isYear='true' :year="'2005'" :accidents="years[2005]['accidents']"></slide>
+      <slide :isYear='true' :year="'2006'" :accidents="years[2006]['accidents']"></slide>
+      <slide :isYear='true' :year="'2007'" :accidents="years[2007]['accidents']"></slide>
+      <slide :isYear='true' :year="'2008'" :accidents="years[2008]['accidents']"></slide>
+      <slide :isYear='true' :year="'2009'" :accidents="years[2009]['accidents']"></slide>
+      <slide :isYear='true' :year="'2010'" :accidents="years[2010]['accidents']"></slide>
+      <slide :isYear='true' :year="'2011'" :accidents="years[2011]['accidents']"></slide>
+      <slide :isYear='true' :year="'2012'" :accidents="years[2012]['accidents']"></slide>
+      <slide :isYear='true' :year="'2013'" :accidents="years[2013]['accidents']"></slide>
+      <slide :isYear='true' :year="'2014'" :accidents="years[2014]['accidents']"></slide>
+      <slide :isYear='true' :year="'2015'" :accidents="years[2015]['accidents']"></slide>
+      <slide :isYear='true' :year="'2016'" :accidents="years[2016]['accidents']"></slide>
       <!-- start outro slide -->
       <slide :id='outroId' :isOutro='true'></slide>
       <!-- end outro slide -->
@@ -114,8 +123,7 @@ export default {
       for (let year of this.yearsRange) { // this block is a good candidate for
         let cardId = '#' + year + '-card' // performance centric refactor
         let el = $(cardId)
-
-        if (utils.isElementInViewport(el)) {
+        if (el && utils.isElementInViewport(el)) {
           this.currentYear = year
           this.filterSites()
         }

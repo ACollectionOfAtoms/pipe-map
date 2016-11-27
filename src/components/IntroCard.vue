@@ -36,9 +36,9 @@ export default {
   display: flex;
   justify-content: center;
   background-color:white;
-  -webkit-box-shadow: 0px 50px 22px 0px rgba(255, 255, 255, 0.75);
-  -moz-box-shadow:    0px 50px 22px 0px rgba(255, 255, 255, 0.75);
-  box-shadow:         0px 50px 22px 0px rgba(255, 255, 255, 0.75);
+  -webkit-box-shadow: 0px 100px 22px 0px rgba(255, 255, 255, 0.75);
+  -moz-box-shadow:    0px 100px 22px 0px rgba(255, 255, 255, 0.75);
+  box-shadow:         0px 100px 22px 0px rgba(255, 255, 255, 0.75);
 }
 .header-container {
   margin-top: 8%;

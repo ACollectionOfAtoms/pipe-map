@@ -1,4 +1,6 @@
 <template>
+  <!-- The outro card should include some photos along with tabulature data with
+      averages and other interesting data -->
   <div class='intro-container'>
     <h1> An Outrocard </h1>
   </div>
