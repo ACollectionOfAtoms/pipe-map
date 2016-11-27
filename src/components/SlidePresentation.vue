@@ -4,10 +4,11 @@
       <pipe-map :site-data='siteData'></pipe-map>
       <!-- start intro slide -->
       <slide :id='introId'>
-        <h1 slot='header'> Pipeline Accidents Of The 21st Century </h1>
-        <p slot='body'> Clicking on disaster sites provides more information. </p>
+        <div slot='header'>
+          <main-header></main-header>
+        </div>
+        <p slot='body'> </p>
         <span slot='footer' class='subdued-text'>
-          <h3>SCROLL DOWN TO BEGIN ⬇</h3>
         </span>
       </slide>
       <!-- end intro slide -->
@@ -32,6 +33,7 @@
 
 <script>
 import PipeMap from 'components/Map.vue'
+import MainHeader from 'components/MainHeader.vue'
 import Slide from 'components/Slide.vue'
 import filter from 'lodash.filter'
 import throttle from 'lodash.throttle'
@@ -62,7 +64,8 @@ export default {
 
   components: {
     'slide': Slide,
-    'pipe-map': PipeMap
+    'pipe-map': PipeMap,
+    'main-header': MainHeader
   },
 
   mounted() {

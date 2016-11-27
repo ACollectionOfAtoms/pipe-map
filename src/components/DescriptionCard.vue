@@ -1,23 +1,27 @@
 <template>
   <div class='card-container'>
 
-    <div :id='cardId'>
+    <div :id='cardId' :class='infoCardClass'>
       <!-- if we have no year... -->
       <!-- show an info card -->
       <!-- (This should be a separate component!) -->
-      <div v-if="!year" class='row middle-xs center-xs' :class='infoCardClass'>
-        <div class='col-xs-12'>
-          <div class='row middle-xs center-xs'>
-            <div class='row-xs-6 info-card-content'>
-              <header>
-                <slot :ref='cardId' name="header"></slot>
-              </header>
-              <main class='card-body'>
-                <slot name="body"></slot>
-              </main>
-              <footer>
-                <slot name="footer"></slot>
-              </footer>
+      <div v-if="!year" class='row middle-xs center-xs'>
+        <div class='col-xs-12 info-card-content'>
+          <div class='hero is-medium'>
+            <div class='hero-head'>
+            </div>
+            <div class='hero-body'>
+              <div class='container'>
+                <header>
+                  <slot :ref='cardId' name="header"></slot>
+                </header>
+                <main class='card-body'>
+                  <slot name="body"></slot>
+                </main>
+                <footer>
+                  <slot name="footer"></slot>
+                </footer>
+              </div>
             </div>
           </div>
         </div>
@@ -42,6 +46,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
       year: '',
@@ -58,10 +63,12 @@ export default {
 
   computed: {
     infoCardClass() {
-      if (this.cardId.includes('outro')) {
-        return 'info-card outro-card'
+      if (!this.year) {
+        if (this.cardId.includes('outro')) {
+          return 'info-card outro-card'
+        }
+        return 'intro-card info-card'
       }
-      return 'intro-card info-card'
     }
   },
 
@@ -73,7 +80,7 @@ export default {
 <style scoped>
   .card-container {
     padding: 0;
-    width: 100%;
+    width: 100vw;
   }
   .flex-container {
     display: -webkit-flex;
@@ -102,11 +109,13 @@ export default {
   .info-card { /* really this is the slide */
     text-align: center;
     height: 100vh;
+    width: 100vw;
+    background-color:white;
     color: white;
   }
   .info-card-content {
-    background-color: rgba(50, 50, 50, 0.75);
-    padding: 1em;
+    height: 100vh;
+    color: black;
   }
   .intro-card {
     /*background-image: url('~assets/images/kalamazoo_2010.jpg');*/

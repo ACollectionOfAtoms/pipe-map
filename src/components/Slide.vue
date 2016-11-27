@@ -60,7 +60,7 @@ export default {
     position: relative;
   }
   .slide-content {
-    width: 60%;
+    width: 100%;
     height: 100%;
   }
 </style>
