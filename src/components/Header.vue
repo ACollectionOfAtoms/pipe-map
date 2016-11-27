@@ -1,8 +1,8 @@
 <template>
   <div id="header-container">
-    <div id="app-header" class='row'>
-      <div @click='goToAbout' class='col-xs-1 about-button'>
-         <span> About </span>
+    <div id="app-header">
+      <div @click='goToAbout' class='about-button'>
+         <span> About This Project </span>
       </div>
     </div>
   </div>
@@ -27,18 +27,20 @@ export default {
   width: 100%;
   position: fixed;
   z-index: 1000000000;
+  display: flex;
 }
 .about-button {
-  background-color: rgb(20, 30, 30);
-  opacity: 0.1;
+  cursor: pointer;
+  border-radius: 15px;
   padding: 0.8em;
-  text-align: center;
+  opacity: 1.0;
+  background-color: rgba(20, 30, 30, 0.8);
+  font-size: 0.6em;
   color: white;
 }
 .about-button:hover {
-  cursor: pointer;
-  opacity: 1.0;
-  background-color: rgba(20, 30, 30, 0.8);
+  background-color: rgb(20, 30, 30);
+  text-align: center;
   color: white;
 }
 </style>

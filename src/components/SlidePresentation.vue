@@ -2,19 +2,10 @@
   <div>
     <div id='presentation-container'>
       <pipe-map :site-data='siteData'></pipe-map>
-      <!-- start intro slide -->
-      <slide :id='introId'>
-        <div slot='header'>
-          <main-header></main-header>
-        </div>
-        <p slot='body'> </p>
-        <span slot='footer' class='subdued-text'>
-        </span>
-      </slide>
-      <!-- end intro slide -->
-
+      <slide :isIntro='true'></slide>
       <!-- start years slides -->
       <slide v-for='(obj, year, index) in years'
+             :isYear='true'
              :ref='index'
              :year='year'
              :accidents="obj.accidents"
@@ -22,10 +13,7 @@
       <!-- end year slides -->
 
       <!-- start outro slide -->
-      <slide :id='outroId'>
-        <h4 slot='header'> In the last 16 years </h4>
-        <p slot='body'> There have been about {{ totalAccidents }} pipeline accidents.* </p>
-      </slide>
+      <slide :id='outroId' :isOutro='true'></slide>
       <!-- end outro slide -->
     </div>
   </div>
@@ -33,12 +21,8 @@
 
 <script>
 import PipeMap from 'components/Map.vue'
-import MainHeader from 'components/MainHeader.vue'
 import Slide from 'components/Slide.vue'
 import filter from 'lodash.filter'
-import throttle from 'lodash.throttle'
-import debounce from 'lodash.debounce'
-import round from 'lodash.round'
 import utils from 'utils'
 import Vue from 'vue'
 
@@ -53,7 +37,8 @@ export default {
     return {
       presContainer: $(window),
       yearsRange: dateRange,
-      years: dateRange.reduce((obj, x) => Object.assign(obj, { [x]: {'accidents': 0} }), {}), // like python dict comprehension
+      // the below (`year`) is like python dict comprehension
+      years: dateRange.reduce((obj, x) => Object.assign(obj, { [x]: {'accidents': 0} }), {}),
       totalAccidents: 0,
       currentYear: 2000,
       yearStack: [], // aids in ensuring we call filter for years only once.
@@ -65,11 +50,10 @@ export default {
   components: {
     'slide': Slide,
     'pipe-map': PipeMap,
-    'main-header': MainHeader
   },
 
   mounted() {
-    this.presContainer.on('scroll.scroller', throttle(this.trackTime, 100))
+    this.presContainer.on('scroll.scroller', this.trackTime)
   },
 
   updated() { // ensure we render sites on reload of page
@@ -78,11 +62,14 @@ export default {
 
   methods: {
     filterSites() {
+      // Ensure one-time firing by creating a 'year' stack
       if (this.yearStack[this.yearStack.length - 1] !== this.currentYear
           && this.siteData.length > 1) {
+
         this.updateYearStack(this.currentYear)
         let currentYear = this.currentYear.toString()
         window.eventBus.$emit('updateCurrentYear', currentYear)
+
         let newData = filter(this.siteData, d => {
           return d.date.getFullYear() <= currentYear
         })
@@ -96,6 +83,7 @@ export default {
       }
     },
     easeSiteExposure(dataList, time) {
+      // TODO: make this work! (sequentially display sites)
       let interval = time / dataList.length,
           ticker = interval,
           growingData;
@@ -108,12 +96,14 @@ export default {
       }
     },
     updateYearStack(year) {
+      // If a user refreshes while at ex: 2014,
+      // we compensate for this by constructing the stack accordingly
       let years = this.yearsRange
       let yearIndex = years.indexOf(year) + 1
       this.yearStack = years.slice(0, yearIndex)
     },
     trackTime() {
-      let introRect = document.getElementById("outro-card").getBoundingClientRect().top
+      // TODO: Refactor for performance!
       let presTop = this.presContainer.scrollTop()
       if (presTop === 0) {
         // We're at the top, remove all sites
@@ -121,17 +111,11 @@ export default {
         window.eventBus.$emit('updateSites', [])
         return
       }
-      // if (round(presTop, -2) === round(introRect, -2)) {
-      //   // we're at the bottom, show all sites
-      //   window.eventBus.$emit('updateSites', this.siteData)
-      //   return
-      // }
-      // Feels very ineffecient, optimize/refactor if required
-      for (let year of this.yearsRange) {
-        let cardId = '#' + year + '-card'
+      for (let year of this.yearsRange) { // this block is a good candidate for
+        let cardId = '#' + year + '-card' // performance centric refactor
         let el = $(cardId)
 
-        if(utils.isElementInViewport(el)) {
+        if (utils.isElementInViewport(el)) {
           this.currentYear = year
           this.filterSites()
         }
@@ -150,8 +134,5 @@ export default {
     max-height: 100%;
     top: 0;
     left: 0;
-  }
-  .subdued-text {
-    font-size: 0.6em;
   }
 </style>

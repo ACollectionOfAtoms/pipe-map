@@ -2,8 +2,8 @@
   <transition name='fade'>
     <div v-if='!hideMe'>
       <div class="modal-container"></div>
-      <div class='row center-xs'>
-        <div class='col-xs-6 modal-box'>
+      <div>
+        <div class='modal-box'>
           <header>
             <h3> {{ title }}</h3>
           </header>
@@ -12,7 +12,7 @@
             <p> {{ body }}</p>
           </main>
           <footer>
-            <div class='row center-xs modal-footer'>
+            <div class='modal-footer'>
               <div @click='hideThis()' class='modal-button col-xs-2'> <h5> OK </h5></div>
             </div>
           </footer>

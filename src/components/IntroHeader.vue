@@ -10,7 +10,7 @@
    </div>
    <span class='large-text'> The 21st Century </span>
    <div class='caption-container'>
-     <span class='caption-text'> By ADAM HERNANDEZ NOV. 26, 2016, </span>
+     <span class='caption-text'> An Overview</span>
    </div>
   </div>
 </template>
