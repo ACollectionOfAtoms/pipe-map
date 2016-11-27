@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .large-text {
   font-size: 3em;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class='intro-container'>
-    <div class='intro-content'>
+    <div :id='cardId' class='intro-content'>
       <div class='header-container'>
         <intro-header></intro-header>
       </div>
@@ -18,6 +18,10 @@
 import IntroHeader from 'components/IntroHeader.vue'
 
 export default {
+  props: {
+    cardId: ''
+  },
+
   components: {
     'intro-header': IntroHeader
   },
@@ -31,8 +35,10 @@ export default {
 
 <style scoped>
 .intro-container {
+  text-align: center;
   height: 80%;
   width: 100%;
+  background-color:white;
   display: flex;
   justify-content: center;
   background-color:white;

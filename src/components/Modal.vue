@@ -1,21 +1,17 @@
 <template>
   <transition name='fade'>
-    <div v-if='!hideMe'>
-      <div class="modal-container"></div>
-      <div>
-        <div class='modal-box'>
-          <header>
-            <h3> {{ title }}</h3>
-          </header>
-
-          <main class='modal-body'>
-            <p> {{ body }}</p>
-          </main>
-          <footer>
-            <div class='modal-footer'>
-              <div @click='hideThis()' class='modal-button col-xs-2'> <h5> OK </h5></div>
-            </div>
-          </footer>
+    <div v-show='!hideMe' class="modal-container">
+      <div @click='hideThis()' class='exit-button-container'>
+        <span class='exit-button'> X </span>
+      </div>
+      <div class='modal-box'>
+        <div class='modal-content'>
+          <div class='title-container'>
+            {{ title }}
+          </div>
+          <div>
+            {{ body }}
+          </div>
         </div>
       </div>
     </div>
@@ -49,26 +45,56 @@ export default {
 </script>
 
 <style scoped>
-.modal-box {
-  background-color: white;
-  position: fixed;
-  margin-top: 10%;
-  max-height: 70%;
-  overflow-y: scroll;
-  background-color: white;
-  z-index: 1000000000000000;
-  -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,1);
-  -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,1);
-  box-shadow: 0px 0px 3px 0px rgba(0,0,0,1);
-}
 .modal-container {
   height: 100%;
   width: 100%;
-  background-color: rgba(20, 30, 30, 0.75);
+  font-size: 1.2em;
+  background-color: rgba(61, 61, 61, 0.9);
   position: fixed;
   z-index: 1000000000000;
 }
 
+.exit-button-container {
+  color: white;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  font-size: 1.5em;
+}
+
+.exit-button {
+  margin-top: 1em;
+  margin-right: 1em;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  align-items: stretch;
+}
+
+.exit-button:hover {
+  background-color: white;
+  border-radius: 50%;
+  color: black;
+  cursor: pointer;
+}
+
+.modal-box {
+  overflow-y: scroll;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  color: white;
+  z-index: 1000000000000000;
+}
+
+.modal-content {
+  width: 80%;
+}
+
+.title-container {
+  padding: 1em 0 1em 0;
+}
 .modal-button:hover {
   background-color: black;
   opacity: 0.75;
@@ -85,11 +111,4 @@ export default {
   padding-top: 0.5em;
   margin: 1em;
 }
-/*TODO: Add nice transition */
-/*.fade-enter-active, .fade-leave-active {
-  transition: opacity .3s
-}
-.fade-enter, .fade-leave-active {
-  opacity: 0
-}*/
 </style>

@@ -2,10 +2,14 @@
   <div>
     <div id='presentation-container'>
       <pipe-map :site-data='siteData'></pipe-map>
-      <slide :isIntro='true'></slide>
+      <slide :isIntro='true' :id='introId'></slide>
       <!-- we forgo the use of a v-for directive to easily interrupt year cards with other cards -->
       <slide :isYear='true' :year="'2000'" :accidents="years[2000]['accidents']"></slide>
       <slide :isYear='true' :year="'2001'" :accidents="years[2001]['accidents']"></slide>
+
+      <!-- 2001 alaskan accident -->
+      <!-- <slide :isInfo='true' :id='info2010'></slide> -->
+
       <slide :isYear='true' :year="'2002'" :accidents="years[2002]['accidents']"></slide>
       <slide :isYear='true' :year="'2003'" :accidents="years[2003]['accidents']"></slide>
       <slide :isYear='true' :year="'2004'" :accidents="years[2004]['accidents']"></slide>
@@ -15,15 +19,21 @@
       <slide :isYear='true' :year="'2008'" :accidents="years[2008]['accidents']"></slide>
       <slide :isYear='true' :year="'2009'" :accidents="years[2009]['accidents']"></slide>
       <slide :isYear='true' :year="'2010'" :accidents="years[2010]['accidents']"></slide>
+
+      <!-- Kalamzoo 2010 -->
+      <slide :isInfo='true'
+             :id="infoCardInfo['2010'].idName"
+             :location="infoCardInfo['2010'].location"
+             :description="infoCardInfo['2010'].description">
+      </slide>
+
       <slide :isYear='true' :year="'2011'" :accidents="years[2011]['accidents']"></slide>
       <slide :isYear='true' :year="'2012'" :accidents="years[2012]['accidents']"></slide>
       <slide :isYear='true' :year="'2013'" :accidents="years[2013]['accidents']"></slide>
       <slide :isYear='true' :year="'2014'" :accidents="years[2014]['accidents']"></slide>
       <slide :isYear='true' :year="'2015'" :accidents="years[2015]['accidents']"></slide>
       <slide :isYear='true' :year="'2016'" :accidents="years[2016]['accidents']"></slide>
-      <!-- start outro slide -->
-      <slide :id='outroId' :isOutro='true'></slide>
-      <!-- end outro slide -->
+      <slide :isOutro='true' :id='outroId'></slide>
     </div>
   </div>
 </template>
@@ -52,7 +62,14 @@ export default {
       currentYear: 2000,
       yearStack: [], // aids in ensuring we call filter for years only once.
       introId: 'intro-card',
-      outroId: 'outro-card'
+      outroId: 'outro-card',
+      infoCardInfo: {
+        '2010': {
+          idName: 'info2010', // Used to dictate bg image in InfoCard.vue
+          location: 'Marshall, Michigan',
+          description: 'On July 26, the Kalamazoo River oil spill: Enbridge Energy Partners LLP (Enbridge), reported that a 30-inch (760 mm) pipeline belonging to Enbridge burst in Marshall, Michigan. Enbridge had numerous alarms from the affected Line 6B, but controllers thought the alarms were from phase separation, and the leak was not reported to Enbridge for 17 hours. '
+        }
+      }
     }
   },
 

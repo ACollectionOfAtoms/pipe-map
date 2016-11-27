@@ -1,8 +1,10 @@
 <template>
   <!-- The outro card should include some photos along with tabulature data with
       averages and other interesting data -->
-  <div class='intro-container'>
-    <h1> An Outrocard </h1>
+  <div class='outro-container'>
+    <div :id='cardId' class='outro-content'>
+      <h1> An Outrocard </h1>
+    </div>
   </div>
 </template>
 
@@ -10,14 +12,14 @@
 import IntroHeader from 'components/IntroHeader.vue'
 
 export default {
-  components: {
-    'intro-header': IntroHeader
+  props: {
+    cardId: ''
   }
 }
 </script>
 
-<style>
-.intro-container {
+<style scoped>
+.outro-container {
   text-align: center;
   height: 100%;
   width: 100%;
