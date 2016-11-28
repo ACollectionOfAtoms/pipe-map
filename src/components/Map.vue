@@ -7,7 +7,10 @@
 
 <script>
 /* with reference to http://bl.ocks.org/cmdoptesc/fc0e318ce7992bed7ca8 */
-import * as d3 from 'd3'
+import * as d3Select from 'd3-selection'
+import * as d3Request from 'd3-request'
+import * as d3Geo from 'd3-geo'
+import * as transition from 'd3-transition'
 import * as topojson from 'topojson-client'
 
 export default {
@@ -40,24 +43,24 @@ export default {
     this.width = $("#map-container").width()
     this.ratio = .5
     this.height = this.width * this.ratio
-    d3.select(window).on('resize', this.resizeMap)
+    d3Select.select(window).on('resize', this.resizeMap)
     this.resizeMap()
   },
 
   methods: {
     createContainer() {
-      this.svg = d3.select("#map-container")
+      this.svg = d3Select.select("#map-container")
                       .append("svg")
                       .attr("width", "100%")
                       .attr("height", "100%")
                           .append("g")
     },
     drawMap() {
-      this.projection = d3.geoAlbersUsa()
+      this.projection = d3Geo.geoAlbersUsa()
       this.projection.scale(this.width)
       this.projection.translate([this.width / 2, this.height / 2]);
-      let path = d3.geoPath().projection(this.projection)
-      d3.json("../data/us.json", (error, json) => {
+      let path = d3Geo.geoPath().projection(this.projection)
+      d3Request.json("../data/us.json", (error, json) => {
         if (error) return console.log(error)
         this.svg.append("path")
               .datum(topojson.feature(json, json.objects.land))
@@ -159,7 +162,7 @@ export default {
       this.svg
             .style("width", this.width + 'px')
             .style("height", this.height + 'px')
-      let path = d3.geoPath().projection(this.projection)
+      let path = d3Geo.geoPath().projection(this.projection)
       this.svg.select('.land-boundary').attr('d', path)
       this.svg.select('.state-boundary').attr('d', path)
       this.drawSites(this.currentSiteData)

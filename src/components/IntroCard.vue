@@ -25,9 +25,10 @@ export default {
   components: {
     'intro-header': IntroHeader
   },
+  
   data() {
     return {
-      introText: 'Scroll down to traverse time. Clicking on sites will show you their Wikipedia descriptions. Radii correspond to gallons spilt.'
+      introText: 'Scroll down to traverse time. Clicking on accident sites show their Wikipedia descriptions. Radii correspond to gallons spilt (if applicable).'
     }
   }
 }
@@ -38,10 +39,9 @@ export default {
   text-align: center;
   height: 80%;
   width: 100%;
-  background-color:white;
+  background-color: white;
   display: flex;
   justify-content: center;
-  background-color:white;
   -webkit-box-shadow: 0px 100px 22px 0px rgba(255, 255, 255, 0.75);
   -moz-box-shadow:    0px 100px 22px 0px rgba(255, 255, 255, 0.75);
   box-shadow:         0px 100px 22px 0px rgba(255, 255, 255, 0.75);

@@ -50,7 +50,7 @@ export default {
   padding: 0.8em;
   opacity: 1.0;
   background-color: rgba(20, 30, 30, 0.8);
-  font-size: 0.6em;
+  font-size: 0.8em;
   color: white;
 }
 .about-button:hover {

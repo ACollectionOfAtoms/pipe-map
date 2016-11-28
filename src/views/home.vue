@@ -15,7 +15,7 @@ import Modal from 'components/Modal.vue'
 import moment from 'moment'
 import Vue from'vue'
 import utils from 'utils'
-import * as d3 from 'd3' //TODO: import what's needed
+import * as d3Request from 'd3-request'
 
 export default {
   name: 'main-app',
@@ -40,7 +40,7 @@ export default {
 
   methods: {
     loadCSV(f) { //could be moved to utils
-      d3.csv(f)
+      d3Request.csv(f)
           .row( d => {
             return {
               uuid: d.uuid,
