@@ -17,15 +17,15 @@
 
 <style scoped>
 .large-text {
-  font-size: 3em;
+  font-size: 5vh;
 }
 .medium-text {
-  font-size: 2em;
+  font-size: 3vh;
 }
 .horz-line {
   height: 1px;
   background-color: black;
-  width: 3.5em;
+  width: 6vw;
   margin: 0 1em 0 1em;
 }
 .mid-container {
@@ -40,7 +40,7 @@
   justify-content: center;
 }
 .caption-container {
-  margin-top: 2em;
-  font-size: 0.8em;
+  margin-top: 3vh;
+  font-size: 2vh;
 }
 </style>

@@ -50,11 +50,10 @@ export default {
 }
 
 .info-text {
-  margin: 5%;
-  font-size: 0.8em;
+  font-size: 1.5vh;
   color: white;
   width: 80%;
-  height: 50%;
+  height: 60%;
 }
 
 #info2001 {

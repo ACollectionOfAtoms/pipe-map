@@ -25,7 +25,7 @@ export default {
   components: {
     'intro-header': IntroHeader
   },
-  
+
   data() {
     return {
       introText: 'Scroll down to traverse time. Clicking on accident sites show their Wikipedia descriptions. Radii correspond to gallons spilt (if applicable).'
@@ -37,22 +37,20 @@ export default {
 <style scoped>
 .intro-container {
   text-align: center;
-  height: 80%;
+  height: 50%;
   width: 100%;
+  margin-top: 10vh;
   background-color: white;
   display: flex;
+  align-content: center;
   justify-content: center;
   -webkit-box-shadow: 0px 100px 22px 0px rgba(255, 255, 255, 0.75);
   -moz-box-shadow:    0px 100px 22px 0px rgba(255, 255, 255, 0.75);
   box-shadow:         0px 100px 22px 0px rgba(255, 255, 255, 0.75);
 }
-.header-container {
-  margin-top: 8%;
-}
 .body-container {
   width: 50%;
-  font-size: 1em;
-  max-height: 30%;
+  font-size: 2vh;
   overflow-y: scroll;
   align-self: center;
   margin-bottom: 5%;

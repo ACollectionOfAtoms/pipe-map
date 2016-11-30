@@ -62,20 +62,22 @@ a:link, a:visited, a:hover, a:active {
   justify-content: center;
   width: 100%;
   height: 100%;
+
 }
 .about-page-content {
-  margin-top: 5%;
+  margin-top: 10vh;
   width: 50%;
 }
 .header-container {
-  font-size: 2em;
+  font-size: 3vh;
   color: rgb(67, 75, 75);
 }
 .body-container {
-  font-size: 1.5em;
+  font-size: 4vh;
+  padding-bottom: 10vh;
 }
 .credits {
-  font-size: 0.55em;
+  font-size: 2.5vh;
   text-align: right;
   color: rgb(102, 100, 100);
   align-self: flex-start;
