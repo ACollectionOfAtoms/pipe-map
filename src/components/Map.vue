@@ -39,10 +39,9 @@ export default {
 
   mounted() {
     this.createContainer()
-    this.drawMap()
     this.width = $("#map-container").width()
-    this.ratio = .5
-    this.height = this.width * this.ratio
+    this.height = $("map-container").height()
+    this.drawMap()
     d3Select.select(window).on('resize', this.resizeMap)
     this.resizeMap()
   },
@@ -51,8 +50,6 @@ export default {
     createContainer() {
       this.svg = d3Select.select("#map-container")
                       .append("svg")
-                      .attr("width", "100%")
-                      .attr("height", "100%")
                           .append("g")
     },
     drawMap() {
@@ -154,10 +151,9 @@ export default {
     },
     resizeMap() {
       this.width = $("#map-container").width()
-      this.ratio = .5
-      this.height = this.width * this.ratio
+      this.height = $("#map-container").height()
       this.projection
-            .translate([this.width / 2, this.height / 2])
+            .translate([this.width /2, this.height / 2 ])
             .scale(this.width)
       this.svg
             .style("width", this.width + 'px')
@@ -172,10 +168,14 @@ export default {
 </script>
 
 <style>
+  svg {
+    width: 100%;
+    height: 100%;
+  }
   #map-component-container {
     position: fixed;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     display: -ms-flexbox;
   	display: -webkit-flex;
   	display: flex;
@@ -187,7 +187,9 @@ export default {
   	align-items: center;
     justify-content: center;
   }
+
   #map-container {
+    border: 1px solid black;
     width: 100%;
     height: 100%;
   }
