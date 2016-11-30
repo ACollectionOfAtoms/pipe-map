@@ -40,7 +40,7 @@ export default {
   mounted() {
     this.createContainer()
     this.width = $("#map-container").width()
-    this.height = $("map-container").height()
+    this.height = $("#map-container").height()
     this.drawMap()
     d3Select.select(window).on('resize', this.resizeMap)
     this.resizeMap()
@@ -153,7 +153,7 @@ export default {
       this.width = $("#map-container").width()
       this.height = $("#map-container").height()
       this.projection
-            .translate([this.width /2, this.height / 2 ])
+            .translate([this.width / 2, this.height / 2 ])
             .scale(this.width)
       this.svg
             .style("width", this.width + 'px')
@@ -171,6 +171,11 @@ export default {
   svg {
     width: 100%;
     height: 100%;
+  }
+  @media only screen and (max-width: 768px) {
+    svg {
+      margin-left: 1%; /* Temporary hack to center map */
+    }
   }
   #map-component-container {
     position: fixed;

@@ -7,7 +7,7 @@
       </div>
       <div class='accident-count-container'>
         <div class='accident-count-header'>
-          Accidents:
+          Accidents
         </div>
         <div class='accident-count-body'>
           <span class='accident-count-text'> {{ accidents }}</span>
@@ -70,16 +70,30 @@ export default {
       /*height: 100%;*/
     }
     .year-card-content {
-      width: 50%;
+      width: 90%;
       height: 80%;
     }
-    .year-container {
+    .year-card-container {
       border-top: 1px solid black;
+    }
+    .year-container {
       height: 80%;
       align-self: flex-start;
     }
     .accident-count-container {
       align-self: flex-end;
+      /*display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: row;
+      flex-direction: row;*/
+      align-content: center;
+      text-align: center;
+    }
+    .accident-count-header {
+      font-size: 20px;
+    }
+    .year-text, .accident-count-text {
+      font-size: 80px;
     }
   }
 </style>

@@ -58,4 +58,9 @@ export default {
   text-align: center;
   color: white;
 }
+@media only screen and (max-width: 768px) {
+  .about-button {
+    font-size: 10px;
+  }
+}
 </style>

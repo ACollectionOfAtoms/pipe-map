@@ -8,7 +8,6 @@
         {{ introText }}
       </div>
       <div class='footer'>
-        <hr>
       </div>
     </div>
   </div>
@@ -64,5 +63,16 @@ export default {
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
+}
+.footer {
+  border-bottom: 1px solid black;
+}
+@media only screen and (max-width: 768px) {
+  .body-container {
+    font-size: 12px;
+  }
+  .footer {
+    border-bottom: 0;
+  }
 }
 </style>

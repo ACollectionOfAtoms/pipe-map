@@ -10,7 +10,6 @@
    </div>
    <span class='large-text'> The 21st Century </span>
    <div class='caption-container'>
-     <span class='caption-text'> An Overview</span>
    </div>
   </div>
 </template>
@@ -42,5 +41,13 @@
 .caption-container {
   margin-top: 3vh;
   font-size: 2vh;
+}
+@media only screen and (max-width: 768px) {
+  .large-text {
+    font-size: 30px;
+  }
+  .medium-text {
+    font-size: 20px;
+  }
 }
 </style>

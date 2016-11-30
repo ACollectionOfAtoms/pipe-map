@@ -55,7 +55,11 @@ export default {
   width: 80%;
   height: 60%;
 }
-
+@media only screen and (max-width: 768px) {
+  .info-text {
+    font-size: 8px;
+  }
+}
 #info2001 {
   background-image: url('~assets/images/2001/alaska_pipelineshot.jpg');
 }

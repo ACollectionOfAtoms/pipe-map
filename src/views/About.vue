@@ -3,9 +3,9 @@
     <app-header></app-header>
     <div class='about-page-container'>
       <div class='about-page-content'>
-        <div class='header-container'>
+        <!-- <div class='header-container'>
           ABOUT
-        </div>
+        </div> -->
         <div class='body-container'>
           Most* of the data found here was programmatically extracted from
           <a href='https://en.wikipedia.org/wiki/List_of_pipeline_accidents_in_the_United_States_in_the_21st_century' target="_blank">
@@ -66,7 +66,7 @@ a:link, a:visited, a:hover, a:active {
 }
 .about-page-content {
   margin-top: 10vh;
-  width: 50%;
+  width: 80%;
 }
 .header-container {
   font-size: 3vh;
@@ -87,6 +87,17 @@ a:link, a:visited, a:hover, a:active {
 }
 .link:hover {
   cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+  .header-container {
+    font-size: 15px;
+  }
+  .body-container {
+    font-size: 25px;
+  }
+  .credits {
+    font-size: 15px;
+  }
 }
 
 </style>
