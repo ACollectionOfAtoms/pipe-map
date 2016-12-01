@@ -10,7 +10,9 @@
 import * as d3Select from 'd3-selection'
 import * as d3Request from 'd3-request'
 import * as d3Geo from 'd3-geo'
+import * as d3scale from 'd3-scale'
 import * as transition from 'd3-transition'
+import * as d3format from 'd3-format'
 import * as topojson from 'topojson-client'
 
 export default {
@@ -39,9 +41,31 @@ export default {
 
   mounted() {
     this.createContainer()
+    // create scale
+    this.radiusFunc = d3scale.scaleSqrt()
+                                .domain([0, 1e6])
+                                .range([5, 50])
+    this.initialRadius = "0.1" // size to transition from to actual radius
+    this.radialUnits = ""
     this.width = $("#map-container").width()
     this.height = $("#map-container").height()
     this.drawMap()
+    // Draw legend TODO: make own method
+    var legend = this.svg.append("g")
+    .attr("class", "legend")
+    .attr("transform", "translate(" + (this.width - 80) + "," + (this.height - 40) + ")")
+      .selectAll("g")
+        .data([20e4, 5e5, 1e6])
+      .enter().append("g");
+
+    legend.append("circle")
+        .attr("cy", d => { return -this.radiusFunc(d); })
+        .attr("r", this.radiusFunc);
+
+    legend.append("text")
+        .attr("y", d => { return -2 * this.radiusFunc(d); })
+        .attr("dy", "1.3em")
+        .text(d3format.format(".1s"));
     d3Select.select(window).on('resize', this.resizeMap)
     this.resizeMap()
   },
@@ -109,7 +133,7 @@ export default {
               .attr("cy", d => {
                 return this.projection([d.lng, d.lat])[1] //can this be shortened?
               })
-              .attr("r", 1)
+              .attr("r", this.initialRadius + this.radialUnits)
               .transition().duration(400)
                 .attr("r", d => {
                   // Python parser failed to catch this one.
@@ -126,21 +150,21 @@ export default {
                   }
                   // ..and this one.
                   if (d.description.includes('Rusk County, Wisconsin')) {
-                    d.gallons = 201600
+                      d.gallons = 201600
                   }
                   // ... and this one
                   if (d.description.includes('Douglas County, Wisconsin')) {
-                    d.gallons = 100000
+                      d.gallons = 100000
                   }
                   let gallons = parseInt(d.gallons) ?
                                 parseInt(d.gallons) :
-                                10000
-                  return Math.sqrt(gallons * 0.001)
+                                0
+                  return this.radiusFunc(gallons) + this.radialUnits
                 })
 
       sites.exit()
         .transition().duration(200)
-          .attr("r", 1)
+          .attr("r", this.initialRadius + this.radialUnits)
           .remove()
     },
     setSiteClass(year) {
@@ -215,12 +239,11 @@ export default {
   .site-unhighlighted {
     stroke-width: 1px;
     opacity: 0.5;
-    stroke: #363636;
     fill: #363636;
   }
   .site-highlighted {
     stroke-width: 1px;
-    stroke: #E9D542;
+    stroke: white;
     fill: #E9D542;
     opacity: 0.8;
   }
@@ -230,5 +253,15 @@ export default {
     stroke: #E9D542;
     fill: #E9D542;
     cursor: pointer;
+  }
+  .legend circle {
+    fill: none;
+    stroke: #ccc;
+  }
+
+  .legend text {
+    fill: #777;
+    font: 10px sans-serif;
+    text-anchor: middle;
   }
 </style>
