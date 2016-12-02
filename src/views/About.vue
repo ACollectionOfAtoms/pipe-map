@@ -73,11 +73,11 @@ a:link, a:visited, a:hover, a:active {
   color: rgb(67, 75, 75);
 }
 .body-container {
-  font-size: 4vh;
+  font-size: 6vh;
   padding-bottom: 10vh;
 }
 .credits {
-  font-size: 2.5vh;
+  font-size: 3vh;
   text-align: right;
   color: rgb(102, 100, 100);
   align-self: flex-start;

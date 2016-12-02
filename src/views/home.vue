@@ -65,11 +65,11 @@ export default {
 
 <style>
   body {
-    font-family: Geneva, Tahoma, Verdana, sans-serif;
+    font-family: "Courier New", Courier, monospace;
     margin: 0;
   }
   #main-container, #app {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
   }
 </style>

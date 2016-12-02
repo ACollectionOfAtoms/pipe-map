@@ -50,22 +50,8 @@ export default {
     this.width = $("#map-container").width()
     this.height = $("#map-container").height()
     this.drawMap()
+    this.drawLegend()
     // Draw legend TODO: make own method
-    var legend = this.svg.append("g")
-    .attr("class", "legend")
-    .attr("transform", "translate(" + (this.width - 80) + "," + (this.height - 40) + ")")
-      .selectAll("g")
-        .data([20e4, 5e5, 1e6])
-      .enter().append("g");
-
-    legend.append("circle")
-        .attr("cy", d => { return -this.radiusFunc(d); })
-        .attr("r", this.radiusFunc);
-
-    legend.append("text")
-        .attr("y", d => { return -2 * this.radiusFunc(d); })
-        .attr("dy", "1.3em")
-        .text(d3format.format(".1s"));
     d3Select.select(window).on('resize', this.resizeMap)
     this.resizeMap()
   },
@@ -87,10 +73,6 @@ export default {
               .datum(topojson.feature(json, json.objects.land))
               .attr("d", path)
               .attr("class", "land-boundary")
-        // this.svg.append("path")
-        //       .datum(topojson.mesh(json, json.objects.counties, function(a, b) {  return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
-        //       .attr("d", path)
-        //       .attr("class", "county-boundary")
         this.svg.append("path")
               .datum(topojson.mesh(json, json.objects.states, function(a, b) {return a !== b; }))
               .attr("d", path)
@@ -138,7 +120,7 @@ export default {
                 .attr("r", d => {
                   // Python parser failed to catch this one.
                   if (d.description.includes('Kalamazoo')) {
-                      d.gallons = 800000
+                      d.gallons = 1139569
                   }
                   // ...and this one.
                   if (d.description.includes('Blackman Charter Township, Michigan')) {
@@ -156,6 +138,9 @@ export default {
                   if (d.description.includes('Douglas County, Wisconsin')) {
                       d.gallons = 100000
                   }
+                  if (d.description.includes('Winchester, Kentucky, a Marathon Oil')) {
+                      d.gallons = 490000
+                  }
                   let gallons = parseInt(d.gallons) ?
                                 parseInt(d.gallons) :
                                 0
@@ -167,6 +152,22 @@ export default {
           .attr("r", this.initialRadius + this.radialUnits)
           .remove()
     },
+    drawLegend() {
+      this.legend = this.svg.append("g")
+      .attr("class", "legend")
+      .attr("transform", "translate(" + (this.width - 80) + "," + (this.height - 40) + ")")
+        .selectAll("g")
+          .data([20e4, 5e5, 1e6])
+        .enter().append("g");
+      this.legend.append("circle")
+          .attr("cy", d => { return -this.radiusFunc(d); })
+          .attr("r", this.radiusFunc);
+
+      this.legend.append("text")
+          .attr("y", d => { return -2 * this.radiusFunc(d); })
+          .attr("dy", "1.3em")
+          .text(d3format.format(".1s"));
+    },
     setSiteClass(year) {
       if (year == parseInt(this.currentYear)) {
         return 'site site-highlighted'
@@ -174,6 +175,7 @@ export default {
       return 'site site-unhighlighted'
     },
     resizeMap() {
+      this.legend.remove()
       this.width = $("#map-container").width()
       this.height = $("#map-container").height()
       this.projection
@@ -185,6 +187,7 @@ export default {
       let path = d3Geo.geoPath().projection(this.projection)
       this.svg.select('.land-boundary').attr('d', path)
       this.svg.select('.state-boundary').attr('d', path)
+      this.drawLegend()
       this.drawSites(this.currentSiteData)
     }
   }
@@ -261,7 +264,8 @@ export default {
 
   .legend text {
     fill: #777;
-    font: 10px sans-serif;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 10px;
     text-anchor: middle;
   }
 </style>

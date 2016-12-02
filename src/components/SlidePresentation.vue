@@ -6,11 +6,11 @@
       <!-- we forgo the use of a v-for directive to easily interrupt year cards with infoCards -->
       <slide :isYear='true' :year="'2000'" :accidents="years[2000]['accidents']"></slide>
       <!-- 2000 Township, Michigan -->
-      <slide :isInfo='true'
+      <!-- <slide :isInfo='true'
              :id="infoCardInfo['2000'].idName"
              :location="infoCardInfo['2000'].location"
              :description="infoCardInfo['2000'].description">
-      </slide>
+      </slide> -->
 
       <slide :isYear='true' :year="'2001'" :accidents="years[2001]['accidents']"></slide>
       <!-- 2001 alaskan accident -->

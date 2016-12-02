@@ -57,7 +57,7 @@ export default {
 }
 @media only screen and (max-width: 768px) {
   .info-text {
-    font-size: 8px;
+    font-size: 13px;
   }
 }
 #info2001 {

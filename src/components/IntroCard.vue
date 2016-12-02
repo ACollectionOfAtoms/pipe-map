@@ -36,9 +36,8 @@ export default {
 <style scoped>
 .intro-container {
   text-align: center;
-  height: 50%;
+  height: 100%;
   width: 100%;
-  margin-top: 10vh;
   background-color: white;
   display: flex;
   align-content: center;
@@ -47,6 +46,17 @@ export default {
   -moz-box-shadow:    0px 100px 22px 0px rgba(255, 255, 255, 0.75);
   box-shadow:         0px 100px 22px 0px rgba(255, 255, 255, 0.75);
 }
+.intro-content {
+  max-width: 60%;
+  height: 80%;
+  display: flex;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
 .body-container {
   width: 50%;
   font-size: 2vh;
@@ -54,15 +64,6 @@ export default {
   align-self: center;
   margin-bottom: 5%;
   margin-top: 5%;
-}
-.intro-content {
-  max-width: 80%;
-  height: 100%;
-  display: flex;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
 }
 .footer {
   border-bottom: 1px solid black;
