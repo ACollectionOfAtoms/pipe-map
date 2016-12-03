@@ -66,6 +66,7 @@ export default {
 }
 
 .exit-button {
+  font-family: arial,helvetica,sans-serif;
   margin-top: 1em;
   margin-right: 1em;
   padding: 0.2em 0.5em 0.2em 0.5em;

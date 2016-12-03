@@ -177,6 +177,7 @@ export default {
     },
     trackTime() {
       // TODO: Refactor for performance!
+      $('.tooltip').addClass('hidden') // This Map related logic shouldn't be here...
       let presTop = this.presContainer.scrollTop()
       if (presTop === 0) {
         // We're at the top, remove all sites

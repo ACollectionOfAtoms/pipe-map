@@ -37,6 +37,9 @@ export default {
     window.eventBus.$on('updateCurrentYear', d => {
       this.currentYear = d
     })
+    this.toolTipDiv = d3Select.select("body")
+                                .append("div")
+                                .attr("class", "tooltip hidden")
   },
 
   mounted() {
@@ -97,13 +100,28 @@ export default {
               .attr("cy", d => {
                 return this.projection([d.lng, d.lat])[1] //can this be shortened?
               })
-              .attr("r", this.enterRadius + this.radialUnits)
+              .attr("r", d => {
+                return this.enterRadius + this.radialUnits
+              })
               .on('click', d => {
                 let modalData = {
                   'title': d.date.getFullYear(),
                   'body': d.description
                 }
                 window.eventBus.$emit('showModal', modalData)
+              })
+              .on('mouseover', d => {
+                if (!parseInt(d.gallons)) {
+                  return
+                }
+                this.toolTipDiv.attr("class", "tooltip")
+                let htmlString = `<span class='state-title'>${d.state}</span> <br/> ${d.gallons.toLocaleString()} <br/> <span class='gallons-label'>gallons</span>`
+                this.toolTipDiv.html(htmlString)
+                          .style("left", (d3Select.event.pageX + 20) + "px")
+                          .style("top", (d3Select.event.pageY - 28) + "px")
+              })
+              .on('mouseout', d => {
+                this.toolTipDiv.attr("class", "tooltip hidden")
               })
               .sort( (a, b) => {
                 let aGallons = parseInt(a.gallons) ? a.gallons : 0,
@@ -253,6 +271,7 @@ export default {
     opacity: 0.5;
     fill: #363636;
   }
+
   .site-highlighted {
     stroke-width: 1px;
     stroke: black;
@@ -277,4 +296,26 @@ export default {
     font-size: 10px;
     text-anchor: middle;
   }
+  .hidden {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+  }
+  .tooltip {
+      position: absolute;
+      /*text-align: center;*/
+      padding: 1%;
+      font: 2.5vh sans-serif;
+      background: #141E1E;
+      color: white;
+      border: 0px;
+      border-radius: 8px;
+      pointer-events: none;
+  }
+  .gallons-label {
+      font-size: 1.8vh;
+  }
+  /*.state-title {
+      font-size: 1.8vh;
+  }*/
 </style>

@@ -48,6 +48,7 @@ export default {
               lat: d.latitude,
               lng: d.longitude,
               city: d.city,
+              state: d.state,
               refLink: d['ref_link'],
               gallons: d.gallons,
               date: new Date(d.date),
