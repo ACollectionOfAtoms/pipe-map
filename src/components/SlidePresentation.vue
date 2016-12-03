@@ -68,6 +68,7 @@
 import PipeMap from 'components/Map.vue'
 import Slide from 'components/Slide.vue'
 import filter from 'lodash.filter'
+import sortby from 'lodash.sortby'
 import utils from 'utils'
 import Vue from 'vue'
 
@@ -141,10 +142,10 @@ export default {
         this.updateYearStack(this.currentYear)
         let currentYear = this.currentYear.toString()
         window.eventBus.$emit('updateCurrentYear', currentYear)
-
         let newData = filter(this.siteData, d => {
           return d.date.getFullYear() <= currentYear
         })
+        newData = sortby(newData, ['date'])
         let currentYearData = filter(newData, d => {
           return currentYear == d.date.getFullYear()
         })
@@ -201,7 +202,7 @@ export default {
     position: absolute;
     background: transparent;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     max-height: 100%;
     top: 0;
     left: 0;

@@ -9,18 +9,18 @@
         <div class='body-container'>
           Most* of the data found here was programmatically extracted from
           <a href='https://en.wikipedia.org/wiki/List_of_pipeline_accidents_in_the_United_States_in_the_21st_century' target="_blank">
-            <span class='link'> wikipedia</span>.
-          </a>
+            <span class='link'> wikipedia</span>
+          </a>.
           It is meant to be a visual aid to the daunting list found therin.
           <br></br>
           Being an open-source project, you may see how the
           <a href='https://github.com/ACollectionOfAtoms/pipe-map-data-acquisition' target="_blank">
-            <span class='link'> data was acquired</span>,
-          </a>
+            <span class='link'> data was acquired</span>
+          </a>,
           along with how this
           <a href='https://github.com/ACollectionOfAtoms/pipe-map' target="_blank">
-            <span class='link'> webpage was built</span>.
-          </a>
+            <span class='link'> webpage was built</span>
+          </a>.
           <br></br>
           <div class='credits'>
             <div>
@@ -56,6 +56,7 @@ a:link, a:visited, a:hover, a:active {
 .about-page {
   width: 100vw;
   height: 100vh;
+  font-family: georgia,"times new roman",times,serif
 }
 .about-page-container {
   display: flex;
@@ -69,11 +70,10 @@ a:link, a:visited, a:hover, a:active {
   width: 80%;
 }
 .header-container {
-  font-size: 3vh;
   color: rgb(67, 75, 75);
 }
 .body-container {
-  font-size: 6vh;
+  font-size: 5vh;
   padding-bottom: 10vh;
 }
 .credits {

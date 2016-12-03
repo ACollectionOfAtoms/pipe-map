@@ -65,7 +65,7 @@ export default {
 
 <style>
   body {
-    font-family: "Courier New", Courier, monospace;
+    font-family: georgia, "times new roman", times, serif;
     margin: 0;
   }
   #main-container, #app {

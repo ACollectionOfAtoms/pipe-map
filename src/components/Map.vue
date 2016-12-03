@@ -45,7 +45,8 @@ export default {
     this.radiusFunc = d3scale.scaleSqrt()
                                 .domain([0, 1e6])
                                 .range([5, 50])
-    this.initialRadius = "0.1" // size to transition from to actual radius
+    this.enterRadius = "80" // size to transition from to actual radius
+    this.exitRadius = "1"
     this.radialUnits = ""
     this.width = $("#map-container").width()
     this.height = $("#map-container").height()
@@ -84,28 +85,9 @@ export default {
                             .data(data, d => {
                               return d['uuid']
                             })
-
-      //update
-      sites.attr("class", d => {
-        return this.setSiteClass(d.date.getFullYear())
-      })
-      // below are to ensure responsiveness of sites
-      .attr("cx", d => {
-        return this.projection([d.lng, d.lat])[0]
-      })
-      .attr("cy", d => {
-        return this.projection([d.lng, d.lat])[1] //can this be shortened?
-      })
-
       // enter
-      sites.enter().append('circle')
-              .on('click', d => {
-                let modalData = {
-                  'title': d.date.getFullYear(),
-                  'body': d.description
-                }
-                window.eventBus.$emit('showModal', modalData)
-              })
+      sites.enter()
+              .append('circle')
               .attr("class", d => {
                 return this.setSiteClass(d.date.getFullYear())
               })
@@ -115,7 +97,19 @@ export default {
               .attr("cy", d => {
                 return this.projection([d.lng, d.lat])[1] //can this be shortened?
               })
-              .attr("r", this.initialRadius + this.radialUnits)
+              .attr("r", this.enterRadius + this.radialUnits)
+              .on('click', d => {
+                let modalData = {
+                  'title': d.date.getFullYear(),
+                  'body': d.description
+                }
+                window.eventBus.$emit('showModal', modalData)
+              })
+              .sort( (a, b) => {
+                let aGallons = parseInt(a.gallons) ? a.gallons : 0,
+                    bGallons = parseInt(b.gallons) ? b.gallons : 0
+                return bGallons - aGallons
+              })
               .transition().duration(400)
                 .attr("r", d => {
                   // Python parser failed to catch this one.
@@ -141,15 +135,30 @@ export default {
                   if (d.description.includes('Winchester, Kentucky, a Marathon Oil')) {
                       d.gallons = 490000
                   }
-                  let gallons = parseInt(d.gallons) ?
-                                parseInt(d.gallons) :
-                                0
-                  return this.radiusFunc(gallons) + this.radialUnits
+                  // .. and this one
+                  if (d.description.includes('Lockport, Illinois. EPA')) {
+                      d.gallons = 270000
+                  }
+                  d.gallons = parseInt(d.gallons) ?
+                              parseInt(d.gallons) :
+                              0
+                  return this.radiusFunc(d.gallons) + this.radialUnits
                 })
+      //update
+      sites.attr("class", d => {
+        return this.setSiteClass(d.date.getFullYear())
+      })
+      // below are to ensure responsiveness of sites
+      .attr("cx", d => {
+        return this.projection([d.lng, d.lat])[0]
+      })
+      .attr("cy", d => {
+        return this.projection([d.lng, d.lat])[1] //can this be shortened?
+      })
 
       sites.exit()
         .transition().duration(200)
-          .attr("r", this.initialRadius + this.radialUnits)
+          .attr("r", this.exitRadius + this.radialUnits)
           .remove()
     },
     drawLegend() {
@@ -157,7 +166,7 @@ export default {
       .attr("class", "legend")
       .attr("transform", "translate(" + (this.width - 80) + "," + (this.height - 40) + ")")
         .selectAll("g")
-          .data([20e4, 5e5, 1e6])
+          .data([1e6, 5e5, 1e5])
         .enter().append("g");
       this.legend.append("circle")
           .attr("cy", d => { return -this.radiusFunc(d); })
@@ -246,24 +255,24 @@ export default {
   }
   .site-highlighted {
     stroke-width: 1px;
-    stroke: white;
+    stroke: black;
     fill: #E9D542;
-    opacity: 0.8;
+    opacity: 0.7;
   }
   .site:hover, .site-highlighted:hover {
-    stroke-width: 4px;
-    opacity: 0.9;
-    stroke: #E9D542;
-    fill: #E9D542;
+    opacity: 1.0;
+    stroke: black;
+    fill: #85BBDD;
     cursor: pointer;
   }
   .legend circle {
-    fill: none;
-    stroke: #ccc;
+    fill: #E9D542;
+    stroke: black;
+    opacity: 0.5;
   }
 
   .legend text {
-    fill: #777;
+    fill: black;
     font-family: "Courier New", Courier, monospace;
     font-size: 10px;
     text-anchor: middle;

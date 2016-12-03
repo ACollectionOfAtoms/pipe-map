@@ -44,11 +44,11 @@ export default {
     flex-direction: row;
   }
   .year-container {
-    top: -1.2em;
+    /*top: -1.2em;*/
   }
   .accident-count-container {
     margin-left: auto;
-    margin-top: 1em;
+    margin-top: -1.2em;
     text-align: right;
   }
   .accident-count-header {
@@ -56,7 +56,7 @@ export default {
   }
   .accident-count-body {
     position: relative;
-    top: -1em;
+    top: -1.2em;
   }
   .year-text, .accident-count-text {
     font-size: 12vh;

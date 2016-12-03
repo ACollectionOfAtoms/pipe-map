@@ -45,6 +45,7 @@ export default {
   display: flex;
 }
 .about-button {
+  font-family: arial,helvetica,sans-serif;
   cursor: pointer;
   border-radius: 15px;
   padding: 0.8em;
