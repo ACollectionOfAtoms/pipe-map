@@ -94,27 +94,27 @@ export default {
         '2000': {
           idName: 'info2000',
           location: 'Township, Michigan',
-          description: "On June 7, a stopple fitting weld failed on a Wolverine Pipeline Company line, causing a rupture releasing 75,000 US gallons (280,000 L) of gasoline into the environment, and causing the evacuation of more than 500 houses in Blackman Charter Township, Michigan. The failure caused the shutdown of 30% of Michigan's gasoline supplies for nine days, contaminated a creek which flows into the Grand River, and a railroad track near the failure site was shut down for a week. Later tests found 715 anomalies in this pipeline. Wolverine later agreed to pay for switching houses in the area from local water wells to a city water source."
+          description: "On June 7, a stopple fitting weld failed on a Wolverine Pipeline Company line, causing a rupture releasing 75,000 US gallons (280,000 L) of gasoline into the environment, and causing the evacuation of more than 500 houses..."
         },
         '2001': {
           idName: 'info2001',
           location: 'Alaska',
-          description: 'On October 4, a drunken man used a rifle to shoot a hole in the Alaskan Pipeline. More than 285,000 gallons of crude oil were spilled, costing more $13 million to clean up. The man was later convicted in Court.'
+          description: "On October 4, a drunken man used a rifle to shoot a hole in the Alaskan Pipeline. More than 285,000 gallons of crude oil were spilled, costing more $13 million to clean up. The man was later convicted in Court."
         },
         '2010': {
           idName: 'info2010', // Used to dictate bg image in InfoCard.vue
           location: 'Ceresco, Michigan',
-          description: 'Cleanup started immediately after the Kalamazoo River oil spill from the Canadian pipeline company Enbridge. The company was fined $61 million as part of a $177 million dollar settlement following the July 2010 leak of 840,000 U.S. gallons. A separate leak of 256,000 U.S. gallons from Chicago suburb Romeville was included in the fine. The oil flowed for about 17 hours before it was shut off.'
+          description: "Cleanup started immediately after the Kalamazoo River oil spill from the Canadian pipeline company Enbridge. The company was fined $61 million as part of a $177 million dollar settlement following the July 2010 leak of 840,000 U.S. gallons."
         },
         '2014': {
           idName: 'info2014',
           location: 'Harlem, New York City',
-          description: 'At 9:31 AM on March 12, 2014, a natural gas explosion leveled two apartment buildings in East Harlem in New York City. The leak started several hours prior and the initial blast killed 8 people. About 100 families were displaced in Manhattan within the blast radius while 70 others were injured. About 250 firefighters from 44 units responded to the explosion that also suspended train service in and out of Grand Central Terminal until later that afternoon. Con Ed was later accused of 11 Safety violations connected to the incident. The Harlem Explosion became the worst energy related explosion that year by casualty and property damage.'
+          description: "At 9:31 AM on March 12, 2014, a natural gas explosion leveled two apartment buildings in East Harlem in New York City. The leak started several hours prior and the initial blast killed 8 people. About 100 families were displaced in Manhattan..."
         },
         '2015': {
           idName: 'info2015',
           location: 'Refugio Beach, California',
-          description: '124,000 U.S. Gallons of crude oil soaked Refugio Beach and wildlife on May 19th. Texas company Plains All American Pipeline was eventually indicted for spilling oil in state waters. The cleanup is ongoing and the California Environmental Protection Agency estimates at total of 181 birds and 107 marine mammals were rehabilitated.'
+          description: "124,000 U.S. Gallons of crude oil soaked Refugio Beach and wildlife on May 19th. Texas company Plains All American Pipeline was eventually indicted for spilling oil in state waters. The cleanup is ongoing and the California EPA..."
         }
       }
     }

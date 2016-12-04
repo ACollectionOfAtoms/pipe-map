@@ -37,26 +37,28 @@ export default {
     window.eventBus.$on('updateCurrentYear', d => {
       this.currentYear = d
     })
-    this.toolTipDiv = d3Select.select("body")
-                                .append("div")
-                                .attr("class", "tooltip hidden")
   },
 
   mounted() {
+    this.createTooltip()
     this.createContainer()
+    if (window.innerWidth <= 622) {
+      this.isMobile = true
+    }
     // create scale
     this.radiusFunc = d3scale.scaleSqrt()
                                 .domain([0, 1e6])
                                 .range([5, 50])
     this.enterRadius = "80" // size to transition from to actual radius
-    this.exitRadius = "1"
-    this.radialUnits = ""
+    this.exitRadius = "1" // size to transition to before disappearing
+    this.radialUnits = "em"
+    this.radialModifer = 0.075
     this.width = $("#map-container").width()
     this.height = $("#map-container").height()
     this.drawMap()
-    this.drawLegend()
     // Draw legend TODO: make own method
     d3Select.select(window).on('resize', this.resizeMap)
+    this.drawLegend()
     this.resizeMap()
   },
 
@@ -67,9 +69,11 @@ export default {
                           .append("g")
     },
     drawMap() {
+      let x = this.width / 2,
+          y = this.isMobile ? this.height : this.height / 2
       this.projection = d3Geo.geoAlbersUsa()
       this.projection.scale(this.width)
-      this.projection.translate([this.width / 2, this.height / 2]);
+      this.projection.translate([x, y])
       let path = d3Geo.geoPath().projection(this.projection)
       d3Request.json("../data/us.json", (error, json) => {
         if (error) return console.log(error)
@@ -101,7 +105,7 @@ export default {
                 return this.projection([d.lng, d.lat])[1] //can this be shortened?
               })
               .attr("r", d => {
-                return this.enterRadius + this.radialUnits
+                return (this.enterRadius)*this.radialModifer + this.radialUnits
               })
               .on('click', d => {
                 let modalData = {
@@ -114,14 +118,16 @@ export default {
                 if (!parseInt(d.gallons)) {
                   return
                 }
-                this.toolTipDiv.attr("class", "tooltip")
-                let htmlString = `<span class='state-title'>${d.state}</span> <br/> ${d.gallons.toLocaleString()} <br/> <span class='gallons-label'>gallons</span>`
+                let formattedGallonsInt = d.gallons.toLocaleString(),
+                    stateTitle = d.state
+                this.toolTipDiv.classed("hidden", false);
+                let htmlString = `<span class='state-title'>${stateTitle}</span> <br/> ${formattedGallonsInt} <br/> <span class='gallons-label'>gallons</span>`
                 this.toolTipDiv.html(htmlString)
                           .style("left", (d3Select.event.pageX + 20) + "px")
                           .style("top", (d3Select.event.pageY - 28) + "px")
               })
               .on('mouseout', d => {
-                this.toolTipDiv.attr("class", "tooltip hidden")
+                this.toolTipDiv.classed("hidden", true);
               })
               .sort( (a, b) => {
                 let aGallons = parseInt(a.gallons) ? a.gallons : 0,
@@ -130,37 +136,10 @@ export default {
               })
               .transition().duration(400)
                 .attr("r", d => {
-                  // Python parser failed to catch this one.
-                  if (d.description.includes('Kalamazoo')) {
-                      d.gallons = 1139569
-                  }
-                  // ...and this one.
-                  if (d.description.includes('Blackman Charter Township, Michigan')) {
-                      d.gallons = 75000
-                  }
-                  // ..and this one.
-                  if (d.description.includes('Cohasset, Minnesota')) {
-                      d.gallons = 252000
-                  }
-                  // ..and this one.
-                  if (d.description.includes('Rusk County, Wisconsin')) {
-                      d.gallons = 201600
-                  }
-                  // ... and this one
-                  if (d.description.includes('Douglas County, Wisconsin')) {
-                      d.gallons = 100000
-                  }
-                  if (d.description.includes('Winchester, Kentucky, a Marathon Oil')) {
-                      d.gallons = 490000
-                  }
-                  // .. and this one
-                  if (d.description.includes('Lockport, Illinois. EPA')) {
-                      d.gallons = 270000
-                  }
                   d.gallons = parseInt(d.gallons) ?
                               parseInt(d.gallons) :
                               0
-                  return this.radiusFunc(d.gallons) + this.radialUnits
+                  return this.radiusFunc(d.gallons)*this.radialModifer + this.radialUnits
                 })
       //update
       sites.attr("class", d => {
@@ -176,24 +155,48 @@ export default {
 
       sites.exit()
         .transition().duration(200)
-          .attr("r", this.exitRadius + this.radialUnits)
+          .attr("r", (this.exitRadius)*this.radialModifer + this.radialUnits)
           .remove()
     },
     drawLegend() {
-      this.legend = this.svg.append("g")
-      .attr("class", "legend")
-      .attr("transform", "translate(" + (this.width - 80) + "," + (this.height - 40) + ")")
-        .selectAll("g")
-          .data([1e6, 5e5, 1e5])
-        .enter().append("g");
-      this.legend.append("circle")
-          .attr("cy", d => { return -this.radiusFunc(d); })
-          .attr("r", this.radiusFunc);
+      let x = this.width - this.width / 10,
+          y = this.height - this.height / 10,
+          spacing
+      if (this.isMobile) {
+          x = this.width / 4,
+          y = this.height - this.height / 4
+          spacing = this.height / 100
+          this.legend = this.svg.append("g")
+          .attr("class", "legend")
+          .attr("transform", `translate(${x}, ${y})`)
+            .selectAll("g")
+              .data([1e6, 5e5, 1e5])
+            .enter().append("g");
+          this.legend.append("circle")
+              .attr("cy", (d, i) => { if(i===0) {return -spacing/4 + this.radialUnits} return (i*spacing) + this.radialUnits})
+              .attr("r", d => { return this.radiusFunc(d)*this.radialModifer + this.radialUnits});
 
-      this.legend.append("text")
-          .attr("y", d => { return -2 * this.radiusFunc(d); })
-          .attr("dy", "1.3em")
-          .text(d3format.format(".1s"));
+          this.legend.append("text")
+              .attr("y", (d, i) => {  return ((i)*spacing)/2.5 + this.radialUnits})
+              .attr("x", x )
+              .attr("dy", "-.7" + this.radialUnits)
+              .text(d3format.format(".1s"))
+      } else {
+        this.legend = this.svg.append("g")
+        .attr("class", "legend")
+        .attr("transform", `translate(${x}, ${y})`)
+          .selectAll("g")
+            .data([1e6, 5e5, 1e5])
+          .enter().append("g");
+        this.legend.append("circle")
+            .attr("cy", d => { return -this.radiusFunc(d)*this.radialModifer + this.radialUnits})
+            .attr("r", d => { return this.radiusFunc(d)*this.radialModifer + this.radialUnits});
+
+        this.legend.append("text")
+            .attr("y", d => { return  -2.5*this.radiusFunc(d)*this.radialModifer + this.radialUnits; })
+            .attr("dy", "2.5" + this.radialUnits)
+            .text(d3format.format(".1s"));
+      }
     },
     setSiteClass(year) {
       if (year == parseInt(this.currentYear)) {
@@ -202,11 +205,18 @@ export default {
       return 'site site-unhighlighted'
     },
     resizeMap() {
+      if (window.innerWidth <= 622) {
+        this.isMobile = true
+      } else {
+        this.isMobile = false
+      }
       this.legend.remove()
       this.width = $("#map-container").width()
       this.height = $("#map-container").height()
+      let x = this.width / 2,
+          y = this.isMobile ? this.height / 2 : this.height / 2
       this.projection
-            .translate([this.width / 2, this.height / 2 ])
+            .translate([x, y])
             .scale(this.width)
       this.svg
             .style("width", this.width + 'px')
@@ -216,6 +226,16 @@ export default {
       this.svg.select('.state-boundary').attr('d', path)
       this.drawLegend()
       this.drawSites(this.currentSiteData)
+    },
+    createTooltip() {
+      // ensure a single tooltip
+      if (document.getElementsByClassName('tooltip').length === 0) {
+        this.toolTipDiv = d3Select.select("body")
+                                    .append("div")
+                                    .attr("class", "tooltip hidden")
+      } else {
+        this.toolTipDiv = d3Select.select('.tooltip')
+      }
     }
   }
 }
@@ -225,11 +245,6 @@ export default {
   svg {
     width: 100%;
     height: 100%;
-  }
-  @media only screen and (max-width: 768px) {
-    svg {
-      margin-left: 1%; /* Temporary hack to center map */
-    }
   }
   #map-component-container {
     position: fixed;
@@ -293,7 +308,7 @@ export default {
   .legend text {
     fill: black;
     font-family: "Courier New", Courier, monospace;
-    font-size: 10px;
+    font-size: 1em;
     text-anchor: middle;
   }
   .hidden {
@@ -318,4 +333,12 @@ export default {
   /*.state-title {
       font-size: 1.8vh;
   }*/
+  @media only screen and (max-width: 622px) {
+    svg {
+      margin-left: 1%; /* Temporary hack to center map */
+    }
+    .legend text {
+      font-size: 3em;
+    }
+  }
 </style>

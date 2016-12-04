@@ -50,11 +50,12 @@ export default {
 }
 
 .info-text {
-  font-size: 1.5vh;
+  font-size: 3vh;
   color: white;
   width: 80%;
   height: 60%;
 }
+
 @media only screen and (max-width: 768px) {
   .info-text {
     font-size: 13px;

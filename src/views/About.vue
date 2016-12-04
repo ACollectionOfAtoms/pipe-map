@@ -9,11 +9,13 @@
         <div class='body-container'>
           Most* of the data found here was programmatically extracted from
           <a href='https://en.wikipedia.org/wiki/List_of_pipeline_accidents_in_the_United_States_in_the_21st_century' target="_blank">
-            <span class='link'> wikipedia</span>
+            <span class='link'> Wikipedia</span>
           </a>.
           It is meant to be a visual aid to the daunting list found therin.
-          <br></br>
-          Being an open-source project, you may see how the
+          <br/>
+
+          <br/>
+          As this is an open-source project, you may see how the
           <a href='https://github.com/ACollectionOfAtoms/pipe-map-data-acquisition' target="_blank">
             <span class='link'> data was acquired</span>
           </a>,
@@ -24,7 +26,7 @@
           <br></br>
           <div class='credits'>
             <div>
-              Engineer: Adam Hernandez
+              Project Lead and Software Engineer: Adam Hernandez
             </div>
             <div>
               * Journalist: Arthur DeVitalis

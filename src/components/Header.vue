@@ -61,7 +61,7 @@ export default {
 }
 @media only screen and (max-width: 768px) {
   .about-button {
-    font-size: 10px;
+    font-size: 1.5em;
   }
 }
 </style>

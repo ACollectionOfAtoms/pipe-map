@@ -16,7 +16,7 @@
 
 <style scoped>
 .large-text {
-  font-size: 5vh;
+  font-size: 8vh;
 }
 .medium-text {
   font-size: 3vh;
@@ -44,10 +44,10 @@
 }
 @media only screen and (max-width: 768px) {
   .large-text {
-    font-size: 30px;
+    font-size: 7em;
   }
   .medium-text {
-    font-size: 20px;
+    font-size: 5em;
   }
 }
 </style>

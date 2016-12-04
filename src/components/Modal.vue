@@ -9,7 +9,7 @@
           <div class='title-container'>
             {{ title }}
           </div>
-          <div>
+          <div class='body-container'>
             {{ body }}
           </div>
         </div>
@@ -48,10 +48,11 @@ export default {
 .modal-container {
   height: 100%;
   width: 100%;
-  font-size: 1.2em;
   background-color: rgba(61, 61, 61, 0.97);
+  overflow-y: scroll;
   position: fixed;
-  z-index: 1000000000000;
+  pointer-events: all !important;
+  z-index: 100000000000000000; /* ¯\_(ツ)_/¯ */
 }
 
 .exit-button-container {
@@ -62,13 +63,14 @@ export default {
   flex-direction: row;
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .exit-button {
   font-family: arial,helvetica,sans-serif;
-  margin-top: 1em;
+  margin-top: 0.3em;
   margin-right: 1em;
+  margin-bottom: 0;
   padding: 0.2em 0.5em 0.2em 0.5em;
   align-items: stretch;
 }
@@ -81,20 +83,23 @@ export default {
 }
 
 .modal-box {
-  overflow-y: scroll;
   display: flex;
   align-content: center;
   justify-content: center;
   color: white;
   z-index: 1000000000000000;
+  padding: 0 3em 3em 3em;
 }
 
 .modal-content {
-  width: 80%;
+  width: 100%;
 }
 
 .title-container {
-  padding: 1em 0 1em 0;
+  font-size: 4em;
+}
+.body-container {
+  font-size: 2em;
 }
 .modal-button:hover {
   background-color: black;
@@ -103,13 +108,25 @@ export default {
   cursor: pointer;
 }
 
-.modal-body {
-  max-height: 10em;
+.modal-content {
+  max-height: 100%;
   overflow-y: scroll;
 }
 
 .modal-footer {
   padding-top: 0.5em;
   margin: 1em;
+}
+
+@media only screen and (max-width: 768px) {
+  .exit-button-container {
+    font-size: 3em;
+  }
+  .title-container {
+    font-size: 6em;
+  }
+  .body-container {
+    font-size: 4em;
+  }
 }
 </style>

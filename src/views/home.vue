@@ -42,6 +42,33 @@ export default {
     loadCSV(f) { //could be moved to utils
       d3Request.csv(f)
           .row( d => {
+            // Python parser failed to catch this one.
+            if (d.description.includes('Kalamazoo')) {
+                d.gallons = 1139569
+            }
+            // ...and this one.
+            if (d.description.includes('Blackman Charter Township, Michigan')) {
+                d.gallons = 75000
+            }
+            // ..and this one.
+            if (d.description.includes('Cohasset, Minnesota')) {
+                d.gallons = 252000
+            }
+            // ..and this one.
+            if (d.description.includes('Rusk County, Wisconsin')) {
+                d.gallons = 201600
+            }
+            // ... and this one
+            if (d.description.includes('Douglas County, Wisconsin')) {
+                d.gallons = 100000
+            }
+            if (d.description.includes('Winchester, Kentucky, a Marathon Oil')) {
+                d.gallons = 490000
+            }
+            // .. and this one
+            if (d.description.includes('Lockport, Illinois. EPA')) {
+                d.gallons = 270000
+            }
             return {
               uuid: d.uuid,
               description: d.description,
@@ -65,9 +92,28 @@ export default {
 </script>
 
 <style>
+  /* commandeer the em unit here */
   body {
     font-family: georgia, "times new roman", times, serif;
     margin: 0;
+    font-size: 12px;
+  }
+  @media only screen and (max-width: 768px) {
+    body {
+      font-size: 8px;
+    }
+  }
+  @media only screen and (min-width: 768px)
+         and (max-width: 1400px){
+    body {
+      font-size: 16px;
+    }
+  }
+  @media only screen and (min-width: 1400px)
+         and (max-width: 2880px) {
+    body {
+      font-size: 24px;
+    }
   }
   #main-container, #app {
     height: 100%;

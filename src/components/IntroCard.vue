@@ -58,8 +58,8 @@ export default {
   justify-content: center;
 }
 .body-container {
-  width: 50%;
-  font-size: 2vh;
+  width: 90%;
+  font-size: 3vh;
   overflow-y: scroll;
   align-self: center;
   margin-bottom: 5%;
@@ -70,7 +70,7 @@ export default {
 }
 @media only screen and (max-width: 768px) {
   .body-container {
-    font-size: 12px;
+    font-size: 2.5em;
   }
   .footer {
     border-bottom: 0;

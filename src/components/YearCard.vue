@@ -34,7 +34,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.7;
+    opacity: 0.8;
   }
   .year-card-content {
     width: 75%;
@@ -48,7 +48,7 @@ export default {
   }
   .accident-count-container {
     margin-left: auto;
-    margin-top: -1.2em;
+    margin-top: -1em;
     text-align: right;
   }
   .accident-count-header {
@@ -67,33 +67,28 @@ export default {
       display: flex;
       -webkit-flex-direction: column;
       flex-direction: column;
+      align-content: center;
       /*height: 100%;*/
     }
     .year-card-content {
       width: 90%;
       height: 80%;
     }
-    .year-card-container {
-      border-top: 1px solid black;
-    }
     .year-container {
-      height: 80%;
-      align-self: flex-start;
+      align-self: center;
     }
     .accident-count-container {
-      align-self: flex-end;
-      /*display: -webkit-flex;
-      display: flex;
-      -webkit-flex-direction: row;
-      flex-direction: row;*/
-      align-content: center;
+      align-self: center;
+      margin-left: 0;
+    }
+    .accident-count-body {
       text-align: center;
     }
     .accident-count-header {
-      font-size: 20px;
+      font-size: 3.5em;
     }
     .year-text, .accident-count-text {
-      font-size: 80px;
+      font-size: 10em;
     }
   }
 </style>
