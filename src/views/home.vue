@@ -93,10 +93,12 @@ export default {
 
 <style>
   /* commandeer the em unit here */
-  body {
+  html, body {
     font-family: georgia, "times new roman", times, serif;
     margin: 0;
     font-size: 12px;
+    height: 100vh;
+    width: 100%;
   }
   @media only screen and (max-width: 768px) {
     body {
@@ -114,9 +116,5 @@ export default {
     body {
       font-size: 24px;
     }
-  }
-  #main-container, #app {
-    height: 100%;
-    width: 100%;
   }
 </style>

@@ -26,7 +26,7 @@
           <br></br>
           <div class='credits'>
             <div>
-              Project Lead and Software Engineer: Adam Hernandez
+              Software Engineer and Project Lead: Adam Hernandez
             </div>
             <div>
               * Journalist: Arthur DeVitalis

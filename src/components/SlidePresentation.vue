@@ -24,9 +24,23 @@
       <slide :isYear='true' :year="'2003'" :accidents="years[2003]['accidents']"></slide>
       <slide :isYear='true' :year="'2004'" :accidents="years[2004]['accidents']"></slide>
       <slide :isYear='true' :year="'2005'" :accidents="years[2005]['accidents']"></slide>
+
+      <slide :isInfo='true'
+             :id="infoCardInfo['2005'].idName"
+             :location="infoCardInfo['2005'].location"
+             :description="infoCardInfo['2005'].description">
+      </slide>
+
       <slide :isYear='true' :year="'2006'" :accidents="years[2006]['accidents']"></slide>
       <slide :isYear='true' :year="'2007'" :accidents="years[2007]['accidents']"></slide>
       <slide :isYear='true' :year="'2008'" :accidents="years[2008]['accidents']"></slide>
+
+      <slide :isInfo='true'
+             :id="infoCardInfo['2008'].idName"
+             :location="infoCardInfo['2008'].location"
+             :description="infoCardInfo['2008'].description">
+      </slide>
+
       <slide :isYear='true' :year="'2009'" :accidents="years[2009]['accidents']"></slide>
       <slide :isYear='true' :year="'2010'" :accidents="years[2010]['accidents']"></slide>
 
@@ -38,8 +52,22 @@
       </slide>
 
       <slide :isYear='true' :year="'2011'" :accidents="years[2011]['accidents']"></slide>
+
+      <slide :isInfo='true'
+             :id="infoCardInfo['2011'].idName"
+             :location="infoCardInfo['2011'].location"
+             :description="infoCardInfo['2011'].description">
+      </slide>
+
       <slide :isYear='true' :year="'2012'" :accidents="years[2012]['accidents']"></slide>
       <slide :isYear='true' :year="'2013'" :accidents="years[2013]['accidents']"></slide>
+
+      <slide :isInfo='true'
+             :id="infoCardInfo['2013'].idName"
+             :location="infoCardInfo['2013'].location"
+             :description="infoCardInfo['2013'].description">
+      </slide>
+
       <slide :isYear='true' :year="'2014'" :accidents="years[2014]['accidents']"></slide>
       <!-- Harlem 2014 -->
       <slide :isInfo='true'
@@ -69,6 +97,7 @@ import PipeMap from 'components/Map.vue'
 import Slide from 'components/Slide.vue'
 import filter from 'lodash.filter'
 import sortby from 'lodash.sortby'
+import debounce from 'lodash.debounce'
 import utils from 'utils'
 import Vue from 'vue'
 
@@ -99,12 +128,32 @@ export default {
         '2001': {
           idName: 'info2001',
           location: 'Alaska',
-          description: "On October 4, a drunken man used a rifle to shoot a hole in the Alaskan Pipeline. More than 285,000 gallons of crude oil were spilled, costing more $13 million to clean up. The man was later convicted in Court."
+          description: "On October 4th, Daniel Lewis shot a .338 caliber rifle in the Trans-Alaska Pipeline. The pressure caused the oil to spew about 75 feet over a nearby road. Crews cleaned up over 260,000 gallons. Lewis was charged with a DWI, felony assault, weapons misconduct and criminal mischief."
+        },
+        '2005': {
+          idName: 'info2005',
+          location: 'Carrollton, Kentucky',
+          description: "A pipeline near Carrollton, Kentucky spilled 290,000 gallons of crude oil into the Kentucky River. Crews rushed to contain the 10 mile oil slick which the Mid-Valley Pipeline Company (Mid-Valley) and pipeline operator Sunoco Pipeline L.P. were fined $2.57 million."
+        },
+        '2008': {
+          idName: 'info2008',
+          location: 'Golden Gate, Illinois',
+          description: "A 20-inch pipeline ruptured near Golden Gate, Illinois causing 210,000 gallons to spill into the surrounding area. The restoration effort included 7.1 acres of forest wetlands and 14.2 acres of agricultural fields located near the spill. Workers installed pumps and planted trees in the process."
         },
         '2010': {
           idName: 'info2010', // Used to dictate bg image in InfoCard.vue
           location: 'Ceresco, Michigan',
-          description: "Cleanup started immediately after the Kalamazoo River oil spill from the Canadian pipeline company Enbridge. The company was fined $61 million as part of a $177 million dollar settlement following the July 2010 leak of 840,000 U.S. gallons."
+          description: "Cleanup started immediately after the Kalamazoo River oil spill from the Canadian pipeline company Enbridge. The company was fined $61 million as part the settlement following the 840,000 gallon leak in July 2010. The oil flowed for about 17 hours before it was shut off."
+        },
+        '2011': {
+          idName: 'info2011',
+          location: 'Nemaha, Nebraska',
+          description: "On December 10th, a bulldozer operator had struck an unmarked pipeline causing a leak of 252,000 gallons. Magellan Midstream Partners estimated a combination of jet fuel, gasoline and diesel leaked a total of 119,028 into the countryside."
+        },
+        '2013': {
+          idName: 'info2013',
+          location: 'Tioga, North Dakota',
+          description: "Steve Jensen saw and smelled crude oil come out of the ground on his 1,800 acre farm on September 29th. A Tesoro pipeline leaked about 865,000 gallons across 7 acres. Cleanup took roughly 3 years but fueling in Tioga, North Dakota has resumed since."
         },
         '2014': {
           idName: 'info2014',
@@ -126,7 +175,10 @@ export default {
   },
 
   mounted() {
-    this.presContainer.on('scroll.scroller', this.trackTime)
+    this.presContainer.on('scroll.scroller', debounce(this.trackTime, 10))
+    if (window.innerWidth <= 622) {
+      this.isMobile = true
+    }
   },
 
   updated() { // ensure we render sites on reload of page
@@ -151,7 +203,11 @@ export default {
         })
         this.totalAccidents = newData.length
         Vue.set(this.years[currentYear], 'accidents', currentYearData.length)
-        window.eventBus.$emit('updateSites', newData)
+        if (this.isMobile) {
+          window.eventBus.$emit('updateSites', currentYearData)
+        } else {
+          window.eventBus.$emit('updateSites', newData)
+        }
         // this.easeSiteExposure(currentYearData, 2)
       }
     },

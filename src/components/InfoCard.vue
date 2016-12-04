@@ -62,9 +62,11 @@ export default {
 @media only screen and (max-width: 768px) {
   .info-text {
     font-size: 2.5em;
+    height: 90%;
   }
   .info-card-content {
     height: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
   }
 }
 #info2001 {
@@ -75,10 +77,24 @@ export default {
   background-image: url('~assets/images/2000/WoodTV_WolverinePipelineRupture2000.jpg');
 }
 
+#info2005 {
+  background-image: url('~assets/images/2005/CarroltonKentucky2005_PublicAcces.jpg')
+}
+
+#info2008 {
+  background-image: url('~assets/images/2008/Crew_2008_Illinois.jpg')
+}
+
 #info2010 {
   background-image: url('~assets/images/2010/KalamazooMI_2010.jpg');
 }
 
+#info2011 {
+  background-image: url('~assets/images/2011/2011_NemahaNB_FuelSpill_PA.jpg')
+}
+#info2013 {
+  background-image: url('~assets/images/2013/TiogaND_2013_PA.jpg')
+}
 #info2014 {
   background-image: url('~assets/images/2014/Harlem2014_NGExplosion_PublicUse.jpg');
 }
