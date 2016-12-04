@@ -40,22 +40,25 @@ export default {
   width: 100%;
   background-color: white;
   display: flex;
+  display: -webkit-flex;
   align-content: center;
+  -webkit-align-content: center;
   justify-content: center;
+  -webkit-justify-content: center;
   -webkit-box-shadow: 0px 100px 22px 0px rgba(255, 255, 255, 0.75);
   -moz-box-shadow:    0px 100px 22px 0px rgba(255, 255, 255, 0.75);
   box-shadow:         0px 100px 22px 0px rgba(255, 255, 255, 0.75);
 }
 .intro-content {
   max-width: 60%;
-  height: 80%;
   display: flex;
   display: -webkit-flex;
-  display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
   align-content: center;
+  -webkit-align-content: center;
   justify-content: center;
+  -webkit-justify-content: center;
 }
 .body-container {
   width: 90%;
@@ -70,7 +73,8 @@ export default {
 }
 @media only screen and (max-width: 768px) {
   .body-container {
-    font-size: 2.5em;
+    font-size: 2em;
+    width: 100%;
   }
   .footer {
     border-bottom: 0;

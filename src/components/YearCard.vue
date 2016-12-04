@@ -32,8 +32,11 @@ export default {
   .year-card-container {
     height: 100%;
     display: flex;
+    display: -webkit-flex;
     align-items: center;
+    -webkit-align-items: center;
     justify-content: center;
+    -webkit-justify-content: center;
     opacity: 0.8;
   }
   .year-card-content {
@@ -68,6 +71,7 @@ export default {
       -webkit-flex-direction: column;
       flex-direction: column;
       align-content: center;
+      align-content: -webkit-center;
       /*height: 100%;*/
     }
     .year-card-content {

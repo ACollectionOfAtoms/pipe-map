@@ -163,7 +163,7 @@ export default {
           y = this.height - this.height / 10,
           spacing
       if (this.isMobile) {
-          x = this.width / 4,
+          x = this.width / 3,
           y = this.height - this.height / 4
           spacing = this.height / 100
           this.legend = this.svg.append("g")
@@ -178,7 +178,7 @@ export default {
 
           this.legend.append("text")
               .attr("y", (d, i) => {  return ((i)*spacing)/2.5 + this.radialUnits})
-              .attr("x", x )
+              .attr("x", x /1.15 )
               .attr("dy", "-.7" + this.radialUnits)
               .text(d3format.format(".1s"))
       } else {
@@ -193,7 +193,7 @@ export default {
             .attr("r", d => { return this.radiusFunc(d)*this.radialModifer + this.radialUnits});
 
         this.legend.append("text")
-            .attr("y", d => { return  -2.5*this.radiusFunc(d)*this.radialModifer + this.radialUnits; })
+            .attr("y", d => { return  -2.4*this.radiusFunc(d)*this.radialModifer + this.radialUnits; })
             .attr("dy", "2.5" + this.radialUnits)
             .text(d3format.format(".1s"));
       }
@@ -258,6 +258,8 @@ export default {
   	-webkit-align-items: center;
   	-webkit-box-align: center;
 
+    -webkit-justify-content: center;
+
   	align-items: center;
     justify-content: center;
   }
@@ -318,7 +320,6 @@ export default {
   }
   .tooltip {
       position: absolute;
-      /*text-align: center;*/
       padding: 1%;
       font: 2.5vh sans-serif;
       background: #141E1E;
@@ -330,9 +331,6 @@ export default {
   .gallons-label {
       font-size: 1.8vh;
   }
-  /*.state-title {
-      font-size: 1.8vh;
-  }*/
   @media only screen and (max-width: 622px) {
     svg {
       margin-left: 1%; /* Temporary hack to center map */

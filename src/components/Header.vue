@@ -42,6 +42,7 @@ export default {
   width: 100%;
   position: fixed;
   z-index: 1000000000;
+  display: -webkit-flex;
   display: flex;
 }
 .about-button {

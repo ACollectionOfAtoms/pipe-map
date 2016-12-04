@@ -35,6 +35,7 @@ export default {
   -webkit-box-shadow: 0px 0px 40px 40px rgba(255, 255, 255, 0.75);
   -moz-box-shadow:    0px 0px 40px 40px rgba(255, 255, 255, 0.75);
   box-shadow:         0px 0px 40px 40px rgba(255, 255, 255, 0.75);
+  display: -webkit-flex;
   display: flex;
 }
 
@@ -44,9 +45,11 @@ export default {
   width: 100%;
   height: 25%;
   background-color: rgba(0, 0, 0, 0.64);
+  display: -webkit-flex;
   display: flex;
+  -webkit-align-items: center;
   align-items: center;
-  justify-content: center;
+  -webkit-justify-content: center;
 }
 
 .info-text {
@@ -58,7 +61,10 @@ export default {
 
 @media only screen and (max-width: 768px) {
   .info-text {
-    font-size: 13px;
+    font-size: 2.5em;
+  }
+  .info-card-content {
+    height: 50%;
   }
 }
 #info2001 {

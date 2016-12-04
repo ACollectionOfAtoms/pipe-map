@@ -203,7 +203,7 @@ export default {
     position: absolute;
     background: transparent;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     max-height: 100%;
     top: 0;
     left: 0;

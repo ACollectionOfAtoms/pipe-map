@@ -73,6 +73,7 @@ export default {
   margin-bottom: 0;
   padding: 0.2em 0.5em 0.2em 0.5em;
   align-items: stretch;
+  -webkit-align-items: stretch;
 }
 
 .exit-button:hover {
@@ -84,8 +85,11 @@ export default {
 
 .modal-box {
   display: flex;
+  display: -webkit-flex;
   align-content: center;
+  -webkit-align-content: center;
   justify-content: center;
+  -webkit-justify-content: center;
   color: white;
   z-index: 1000000000000000;
   padding: 0 3em 3em 3em;
