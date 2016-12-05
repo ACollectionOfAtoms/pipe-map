@@ -100,6 +100,7 @@ import sortby from 'lodash.sortby'
 import debounce from 'lodash.debounce'
 import utils from 'utils'
 import Vue from 'vue'
+import $ from 'jquery'
 
 export default {
   props: {

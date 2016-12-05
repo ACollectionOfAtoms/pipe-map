@@ -14,6 +14,7 @@ import * as d3scale from 'd3-scale'
 import * as transition from 'd3-transition'
 import * as d3format from 'd3-format'
 import * as topojson from 'topojson-client'
+import $ from 'jquery'
 
 export default {
   name: 'main-app',

@@ -1,3 +1,4 @@
+import jQuery from 'jquery'
 export default {
   isElementInViewport(el) {
     // Adapted From:
