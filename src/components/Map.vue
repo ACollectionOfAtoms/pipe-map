@@ -170,7 +170,7 @@ export default {
           .attr("class", "legend")
           .attr("transform", `translate(${x}, ${y})`)
             .selectAll("g")
-              .data([1e6, 5e5, 1e5])
+              .data([149e4, 549e3, 149e3])
             .enter().append("g");
           this.legend.append("circle")
               .attr("cy", (d, i) => { if(i===0) {return -spacing/4 + this.radialUnits} return (i*spacing) + this.radialUnits})

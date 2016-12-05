@@ -32,9 +32,6 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  -webkit-box-shadow: 0px 0px 40px 40px rgba(255, 255, 255, 0.75);
-  -moz-box-shadow:    0px 0px 40px 40px rgba(255, 255, 255, 0.75);
-  box-shadow:         0px 0px 40px 40px rgba(255, 255, 255, 0.75);
   display: -webkit-flex;
   display: flex;
 }
@@ -43,7 +40,7 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 25%;
+  height: auto;
   background-color: rgba(0, 0, 0, 0.64);
   display: -webkit-flex;
   display: flex;
@@ -54,6 +51,7 @@ export default {
 
 .info-text {
   font-size: 3vh;
+  padding: 1em;
   color: white;
   width: 80%;
   height: 60%;
@@ -62,10 +60,10 @@ export default {
 @media only screen and (max-width: 768px) {
   .info-text {
     font-size: 2.5em;
-    height: 90%;
+    margin: 1em;
   }
   .info-card-content {
-    height: 50%;
+    height: auto;
     background-color: rgba(0, 0, 0, 0.5);
   }
 }

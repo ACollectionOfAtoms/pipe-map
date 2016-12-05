@@ -128,7 +128,7 @@ export default {
         '2001': {
           idName: 'info2001',
           location: 'Alaska',
-          description: "On October 4th, Daniel Lewis shot a .338 caliber rifle in the Trans-Alaska Pipeline. The pressure caused the oil to spew about 75 feet over a nearby road. Crews cleaned up over 260,000 gallons. Lewis was charged with a DWI, felony assault, weapons misconduct and criminal mischief."
+          description: "On October 4th, Daniel Lewis shot a .338 caliber rifle in the Trans-Alaska Pipeline. The pressure cause the oil to spew about 75 feet over a nearby road. Crews cleaned up over 260,000 gallons. Lewis was charged with a DWI, felony assault, weapons misconduct and criminal mischief."
         },
         '2005': {
           idName: 'info2005',
@@ -138,7 +138,7 @@ export default {
         '2008': {
           idName: 'info2008',
           location: 'Golden Gate, Illinois',
-          description: "A 20-inch pipeline ruptured near Golden Gate, Illinois causing 210,000 gallons to spill into the surrounding area. The restoration effort included 7.1 acres of forest wetlands and 14.2 acres of agricultural fields located near the spill. Workers installed pumps and planted trees in the process."
+          description: "A 20-inch pipeline ruptured near Golden Gate, IL on August 10th. 210,000 gallons spilled into the surrounding area. The restoration effort included 7.1 acres of forest wetlands and 14.2 acres of agricultural fields located near the spill. Workers installed pumps and planted trees to repair the environmental damage."
         },
         '2010': {
           idName: 'info2010', // Used to dictate bg image in InfoCard.vue
@@ -153,7 +153,7 @@ export default {
         '2013': {
           idName: 'info2013',
           location: 'Tioga, North Dakota',
-          description: "Steve Jensen saw and smelled crude oil come out of the ground on his 1,800 acre farm on September 29th. A Tesoro pipeline leaked about 865,000 gallons across 7 acres. Cleanup took roughly 3 years but fueling in Tioga, North Dakota has resumed since."
+          description: "Steve Jensen saw and smelled crude oil come out of the ground on his 1,800 acre farm on September 29th. A Tesoro pipeline leaked about 865,000 gallons across 7 acres. Cleanup took roughly 3 years but fueling in Tioga, ND has resumed since."
         },
         '2014': {
           idName: 'info2014',

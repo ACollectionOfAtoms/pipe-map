@@ -97,8 +97,6 @@ export default {
     font-family: georgia, "times new roman", times, serif;
     margin: 0;
     font-size: 12px;
-    height: 100vh;
-    width: 100%;
   }
   @media only screen and (max-width: 768px) {
     body {

@@ -65,18 +65,20 @@ export default {
     font-size: 12vh;
   }
   @media only screen and (max-width: 768px) {
+    .year-card-container {
+      align-items: flex-start;
+      -webkit-align-items: flex-start;
+      justify-content: center;
+      -webkit-justify-content: center;
+    }
     .year-card-content {
       display: -webkit-flex;
       display: flex;
       -webkit-flex-direction: column;
       flex-direction: column;
-      align-content: center;
-      align-content: -webkit-center;
-      /*height: 100%;*/
     }
     .year-card-content {
       width: 90%;
-      height: 80%;
     }
     .year-container {
       align-self: center;
