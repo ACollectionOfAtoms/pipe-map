@@ -166,7 +166,7 @@ export default {
       if (this.isMobile) {
           x = this.width / 3,
           y = this.height - this.height / 4
-          spacing = this.height / 100
+          spacing = this.height / 90
           this.legend = this.svg.append("g")
           .attr("class", "legend")
           .attr("transform", `translate(${x}, ${y})`)

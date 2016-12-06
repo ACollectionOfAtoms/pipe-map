@@ -44,6 +44,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.64);
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .info-text {
@@ -82,10 +83,6 @@ export default {
 }
 #info2001 {
   background-image: url('~assets/images/2001/alaska_pipelineshot.jpg');
-}
-
-#info2000 {
-  background-image: url('~assets/images/2000/WoodTV_WolverinePipelineRupture2000.jpg');
 }
 
 #info2005 {
