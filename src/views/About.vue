@@ -7,7 +7,7 @@
           ABOUT
         </div> -->
         <div class='body-container'>
-          Most* of the data found here was programmatically extracted from
+          Nearly* all of the data found here was programmatically extracted from
           <a href='https://en.wikipedia.org/wiki/List_of_pipeline_accidents_in_the_United_States_in_the_21st_century' target="_blank">
             <span class='link'> Wikipedia</span>
           </a>.

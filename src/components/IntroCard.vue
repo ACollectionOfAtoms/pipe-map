@@ -36,29 +36,19 @@ export default {
 <style scoped>
 .intro-container {
   text-align: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-color: white;
   display: flex;
-  display: -webkit-flex;
   align-content: center;
-  -webkit-align-content: center;
   justify-content: center;
-  -webkit-justify-content: center;
-  -webkit-box-shadow: 0px 100px 22px 0px rgba(255, 255, 255, 0.75);
-  -moz-box-shadow:    0px 100px 22px 0px rgba(255, 255, 255, 0.75);
-  box-shadow:         0px 100px 22px 0px rgba(255, 255, 255, 0.75);
 }
 .intro-content {
   max-width: 60%;
   display: flex;
-  display: -webkit-flex;
-  -webkit-flex-direction: column;
   flex-direction: column;
   align-content: center;
-  -webkit-align-content: center;
   justify-content: center;
-  -webkit-justify-content: center;
 }
 .body-container {
   width: 90%;

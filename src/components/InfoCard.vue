@@ -28,11 +28,11 @@ export default {
 
 .info-card-container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  transition: height 999999s;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  display: -webkit-flex;
   display: flex;
 }
 
@@ -42,11 +42,8 @@ export default {
   width: 100%;
   height: auto;
   background-color: rgba(0, 0, 0, 0.64);
-  display: -webkit-flex;
   display: flex;
-  -webkit-align-items: center;
   align-items: center;
-  -webkit-justify-content: center;
 }
 
 .info-text {

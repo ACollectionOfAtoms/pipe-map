@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 .modal-container {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-color: rgba(61, 61, 61, 0.97);
   overflow-y: scroll;
@@ -57,11 +57,8 @@ export default {
 
 .exit-button-container {
   color: white;
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: row;
   flex-direction: row;
-  -webkit-justify-content: flex-end;
   justify-content: flex-end;
   font-size: 2em;
 }
@@ -69,11 +66,10 @@ export default {
 .exit-button {
   font-family: arial,helvetica,sans-serif;
   margin-top: 0.3em;
-  margin-right: 1em;
+  margin-right: 0.2em;
   margin-bottom: 0;
   padding: 0.2em 0.5em 0.2em 0.5em;
   align-items: stretch;
-  -webkit-align-items: stretch;
 }
 
 .exit-button:hover {
@@ -85,11 +81,8 @@ export default {
 
 .modal-box {
   display: flex;
-  display: -webkit-flex;
   align-content: center;
-  -webkit-align-content: center;
   justify-content: center;
-  -webkit-justify-content: center;
   color: white;
   z-index: 1000000000000000;
   padding: 0 3em 3em 3em;

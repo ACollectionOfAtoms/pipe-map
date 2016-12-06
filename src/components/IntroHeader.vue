@@ -29,20 +29,14 @@
 }
 .mid-container {
   display: flex;
-  display: -webkit-flex;
   align-items: center;
-  -webkit-align-items: center;
   justify-content: center;
-  -webkit-justify-content: center;
 }
 .mid-content {
   max-width: 50%;
   display: flex;
-  display: -webkit-flex;
   align-items: center;
-  -webkit-align-items: center;
   justify-content: center;
-  -webkit-justify-content: center;
 }
 .caption-container {
   margin-top: 3vh;

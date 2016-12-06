@@ -129,7 +129,7 @@ export default {
         '2001': {
           idName: 'info2001',
           location: 'Alaska',
-          description: "On October 4th, Daniel Lewis shot a .338 caliber rifle in the Trans-Alaska Pipeline. The pressure cause the oil to spew about 75 feet over a nearby road. Crews cleaned up over 260,000 gallons. Lewis was charged with a DWI, felony assault, weapons misconduct and criminal mischief."
+          description: "On October 4th, Daniel Lewis shot a .338 caliber rifle in the Trans-Alaska Pipeline. The pressure caused the oil to spew about 75 feet over a nearby road. Crews cleaned up over 260,000 gallons. Lewis was charged with a DWI, felony assault, weapons misconduct and criminal mischief."
         },
         '2005': {
           idName: 'info2005',
@@ -235,13 +235,6 @@ export default {
     trackTime() {
       // TODO: Refactor for performance!
       $('.tooltip').addClass('hidden') // This Map related logic shouldn't be here...
-      let presTop = this.presContainer.scrollTop()
-      if (presTop === 0) {
-        // We're at the top, remove all sites
-        this.yearStack = []
-        window.eventBus.$emit('updateSites', [])
-        return
-      }
       for (let year of this.yearsRange) { // this block is a good candidate for
         let cardId = '#' + year + '-card' // performance centric refactor
         let el = $(cardId)
@@ -260,9 +253,8 @@ export default {
     position: absolute;
     background: transparent;
     width: 100vw;
-    height: 100%;
-    max-height: 100%;
     top: 0;
     left: 0;
+    height: 100%;
   }
 </style>

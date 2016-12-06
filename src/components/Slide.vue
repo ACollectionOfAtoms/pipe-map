@@ -58,7 +58,8 @@ export default {
 <style scoped>
   .slide-container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    transition: height 999999s;
     pointer-events: none;
     position: relative;
   }

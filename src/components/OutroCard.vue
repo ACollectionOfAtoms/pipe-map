@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .outro-container {
   text-align: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-color:white;
 }

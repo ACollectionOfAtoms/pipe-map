@@ -30,20 +30,16 @@ export default {
 
 <style scoped>
   .year-card-container {
-    height: 100%;
+    height: 100vh;
+    transition: height 999999s;
     display: flex;
-    display: -webkit-flex;
     align-items: center;
-    -webkit-align-items: center;
     justify-content: center;
-    -webkit-justify-content: center;
     opacity: 0.8;
   }
   .year-card-content {
     width: 75%;
-    display: -webkit-flex;
     display: flex;
-    -webkit-flex-direction: row;
     flex-direction: row;
   }
   .year-container {
@@ -67,14 +63,10 @@ export default {
   @media only screen and (max-width: 768px) {
     .year-card-container {
       align-items: flex-start;
-      -webkit-align-items: flex-start;
       justify-content: center;
-      -webkit-justify-content: center;
     }
     .year-card-content {
-      display: -webkit-flex;
       display: flex;
-      -webkit-flex-direction: column;
       flex-direction: column;
     }
     .year-card-content {

@@ -135,7 +135,7 @@ export default {
                     bGallons = parseInt(b.gallons) ? b.gallons : 0
                 return bGallons - aGallons
               })
-              .transition().duration(400)
+              .transition().duration(700)
                 .attr("r", d => {
                   d.gallons = parseInt(d.gallons) ?
                               parseInt(d.gallons) :
@@ -250,16 +250,9 @@ export default {
   #map-component-container {
     position: fixed;
     height: 100%;
+    transition: height 999999s;
     width: 100%;
-    display: -ms-flexbox;
-  	display: -webkit-flex;
   	display: flex;
-
-  	-ms-flex-align: center;
-  	-webkit-align-items: center;
-  	-webkit-box-align: center;
-
-    -webkit-justify-content: center;
 
   	align-items: center;
     justify-content: center;
@@ -267,7 +260,8 @@ export default {
 
   #map-container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    transition: height 999999s;
   }
 
   path {
@@ -320,17 +314,17 @@ export default {
     left: -9999px !important;
   }
   .tooltip {
-      position: absolute;
-      padding: 1%;
-      font: 2.5vh sans-serif;
-      background: #141E1E;
-      color: white;
-      border: 0px;
-      border-radius: 8px;
-      pointer-events: none;
+    position: absolute;
+    padding: 1%;
+    font: 2.5vh sans-serif;
+    background: #141E1E;
+    color: white;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
   }
   .gallons-label {
-      font-size: 1.8vh;
+    font-size: 1.8vh;
   }
   @media only screen and (max-width: 622px) {
     svg {

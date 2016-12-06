@@ -16,6 +16,7 @@ import moment from 'moment'
 import Vue from'vue'
 import utils from 'utils'
 import * as d3Request from 'd3-request'
+import jQuery from 'jquery'
 
 export default {
   name: 'main-app',
@@ -35,6 +36,7 @@ export default {
   },
 
   mounted() {
+    let bg = jQuery("body");
     this.loadCSV("../data/pipe-data.csv")
   },
 
