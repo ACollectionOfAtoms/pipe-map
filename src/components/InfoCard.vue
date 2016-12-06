@@ -39,7 +39,7 @@ export default {
 .info-card-content {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  min-height: 25%;
   height: auto;
   background-color: rgba(0, 0, 0, 0.64);
   display: flex;
@@ -51,7 +51,6 @@ export default {
   padding: 1em;
   color: white;
   width: 80%;
-  height: 60%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -60,8 +59,25 @@ export default {
     margin: 1em;
   }
   .info-card-content {
+    min-height: auto;
     height: auto;
     background-color: rgba(0, 0, 0, 0.5);
+  }
+  #info2005 .info-card-content {
+    top: 0;
+    bottom: auto;
+  }
+  #info2011 .info-card-content {
+    top: 0;
+    bottom: auto;
+  }
+  #info2013 .info-card-content {
+    top: 0;
+    bottom: auto;
+  }
+  #info2014 .info-card-content {
+    top: 0;
+    bottom: auto;
   }
 }
 #info2001 {
