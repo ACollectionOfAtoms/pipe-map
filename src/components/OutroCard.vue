@@ -26,7 +26,6 @@
             </div>
           </div>
           <br/>
-          <br/>
           <div class='stats-div stat-two-container'>
             <div class='stats-title'>
               Minimum Gallons Spilt
@@ -35,7 +34,6 @@
               100,000<span class='unit'>/year</span>
             </div>
           </div>
-          <br/>
           <br/>
           <div class='stats-div stat-three-container'>
             <div class='stats-title'>
@@ -65,8 +63,6 @@ export default {
 <style scoped>
 /* the sorta CSS you write when you give yourself an ambitious deadline */
 .outro-container {
-  height: 100vh;
-  max-height: 100vh;
   width: 100%;
   pointer-events: all;
   background-color: rgba(0, 0, 0, 0.8);
@@ -81,7 +77,7 @@ export default {
 }
 .outro-body {
   margin: 1em;
-  margin-top: 5em;
+  /*margin-top: 4.5em;*/
   text-align: center;
   display: flex;
   align-items: center;
@@ -90,9 +86,7 @@ export default {
 }
 .outro-top, .outro-bottom {
   width: 70%;
-  font-size: 1.4em;
-}
-.outro-top {
+  font-size: 1.8em;
 }
 .outro-top-container {
   display: flex;
@@ -123,18 +117,18 @@ export default {
 }
 .stats-title {
   text-align: center;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 .stats-body {
   text-align: center;
-  font-size: 2em;
+  font-size: 3em;
 }
 .unit {
   font-size: 0.5em;
 }
 .image {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 100%;
   margin: 1em 1em 1em 0;
   border: 1px solid black;
@@ -207,8 +201,7 @@ export default {
         margin: 1em;
       }
       .stat-two-container {
-        border-left: 1px solid white;
-        border-right: 1px solid white;
+
       }
 }
 /* SMH :( */
@@ -216,17 +209,17 @@ export default {
        and (max-width: 2880px) {
          .header {
            visibility: visible;
-           font-size: 2em;
+           font-size: 2.2em;
          }
          .outro-top, .outro-bottom {
            width: 50%;
-           font-size: 0.6em;
+           font-size: 0.8em;
          }
          .stats-body {
-           font-size: 1.8em;
+           font-size: 2em;
          }
          .unit {
-           font-size: 0.4em;
+           font-size: 0.5em;
          }
          .outro-top-container {
            display: flex;
@@ -273,11 +266,10 @@ export default {
          }
          .stats-div {
            width: 33%;
-           margin: 1em;
          }
          .stat-two-container {
-           border-left: 1px solid white;
-           border-right: 1px solid white;
+           margin-left: 1em;
+           margin-right: 1em;
          }
        }
 </style>
