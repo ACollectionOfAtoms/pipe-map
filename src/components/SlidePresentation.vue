@@ -129,7 +129,7 @@ export default {
         '2005': {
           idName: 'info2005',
           location: 'Carrollton, Kentucky',
-          description: "A pipeline near Carrollton, Kentucky spilled 290,000 gallons of crude oil into the Kentucky River. Crews rushed to contain the 10 mile oil slick which the Mid-Valley Pipeline Company (Mid-Valley) and pipeline operator Sunoco Pipeline L.P. were fined $2.57 million."
+          description: "A pipeline near Carrollton, KY spilled 290,000 gallons of crude oil into the Kentucky River on January 26th. Crews rushed to contain the 10 mile oil slick which the Mid-Valley Pipeline Company (Mid-Valley) and pipeline operator Sunoco Pipeline L.P. were fined $2.57 million."
         },
         '2008': {
           idName: 'info2008',
@@ -154,12 +154,12 @@ export default {
         '2014': {
           idName: 'info2014',
           location: 'Harlem, New York City',
-          description: "At 9:31 AM on March 12, 2014, a natural gas explosion leveled two apartment buildings in East Harlem in New York City. The leak started several hours prior and the initial blast killed 8 people. About 100 families were displaced in Manhattan..."
+          description: "On March 12, a natural gas explosion leveled two apartment buildings in East Harlem in New York City. The leak began several hours prior while the blast killed 8 people. About 100 families were displaced in Manhattan within the blast radius."
         },
         '2015': {
           idName: 'info2015',
           location: 'Refugio Beach, California',
-          description: "124,000 U.S. Gallons of crude oil soaked Refugio Beach and wildlife on May 19th. Texas company Plains All American Pipeline was eventually indicted for spilling oil in state waters. The cleanup is ongoing and the California EPA..."
+          description: "124,000 gallons of crude oil soaked Refugio Beach in California on May 19th. Texas company Plains All American Pipeline was indicted for spilling oil in state waters. The California Environmental Protection Agency estimates 181 birds and 107 marine mammals were rehabilitated."
         }
       }
     }
