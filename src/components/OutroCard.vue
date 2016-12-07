@@ -2,21 +2,21 @@
   <!-- The outro card should include some photos along with tabulature data with
       averages and other interesting data -->
   <div :id='cardId' class='outro-container'>
-    <div class='header'>
-      Accidents Happen
-    </div>
     <div class='outro-body'>
       <div class='outro-top'>
         <div class='outro-top-container'>
+          <div class='header'>
+            Accidents Happen
+          </div>
           <div class='image'></div>
-          <p class='top-text-body'>As pipelines age and accidents happen, the United States has seen a spike of energy infrastructure incidents in the 21st century. Fuel leaks contaminate soil and water, posing a serious threat to our sustainability.</p>
+          <p class='top-text-body'>As pipelines age and accidents happen, the United States has seen a spike of energy infrastructure incidents in the 21st century. Fuel leaks contaminate soil and water, posing a serious threat to our sustainability. Families displaced in explosions or by line ruptures are sometimes forced to leave their homes permanently. Farmers face extensive cleanup and abandon the land for growth. These incidents demonstrate the impact this has on the land, wildlife and people that can take years to recover from. </p>
         </div>
       </div>
       <div class='outro-bottom'>
         <div class='bottom-text-container'>
-          <p> Families displaced in explosions or by line ruptures are sometimes forced to leave their homes permanently. Farmers face extensive cleanup and abandon the land for growth. These incidents demonstrate the impact this has on the land, wildlife and people that can take years to recover from. </p>
         </div>
         <div class='stats-container'>
+          <br/>
           <div class='stats-div stat-one-container'>
             <div class='stats-title'>
               Average Gallons Spilt
@@ -25,6 +25,8 @@
               300,000<span class='unit'>/year</span>
             </div>
           </div>
+          <br/>
+          <br/>
           <div class='stats-div stat-two-container'>
             <div class='stats-title'>
               Minimum Gallons Spilt
@@ -33,6 +35,8 @@
               100,000<span class='unit'>/year</span>
             </div>
           </div>
+          <br/>
+          <br/>
           <div class='stats-div stat-three-container'>
             <div class='stats-title'>
               Average Number Of Accidents
@@ -62,14 +66,13 @@ export default {
 /* the sorta CSS you write when you give yourself an ambitious deadline */
 .outro-container {
   height: 100vh;
+  max-height: 100vh;
   width: 100%;
-  transition: height 0s;
   pointer-events: all;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
 }
 .header {
@@ -78,37 +81,39 @@ export default {
 }
 .outro-body {
   margin: 1em;
+  margin-top: 5em;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 .outro-top, .outro-bottom {
-  width: 100%;
-  font-size: 2em;
+  width: 70%;
+  font-size: 1.4em;
 }
 .outro-top {
-  height: 36%;
 }
 .outro-top-container {
-  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .outro-bottom {
-  height: 36%;
-  display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .stats-container {
-  width: 50%;
-  border-left: 1px solid white;
-  margin: 0 1em 0 1em;
+  margin: 1em;
   display: flex;
   flex-direction: column;
 }
 .bottom-text-container {
-  width: 50%;
-  margin: 0 -0.3em 0 1em;
-  text-align: right;
+  width: 90%;
+  margin-top: -1.5em;
+  text-align: center;
 }
 .stats-div {
   display: flex;
@@ -122,15 +127,15 @@ export default {
 }
 .stats-body {
   text-align: center;
-  font-size: 1.6em;
+  font-size: 2em;
 }
 .unit {
   font-size: 0.5em;
 }
 .image {
-  float: left;
-  width: 8em;
-  height: 8em;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
   margin: 1em 1em 1em 0;
   border: 1px solid black;
   background-repeat: no-repeat;
@@ -138,15 +143,10 @@ export default {
   background-size: cover;
   background-image: url('~assets/images/2013/mayflowerarspill2013_PA.jpg');
 }
-@supports (shape-outside: circle()) {
-    .image  {
-      border-radius: 50%;
-      shape-outside: circle(50%);
-    }
-}
 @media only screen and (min-width: 768px)
        and (max-width: 1400px){
       .header {
+        visibility: visible;
         font-size: 2.2em;
       }
       .outro-top, .outro-bottom {
@@ -215,6 +215,7 @@ export default {
 @media only screen and (min-width: 1400px)
        and (max-width: 2880px) {
          .header {
+           visibility: visible;
            font-size: 2em;
          }
          .outro-top, .outro-bottom {

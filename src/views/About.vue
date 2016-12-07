@@ -32,7 +32,7 @@
               * Journalist: Arthur DeVitalis
             </div>
             <div>
-              UI-Designer: Stiles Lowe
+              Design Advisor: Stiles Lowe
             </div>
           </div>
         </div>

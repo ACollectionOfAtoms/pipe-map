@@ -30,6 +30,9 @@ module.exports = {
       { test: /\.jpg$/, loader: "file-loader" }
     ]
   },
+  vue: {
+    postcss: [require('autoprefixer')()]
+  },
   babel: {
     presets: ['es2015'],
     plugins: ['transform-runtime']
