@@ -31,11 +31,15 @@ export default {
 <style scoped>
   .year-card-container {
     height: 100vh;
-    transition: height 999999s;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0.8;
+  }
+  @media only screen and (max-width: 768px) {
+    .year-card-container {
+      transition: height 999999s;
+    }
   }
   .year-card-content {
     width: 75%;

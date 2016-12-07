@@ -59,8 +59,12 @@ export default {
   .slide-container {
     width: 100%;
     height: 100vh;
-    transition: height 999999s;
     pointer-events: none;
     position: relative;
+  }
+  @media only screen and (max-width: 768px) {
+    .slide-container {
+      transition: height 999999s;
+    }
   }
 </style>

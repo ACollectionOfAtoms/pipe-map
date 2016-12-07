@@ -82,7 +82,7 @@
 
       <slide :isYear='true' :year="'2016'" :accidents="years[2016]['accidents']"></slide>
 
-      <!-- <slide :isOutro='true' :id='outroId'></slide> -->
+      <slide :isOutro='true' :id='outroId'></slide>
     </div>
   </div>
 </template>
@@ -250,6 +250,7 @@ export default {
     width: 100vw;
     top: 0;
     left: 0;
+    bottom: 0;
     height: 100%;
   }
 </style>

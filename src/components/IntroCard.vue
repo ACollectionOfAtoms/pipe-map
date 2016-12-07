@@ -36,8 +36,10 @@ export default {
 <style scoped>
 .intro-container {
   text-align: center;
+  pointer-events: all;
   height: 100vh;
   width: 100%;
+  transition: height 999999s;
   background-color: white;
   display: flex;
   align-content: center;

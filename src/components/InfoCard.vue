@@ -29,13 +29,17 @@ export default {
 .info-card-container {
   width: 100%;
   height: 100vh;
-  transition: height 999999s;
+  pointer-events: all;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   display: flex;
 }
-
+@media only screen and (max-width: 768px) {
+  .info-card-container {
+    transition: height 999999s;
+  }
+}
 .info-card-content {
   position: absolute;
   bottom: 0;

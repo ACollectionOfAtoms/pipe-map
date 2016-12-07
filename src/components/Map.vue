@@ -250,7 +250,6 @@ export default {
   #map-component-container {
     position: fixed;
     height: 100%;
-    transition: height 999999s;
     width: 100%;
   	display: flex;
 
@@ -261,7 +260,12 @@ export default {
   #map-container {
     width: 100%;
     height: 100vh;
-    transition: height 999999s;
+  }
+  /* hack to stop jerkyness on mobile */
+  @media only screen and (max-width: 768px) {
+    #map-component-container, #map-container {
+      transition: height 999999s;
+    }
   }
 
   path {
