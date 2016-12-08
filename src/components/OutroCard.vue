@@ -9,7 +9,7 @@
             Accidents Happen
           </div>
           <div class='image'></div>
-          <p class='top-text-body'>As pipelines age and accidents happen, the United States has seen a spike of energy infrastructure incidents in the 21st century. Fuel leaks contaminate soil and water, posing a serious threat to our sustainability. Families displaced in explosions or by line ruptures are sometimes forced to leave their homes permanently. Farmers face extensive cleanup and abandon the land for growth. These incidents demonstrate the impact this has on the land, wildlife and people that can take years to recover from. </p>
+          <p class='top-text-body'>As pipelines age and accidents happen, the United States has seen a spike of energy infrastructure incidents in the 21st century. Fuel leaks contaminate soil and water, posing a serious threat to the land and ecosystems we rely on. Families displaced in explosions or by line ruptures are sometimes forced to leave their homes permanently. Farmers face extensive cleanup and abandon the land for growth. These incidents demonstrate the impact this has on the land, wildlife and people that can take years to recover from. </p>
         </div>
       </div>
       <div class='outro-bottom'>
