@@ -40,7 +40,7 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --no-info",
-    "build": "webpack --progress --hide-modules",
+    "build": "NODE_ENV=production webpack --progress --hide-modules",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

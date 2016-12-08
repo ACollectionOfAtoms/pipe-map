@@ -19,30 +19,34 @@
           <br/>
           <div class='stats-div stat-one-container'>
             <div class='stats-title'>
-              Average Gallons Spilt
+              Avg. Gallons Spilt
             </div>
             <div class='stats-body'>
-              300,000<span class='unit'>/year</span>
+              349,565<span class='unit'>/year</span>
             </div>
           </div>
+          <br/>
           <br/>
           <div class='stats-div stat-two-container'>
             <div class='stats-title'>
-              Minimum Gallons Spilt
+              Avg. Minimum Gallons Spilt
             </div>
             <div class='stats-body'>
-              100,000<span class='unit'>/year</span>
+              18,766<span class='unit'>/year</span>
             </div>
           </div>
           <br/>
+          <br/>
           <div class='stats-div stat-three-container'>
             <div class='stats-title'>
-              Average Number Of Accidents
+              Avg. Number Of Accidents
             </div>
             <div class='stats-body'>
               24<span class='unit'>/year</span>
             </div>
           </div>
+          <br/>
+          <br/>
         </div>
       </div>
     </div>
@@ -111,7 +115,7 @@ export default {
 }
 .stats-div {
   display: flex;
-  height: 33%;
+  min-height: 33%;
   flex-direction: column;
   margin: 1em 0 1em 0;
 }
@@ -141,17 +145,17 @@ export default {
        and (max-width: 1400px){
       .header {
         visibility: visible;
-        font-size: 2.2em;
+        font-size: 2.4em;
       }
       .outro-top, .outro-bottom {
         width: 50%;
-        font-size: 0.8em;
+        font-size: 1em;
       }
-      .stats-body {
-        font-size: 2em;
+      .outro-bottom {
+        width: 90%;
       }
       .unit {
-        font-size: 0.5em;
+        font-size: 0.6em;
       }
       .outro-top-container {
         display: flex;

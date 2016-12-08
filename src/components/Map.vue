@@ -135,7 +135,7 @@ export default {
                     bGallons = parseInt(b.gallons) ? b.gallons : 0
                 return bGallons - aGallons
               })
-              .transition().duration(650)
+              .transition().duration(750)
                 .attr("r", d => {
                   d.gallons = parseInt(d.gallons) ?
                               parseInt(d.gallons) :
