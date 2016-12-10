@@ -55,7 +55,6 @@ export default {
 .body-container {
   width: 90%;
   font-size: 3vh;
-  overflow-y: scroll;
   align-self: center;
   margin-bottom: 5%;
   margin-top: 5%;

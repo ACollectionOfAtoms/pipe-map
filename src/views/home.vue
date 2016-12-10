@@ -36,7 +36,6 @@ export default {
   },
 
   mounted() {
-    let bg = jQuery("body");
     this.loadCSV("../data/pipe-data.csv")
   },
 

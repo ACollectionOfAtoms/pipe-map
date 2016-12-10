@@ -247,7 +247,6 @@ export default {
   #presentation-container {
     position: absolute;
     background: transparent;
-    width: 100vw;
     top: 0;
     left: 0;
     bottom: 0;
